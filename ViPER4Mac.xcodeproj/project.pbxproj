@@ -6,8 +6,218 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7F4FBB522F66D447002A6C68 /* ViPERParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAE22F66D447002A6C68 /* ViPERParams.h */; };
+		7F4FBB532F66D447002A6C68 /* HighShelf.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB262F66D447002A6C68 /* HighShelf.h */; };
+		7F4FBB542F66D447002A6C68 /* VHE_L3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB052F66D447002A6C68 /* VHE_L3.h */; };
+		7F4FBB552F66D447002A6C68 /* DepthSurround.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB1C2F66D447002A6C68 /* DepthSurround.h */; };
+		7F4FBB562F66D447002A6C68 /* Convolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAE82F66D447002A6C68 /* Convolver.h */; };
+		7F4FBB572F66D447002A6C68 /* VHE_L1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB032F66D447002A6C68 /* VHE_L1.h */; };
+		7F4FBB582F66D447002A6C68 /* IIRFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAF22F66D447002A6C68 /* IIRFilter.h */; };
+		7F4FBB592F66D447002A6C68 /* Crossfeed.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB1A2F66D447002A6C68 /* Crossfeed.h */; };
+		7F4FBB5A2F66D447002A6C68 /* Biquad.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB122F66D447002A6C68 /* Biquad.h */; };
+		7F4FBB5B2F66D447002A6C68 /* ViPERDDC.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB0D2F66D447002A6C68 /* ViPERDDC.h */; };
+		7F4FBB5C2F66D447002A6C68 /* ViPERBass.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB072F66D447002A6C68 /* ViPERBass.h */; };
+		7F4FBB5D2F66D447002A6C68 /* DiffSurround.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAEC2F66D447002A6C68 /* DiffSurround.h */; };
+		7F4FBB5E2F66D447002A6C68 /* AnalogX.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAE42F66D447002A6C68 /* AnalogX.h */; };
+		7F4FBB5F2F66D447002A6C68 /* MinPhaseIIRCoeffs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB2E2F66D447002A6C68 /* MinPhaseIIRCoeffs.h */; };
+		7F4FBB602F66D447002A6C68 /* ViPERBassMono.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB092F66D447002A6C68 /* ViPERBassMono.h */; };
+		7F4FBB612F66D447002A6C68 /* PolesFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB3A2F66D447002A6C68 /* PolesFilter.h */; };
+		7F4FBB622F66D447002A6C68 /* PConvSingle.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB362F66D447002A6C68 /* PConvSingle.h */; };
+		7F4FBB632F66D447002A6C68 /* ViPERClarity.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB0B2F66D447002A6C68 /* ViPERClarity.h */; };
+		7F4FBB642F66D447002A6C68 /* FETCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAF02F66D447002A6C68 /* FETCompressor.h */; };
+		7F4FBB652F66D447002A6C68 /* WaveBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB442F66D447002A6C68 /* WaveBuffer.h */; };
+		7F4FBB662F66D447002A6C68 /* pffft.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB382F66D447002A6C68 /* pffft.h */; };
+		7F4FBB672F66D447002A6C68 /* PassFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB342F66D447002A6C68 /* PassFilter.h */; };
+		7F4FBB682F66D447002A6C68 /* Stereo3DSurround.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB3E2F66D447002A6C68 /* Stereo3DSurround.h */; };
+		7F4FBB692F66D447002A6C68 /* PlaybackGain.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAF42F66D447002A6C68 /* PlaybackGain.h */; };
+		7F4FBB6A2F66D447002A6C68 /* SpeakerCorrection.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAFA2F66D447002A6C68 /* SpeakerCorrection.h */; };
+		7F4FBB6B2F66D447002A6C68 /* TubeSimulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAFE2F66D447002A6C68 /* TubeSimulator.h */; };
+		7F4FBB6C2F66D447002A6C68 /* constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB482F66D447002A6C68 /* constants.h */; };
+		7F4FBB6D2F66D447002A6C68 /* Subwoofer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB402F66D447002A6C68 /* Subwoofer.h */; };
+		7F4FBB6E2F66D447002A6C68 /* Cure.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAEA2F66D447002A6C68 /* Cure.h */; };
+		7F4FBB6F2F66D447002A6C68 /* IIR_NOrder_BW_LH.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB2C2F66D447002A6C68 /* IIR_NOrder_BW_LH.h */; };
+		7F4FBB702F66D447002A6C68 /* WaveReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB462F66D447002A6C68 /* WaveReader.h */; };
+		7F4FBB712F66D447002A6C68 /* DynamicBass.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB1E2F66D447002A6C68 /* DynamicBass.h */; };
+		7F4FBB722F66D447002A6C68 /* NoiseSharpening.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB322F66D447002A6C68 /* NoiseSharpening.h */; };
+		7F4FBB732F66D447002A6C68 /* Polyphase.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB3C2F66D447002A6C68 /* Polyphase.h */; };
+		7F4FBB742F66D447002A6C68 /* VHE_L4.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB062F66D447002A6C68 /* VHE_L4.h */; };
+		7F4FBB752F66D447002A6C68 /* CRevModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB182F66D447002A6C68 /* CRevModel.h */; };
+		7F4FBB762F66D447002A6C68 /* Harmonic.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB222F66D447002A6C68 /* Harmonic.h */; };
+		7F4FBB772F66D447002A6C68 /* HiFi.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB242F66D447002A6C68 /* HiFi.h */; };
+		7F4FBB782F66D447002A6C68 /* ColorfulMusic.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAE62F66D447002A6C68 /* ColorfulMusic.h */; };
+		7F4FBB792F66D447002A6C68 /* Reverberation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAF62F66D447002A6C68 /* Reverberation.h */; };
+		7F4FBB7A2F66D447002A6C68 /* CAllpassFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB142F66D447002A6C68 /* CAllpassFilter.h */; };
+		7F4FBB7B2F66D447002A6C68 /* SpectrumExtend.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAFC2F66D447002A6C68 /* SpectrumExtend.h */; };
+		7F4FBB7C2F66D447002A6C68 /* FIR.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB202F66D447002A6C68 /* FIR.h */; };
+		7F4FBB7D2F66D447002A6C68 /* MultiBiquad.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB302F66D447002A6C68 /* MultiBiquad.h */; };
+		7F4FBB7E2F66D447002A6C68 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAE12F66D447002A6C68 /* log.h */; };
+		7F4FBB7F2F66D447002A6C68 /* ViPER.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB492F66D447002A6C68 /* ViPER.h */; };
+		7F4FBB802F66D447002A6C68 /* CCombFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB162F66D447002A6C68 /* CCombFilter.h */; };
+		7F4FBB812F66D447002A6C68 /* SoftwareLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAF82F66D447002A6C68 /* SoftwareLimiter.h */; };
+		7F4FBB822F66D447002A6C68 /* VHE_L0.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB022F66D447002A6C68 /* VHE_L0.h */; };
+		7F4FBB832F66D447002A6C68 /* TimeConstDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB422F66D447002A6C68 /* TimeConstDelay.h */; };
+		7F4FBB842F66D447002A6C68 /* VHE_L2.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB042F66D447002A6C68 /* VHE_L2.h */; };
+		7F4FBB852F66D447002A6C68 /* IIR_1st.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB282F66D447002A6C68 /* IIR_1st.h */; };
+		7F4FBB862F66D447002A6C68 /* DynamicSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBAEE2F66D447002A6C68 /* DynamicSystem.h */; };
+		7F4FBB872F66D447002A6C68 /* AdaptiveBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB102F66D447002A6C68 /* AdaptiveBuffer.h */; };
+		7F4FBB882F66D447002A6C68 /* VHE.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB002F66D447002A6C68 /* VHE.h */; };
+		7F4FBB892F66D447002A6C68 /* IIR_NOrder_BW_BP.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F4FBB2A2F66D447002A6C68 /* IIR_NOrder_BW_BP.h */; };
+		7F4FBB8A2F66D447002A6C68 /* pffft.c in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB392F66D447002A6C68 /* pffft.c */; };
+		7F4FBB8B2F66D447002A6C68 /* Harmonic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB232F66D447002A6C68 /* Harmonic.cpp */; };
+		7F4FBB8C2F66D447002A6C68 /* ViPERBassMono.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB0A2F66D447002A6C68 /* ViPERBassMono.cpp */; };
+		7F4FBB8D2F66D447002A6C68 /* DynamicBass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB1F2F66D447002A6C68 /* DynamicBass.cpp */; };
+		7F4FBB8E2F66D447002A6C68 /* Convolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAE92F66D447002A6C68 /* Convolver.cpp */; };
+		7F4FBB8F2F66D447002A6C68 /* Reverberation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAF72F66D447002A6C68 /* Reverberation.cpp */; };
+		7F4FBB902F66D447002A6C68 /* TubeSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAFF2F66D447002A6C68 /* TubeSimulator.cpp */; };
+		7F4FBB912F66D447002A6C68 /* AdaptiveBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB112F66D447002A6C68 /* AdaptiveBuffer.cpp */; };
+		7F4FBB922F66D447002A6C68 /* ViPERBass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB082F66D447002A6C68 /* ViPERBass.cpp */; };
+		7F4FBB932F66D447002A6C68 /* ViPERClarity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB0C2F66D447002A6C68 /* ViPERClarity.cpp */; };
+		7F4FBB942F66D447002A6C68 /* WaveBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB452F66D447002A6C68 /* WaveBuffer.cpp */; };
+		7F4FBB952F66D447002A6C68 /* IIR_NOrder_BW_BP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB2B2F66D447002A6C68 /* IIR_NOrder_BW_BP.cpp */; };
+		7F4FBB962F66D447002A6C68 /* VHE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB012F66D447002A6C68 /* VHE.cpp */; };
+		7F4FBB972F66D447002A6C68 /* AnalogX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAE52F66D447002A6C68 /* AnalogX.cpp */; };
+		7F4FBB982F66D447002A6C68 /* FETCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAF12F66D447002A6C68 /* FETCompressor.cpp */; };
+		7F4FBB992F66D447002A6C68 /* IIRFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAF32F66D447002A6C68 /* IIRFilter.cpp */; };
+		7F4FBB9A2F66D447002A6C68 /* SoftwareLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAF92F66D447002A6C68 /* SoftwareLimiter.cpp */; };
+		7F4FBB9B2F66D447002A6C68 /* TimeConstDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB432F66D447002A6C68 /* TimeConstDelay.cpp */; };
+		7F4FBB9C2F66D447002A6C68 /* MultiBiquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB312F66D447002A6C68 /* MultiBiquad.cpp */; };
+		7F4FBB9D2F66D447002A6C68 /* Crossfeed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB1B2F66D447002A6C68 /* Crossfeed.cpp */; };
+		7F4FBB9E2F66D447002A6C68 /* ViPERDDC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB0E2F66D447002A6C68 /* ViPERDDC.cpp */; };
+		7F4FBB9F2F66D447002A6C68 /* MinPhaseIIRCoeffs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB2F2F66D447002A6C68 /* MinPhaseIIRCoeffs.cpp */; };
+		7F4FBBA02F66D447002A6C68 /* PassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB352F66D447002A6C68 /* PassFilter.cpp */; };
+		7F4FBBA12F66D447002A6C68 /* IIR_1st.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB292F66D447002A6C68 /* IIR_1st.cpp */; };
+		7F4FBBA22F66D447002A6C68 /* SpeakerCorrection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAFB2F66D447002A6C68 /* SpeakerCorrection.cpp */; };
+		7F4FBBA32F66D447002A6C68 /* Subwoofer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB412F66D447002A6C68 /* Subwoofer.cpp */; };
+		7F4FBBA42F66D447002A6C68 /* CRevModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB192F66D447002A6C68 /* CRevModel.cpp */; };
+		7F4FBBA52F66D447002A6C68 /* IIR_NOrder_BW_LH.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB2D2F66D447002A6C68 /* IIR_NOrder_BW_LH.cpp */; };
+		7F4FBBA62F66D447002A6C68 /* PlaybackGain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAF52F66D447002A6C68 /* PlaybackGain.cpp */; };
+		7F4FBBA72F66D447002A6C68 /* FIR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB212F66D447002A6C68 /* FIR.cpp */; };
+		7F4FBBA82F66D447002A6C68 /* NoiseSharpening.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB332F66D447002A6C68 /* NoiseSharpening.cpp */; };
+		7F4FBBA92F66D447002A6C68 /* ColorfulMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAE72F66D447002A6C68 /* ColorfulMusic.cpp */; };
+		7F4FBBAA2F66D447002A6C68 /* HiFi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB252F66D447002A6C68 /* HiFi.cpp */; };
+		7F4FBBAB2F66D447002A6C68 /* ViPER.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB4A2F66D447002A6C68 /* ViPER.cpp */; };
+		7F4FBBAC2F66D447002A6C68 /* DiffSurround.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAED2F66D447002A6C68 /* DiffSurround.cpp */; };
+		7F4FBBAD2F66D447002A6C68 /* HighShelf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB272F66D447002A6C68 /* HighShelf.cpp */; };
+		7F4FBBAE2F66D447002A6C68 /* CAllpassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB152F66D447002A6C68 /* CAllpassFilter.cpp */; };
+		7F4FBBAF2F66D447002A6C68 /* CCombFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB172F66D447002A6C68 /* CCombFilter.cpp */; };
+		7F4FBBB02F66D447002A6C68 /* PConvSingle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB372F66D447002A6C68 /* PConvSingle.cpp */; };
+		7F4FBBB12F66D447002A6C68 /* SpectrumExtend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAFD2F66D447002A6C68 /* SpectrumExtend.cpp */; };
+		7F4FBBB22F66D447002A6C68 /* Cure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAEB2F66D447002A6C68 /* Cure.cpp */; };
+		7F4FBBB32F66D447002A6C68 /* DynamicSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBAEF2F66D447002A6C68 /* DynamicSystem.cpp */; };
+		7F4FBBB42F66D447002A6C68 /* Stereo3DSurround.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB3F2F66D447002A6C68 /* Stereo3DSurround.cpp */; };
+		7F4FBBB52F66D447002A6C68 /* Polyphase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB3D2F66D447002A6C68 /* Polyphase.cpp */; };
+		7F4FBBB62F66D447002A6C68 /* PolesFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB3B2F66D447002A6C68 /* PolesFilter.cpp */; };
+		7F4FBBB72F66D447002A6C68 /* DepthSurround.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB1D2F66D447002A6C68 /* DepthSurround.cpp */; };
+		7F4FBBB82F66D447002A6C68 /* Biquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB132F66D447002A6C68 /* Biquad.cpp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		7F4FB91F2F65C8D4002A6C68 /* ViPER4Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViPER4Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F4FB9332F66D193002A6C68 /* libViPERDSP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libViPERDSP.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F4FBAE12F66D447002A6C68 /* log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		7F4FBAE22F66D447002A6C68 /* ViPERParams.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViPERParams.h; sourceTree = "<group>"; };
+		7F4FBAE42F66D447002A6C68 /* AnalogX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnalogX.h; sourceTree = "<group>"; };
+		7F4FBAE52F66D447002A6C68 /* AnalogX.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AnalogX.cpp; sourceTree = "<group>"; };
+		7F4FBAE62F66D447002A6C68 /* ColorfulMusic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorfulMusic.h; sourceTree = "<group>"; };
+		7F4FBAE72F66D447002A6C68 /* ColorfulMusic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ColorfulMusic.cpp; sourceTree = "<group>"; };
+		7F4FBAE82F66D447002A6C68 /* Convolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Convolver.h; sourceTree = "<group>"; };
+		7F4FBAE92F66D447002A6C68 /* Convolver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Convolver.cpp; sourceTree = "<group>"; };
+		7F4FBAEA2F66D447002A6C68 /* Cure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cure.h; sourceTree = "<group>"; };
+		7F4FBAEB2F66D447002A6C68 /* Cure.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cure.cpp; sourceTree = "<group>"; };
+		7F4FBAEC2F66D447002A6C68 /* DiffSurround.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiffSurround.h; sourceTree = "<group>"; };
+		7F4FBAED2F66D447002A6C68 /* DiffSurround.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DiffSurround.cpp; sourceTree = "<group>"; };
+		7F4FBAEE2F66D447002A6C68 /* DynamicSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicSystem.h; sourceTree = "<group>"; };
+		7F4FBAEF2F66D447002A6C68 /* DynamicSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicSystem.cpp; sourceTree = "<group>"; };
+		7F4FBAF02F66D447002A6C68 /* FETCompressor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FETCompressor.h; sourceTree = "<group>"; };
+		7F4FBAF12F66D447002A6C68 /* FETCompressor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FETCompressor.cpp; sourceTree = "<group>"; };
+		7F4FBAF22F66D447002A6C68 /* IIRFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IIRFilter.h; sourceTree = "<group>"; };
+		7F4FBAF32F66D447002A6C68 /* IIRFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IIRFilter.cpp; sourceTree = "<group>"; };
+		7F4FBAF42F66D447002A6C68 /* PlaybackGain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaybackGain.h; sourceTree = "<group>"; };
+		7F4FBAF52F66D447002A6C68 /* PlaybackGain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlaybackGain.cpp; sourceTree = "<group>"; };
+		7F4FBAF62F66D447002A6C68 /* Reverberation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reverberation.h; sourceTree = "<group>"; };
+		7F4FBAF72F66D447002A6C68 /* Reverberation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Reverberation.cpp; sourceTree = "<group>"; };
+		7F4FBAF82F66D447002A6C68 /* SoftwareLimiter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoftwareLimiter.h; sourceTree = "<group>"; };
+		7F4FBAF92F66D447002A6C68 /* SoftwareLimiter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SoftwareLimiter.cpp; sourceTree = "<group>"; };
+		7F4FBAFA2F66D447002A6C68 /* SpeakerCorrection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeakerCorrection.h; sourceTree = "<group>"; };
+		7F4FBAFB2F66D447002A6C68 /* SpeakerCorrection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpeakerCorrection.cpp; sourceTree = "<group>"; };
+		7F4FBAFC2F66D447002A6C68 /* SpectrumExtend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpectrumExtend.h; sourceTree = "<group>"; };
+		7F4FBAFD2F66D447002A6C68 /* SpectrumExtend.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpectrumExtend.cpp; sourceTree = "<group>"; };
+		7F4FBAFE2F66D447002A6C68 /* TubeSimulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TubeSimulator.h; sourceTree = "<group>"; };
+		7F4FBAFF2F66D447002A6C68 /* TubeSimulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TubeSimulator.cpp; sourceTree = "<group>"; };
+		7F4FBB002F66D447002A6C68 /* VHE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VHE.h; sourceTree = "<group>"; };
+		7F4FBB012F66D447002A6C68 /* VHE.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VHE.cpp; sourceTree = "<group>"; };
+		7F4FBB022F66D447002A6C68 /* VHE_L0.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VHE_L0.h; sourceTree = "<group>"; };
+		7F4FBB032F66D447002A6C68 /* VHE_L1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VHE_L1.h; sourceTree = "<group>"; };
+		7F4FBB042F66D447002A6C68 /* VHE_L2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VHE_L2.h; sourceTree = "<group>"; };
+		7F4FBB052F66D447002A6C68 /* VHE_L3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VHE_L3.h; sourceTree = "<group>"; };
+		7F4FBB062F66D447002A6C68 /* VHE_L4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VHE_L4.h; sourceTree = "<group>"; };
+		7F4FBB072F66D447002A6C68 /* ViPERBass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViPERBass.h; sourceTree = "<group>"; };
+		7F4FBB082F66D447002A6C68 /* ViPERBass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ViPERBass.cpp; sourceTree = "<group>"; };
+		7F4FBB092F66D447002A6C68 /* ViPERBassMono.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViPERBassMono.h; sourceTree = "<group>"; };
+		7F4FBB0A2F66D447002A6C68 /* ViPERBassMono.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ViPERBassMono.cpp; sourceTree = "<group>"; };
+		7F4FBB0B2F66D447002A6C68 /* ViPERClarity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViPERClarity.h; sourceTree = "<group>"; };
+		7F4FBB0C2F66D447002A6C68 /* ViPERClarity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ViPERClarity.cpp; sourceTree = "<group>"; };
+		7F4FBB0D2F66D447002A6C68 /* ViPERDDC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViPERDDC.h; sourceTree = "<group>"; };
+		7F4FBB0E2F66D447002A6C68 /* ViPERDDC.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ViPERDDC.cpp; sourceTree = "<group>"; };
+		7F4FBB102F66D447002A6C68 /* AdaptiveBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdaptiveBuffer.h; sourceTree = "<group>"; };
+		7F4FBB112F66D447002A6C68 /* AdaptiveBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AdaptiveBuffer.cpp; sourceTree = "<group>"; };
+		7F4FBB122F66D447002A6C68 /* Biquad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Biquad.h; sourceTree = "<group>"; };
+		7F4FBB132F66D447002A6C68 /* Biquad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Biquad.cpp; sourceTree = "<group>"; };
+		7F4FBB142F66D447002A6C68 /* CAllpassFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAllpassFilter.h; sourceTree = "<group>"; };
+		7F4FBB152F66D447002A6C68 /* CAllpassFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CAllpassFilter.cpp; sourceTree = "<group>"; };
+		7F4FBB162F66D447002A6C68 /* CCombFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCombFilter.h; sourceTree = "<group>"; };
+		7F4FBB172F66D447002A6C68 /* CCombFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CCombFilter.cpp; sourceTree = "<group>"; };
+		7F4FBB182F66D447002A6C68 /* CRevModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRevModel.h; sourceTree = "<group>"; };
+		7F4FBB192F66D447002A6C68 /* CRevModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CRevModel.cpp; sourceTree = "<group>"; };
+		7F4FBB1A2F66D447002A6C68 /* Crossfeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Crossfeed.h; sourceTree = "<group>"; };
+		7F4FBB1B2F66D447002A6C68 /* Crossfeed.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Crossfeed.cpp; sourceTree = "<group>"; };
+		7F4FBB1C2F66D447002A6C68 /* DepthSurround.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DepthSurround.h; sourceTree = "<group>"; };
+		7F4FBB1D2F66D447002A6C68 /* DepthSurround.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DepthSurround.cpp; sourceTree = "<group>"; };
+		7F4FBB1E2F66D447002A6C68 /* DynamicBass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicBass.h; sourceTree = "<group>"; };
+		7F4FBB1F2F66D447002A6C68 /* DynamicBass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicBass.cpp; sourceTree = "<group>"; };
+		7F4FBB202F66D447002A6C68 /* FIR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FIR.h; sourceTree = "<group>"; };
+		7F4FBB212F66D447002A6C68 /* FIR.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FIR.cpp; sourceTree = "<group>"; };
+		7F4FBB222F66D447002A6C68 /* Harmonic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Harmonic.h; sourceTree = "<group>"; };
+		7F4FBB232F66D447002A6C68 /* Harmonic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Harmonic.cpp; sourceTree = "<group>"; };
+		7F4FBB242F66D447002A6C68 /* HiFi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiFi.h; sourceTree = "<group>"; };
+		7F4FBB252F66D447002A6C68 /* HiFi.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HiFi.cpp; sourceTree = "<group>"; };
+		7F4FBB262F66D447002A6C68 /* HighShelf.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HighShelf.h; sourceTree = "<group>"; };
+		7F4FBB272F66D447002A6C68 /* HighShelf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HighShelf.cpp; sourceTree = "<group>"; };
+		7F4FBB282F66D447002A6C68 /* IIR_1st.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IIR_1st.h; sourceTree = "<group>"; };
+		7F4FBB292F66D447002A6C68 /* IIR_1st.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IIR_1st.cpp; sourceTree = "<group>"; };
+		7F4FBB2A2F66D447002A6C68 /* IIR_NOrder_BW_BP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IIR_NOrder_BW_BP.h; sourceTree = "<group>"; };
+		7F4FBB2B2F66D447002A6C68 /* IIR_NOrder_BW_BP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IIR_NOrder_BW_BP.cpp; sourceTree = "<group>"; };
+		7F4FBB2C2F66D447002A6C68 /* IIR_NOrder_BW_LH.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IIR_NOrder_BW_LH.h; sourceTree = "<group>"; };
+		7F4FBB2D2F66D447002A6C68 /* IIR_NOrder_BW_LH.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IIR_NOrder_BW_LH.cpp; sourceTree = "<group>"; };
+		7F4FBB2E2F66D447002A6C68 /* MinPhaseIIRCoeffs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MinPhaseIIRCoeffs.h; sourceTree = "<group>"; };
+		7F4FBB2F2F66D447002A6C68 /* MinPhaseIIRCoeffs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MinPhaseIIRCoeffs.cpp; sourceTree = "<group>"; };
+		7F4FBB302F66D447002A6C68 /* MultiBiquad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultiBiquad.h; sourceTree = "<group>"; };
+		7F4FBB312F66D447002A6C68 /* MultiBiquad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MultiBiquad.cpp; sourceTree = "<group>"; };
+		7F4FBB322F66D447002A6C68 /* NoiseSharpening.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoiseSharpening.h; sourceTree = "<group>"; };
+		7F4FBB332F66D447002A6C68 /* NoiseSharpening.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NoiseSharpening.cpp; sourceTree = "<group>"; };
+		7F4FBB342F66D447002A6C68 /* PassFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PassFilter.h; sourceTree = "<group>"; };
+		7F4FBB352F66D447002A6C68 /* PassFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PassFilter.cpp; sourceTree = "<group>"; };
+		7F4FBB362F66D447002A6C68 /* PConvSingle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PConvSingle.h; sourceTree = "<group>"; };
+		7F4FBB372F66D447002A6C68 /* PConvSingle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PConvSingle.cpp; sourceTree = "<group>"; };
+		7F4FBB382F66D447002A6C68 /* pffft.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pffft.h; sourceTree = "<group>"; };
+		7F4FBB392F66D447002A6C68 /* pffft.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pffft.c; sourceTree = "<group>"; };
+		7F4FBB3A2F66D447002A6C68 /* PolesFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PolesFilter.h; sourceTree = "<group>"; };
+		7F4FBB3B2F66D447002A6C68 /* PolesFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PolesFilter.cpp; sourceTree = "<group>"; };
+		7F4FBB3C2F66D447002A6C68 /* Polyphase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Polyphase.h; sourceTree = "<group>"; };
+		7F4FBB3D2F66D447002A6C68 /* Polyphase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Polyphase.cpp; sourceTree = "<group>"; };
+		7F4FBB3E2F66D447002A6C68 /* Stereo3DSurround.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stereo3DSurround.h; sourceTree = "<group>"; };
+		7F4FBB3F2F66D447002A6C68 /* Stereo3DSurround.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Stereo3DSurround.cpp; sourceTree = "<group>"; };
+		7F4FBB402F66D447002A6C68 /* Subwoofer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Subwoofer.h; sourceTree = "<group>"; };
+		7F4FBB412F66D447002A6C68 /* Subwoofer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Subwoofer.cpp; sourceTree = "<group>"; };
+		7F4FBB422F66D447002A6C68 /* TimeConstDelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeConstDelay.h; sourceTree = "<group>"; };
+		7F4FBB432F66D447002A6C68 /* TimeConstDelay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TimeConstDelay.cpp; sourceTree = "<group>"; };
+		7F4FBB442F66D447002A6C68 /* WaveBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveBuffer.h; sourceTree = "<group>"; };
+		7F4FBB452F66D447002A6C68 /* WaveBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WaveBuffer.cpp; sourceTree = "<group>"; };
+		7F4FBB462F66D447002A6C68 /* WaveReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaveReader.h; sourceTree = "<group>"; };
+		7F4FBB482F66D447002A6C68 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		7F4FBB492F66D447002A6C68 /* ViPER.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViPER.h; sourceTree = "<group>"; };
+		7F4FBB4A2F66D447002A6C68 /* ViPER.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ViPER.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -26,12 +236,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7F4FB9312F66D193002A6C68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		7F4FB9162F65C8D4002A6C68 = {
 			isa = PBXGroup;
 			children = (
+				7F4FBB512F66D447002A6C68 /* ViPERDSP */,
 				7F4FB9212F65C8D4002A6C68 /* ViPER4Mac */,
 				7F4FB9202F65C8D4002A6C68 /* Products */,
 			);
@@ -41,11 +259,220 @@
 			isa = PBXGroup;
 			children = (
 				7F4FB91F2F65C8D4002A6C68 /* ViPER4Mac.app */,
+				7F4FB9332F66D193002A6C68 /* libViPERDSP.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7F4FBAE32F66D447002A6C68 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				7F4FBAE12F66D447002A6C68 /* log.h */,
+				7F4FBAE22F66D447002A6C68 /* ViPERParams.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		7F4FBB0F2F66D447002A6C68 /* effects */ = {
+			isa = PBXGroup;
+			children = (
+				7F4FBAE42F66D447002A6C68 /* AnalogX.h */,
+				7F4FBAE52F66D447002A6C68 /* AnalogX.cpp */,
+				7F4FBAE62F66D447002A6C68 /* ColorfulMusic.h */,
+				7F4FBAE72F66D447002A6C68 /* ColorfulMusic.cpp */,
+				7F4FBAE82F66D447002A6C68 /* Convolver.h */,
+				7F4FBAE92F66D447002A6C68 /* Convolver.cpp */,
+				7F4FBAEA2F66D447002A6C68 /* Cure.h */,
+				7F4FBAEB2F66D447002A6C68 /* Cure.cpp */,
+				7F4FBAEC2F66D447002A6C68 /* DiffSurround.h */,
+				7F4FBAED2F66D447002A6C68 /* DiffSurround.cpp */,
+				7F4FBAEE2F66D447002A6C68 /* DynamicSystem.h */,
+				7F4FBAEF2F66D447002A6C68 /* DynamicSystem.cpp */,
+				7F4FBAF02F66D447002A6C68 /* FETCompressor.h */,
+				7F4FBAF12F66D447002A6C68 /* FETCompressor.cpp */,
+				7F4FBAF22F66D447002A6C68 /* IIRFilter.h */,
+				7F4FBAF32F66D447002A6C68 /* IIRFilter.cpp */,
+				7F4FBAF42F66D447002A6C68 /* PlaybackGain.h */,
+				7F4FBAF52F66D447002A6C68 /* PlaybackGain.cpp */,
+				7F4FBAF62F66D447002A6C68 /* Reverberation.h */,
+				7F4FBAF72F66D447002A6C68 /* Reverberation.cpp */,
+				7F4FBAF82F66D447002A6C68 /* SoftwareLimiter.h */,
+				7F4FBAF92F66D447002A6C68 /* SoftwareLimiter.cpp */,
+				7F4FBAFA2F66D447002A6C68 /* SpeakerCorrection.h */,
+				7F4FBAFB2F66D447002A6C68 /* SpeakerCorrection.cpp */,
+				7F4FBAFC2F66D447002A6C68 /* SpectrumExtend.h */,
+				7F4FBAFD2F66D447002A6C68 /* SpectrumExtend.cpp */,
+				7F4FBAFE2F66D447002A6C68 /* TubeSimulator.h */,
+				7F4FBAFF2F66D447002A6C68 /* TubeSimulator.cpp */,
+				7F4FBB002F66D447002A6C68 /* VHE.h */,
+				7F4FBB012F66D447002A6C68 /* VHE.cpp */,
+				7F4FBB022F66D447002A6C68 /* VHE_L0.h */,
+				7F4FBB032F66D447002A6C68 /* VHE_L1.h */,
+				7F4FBB042F66D447002A6C68 /* VHE_L2.h */,
+				7F4FBB052F66D447002A6C68 /* VHE_L3.h */,
+				7F4FBB062F66D447002A6C68 /* VHE_L4.h */,
+				7F4FBB072F66D447002A6C68 /* ViPERBass.h */,
+				7F4FBB082F66D447002A6C68 /* ViPERBass.cpp */,
+				7F4FBB092F66D447002A6C68 /* ViPERBassMono.h */,
+				7F4FBB0A2F66D447002A6C68 /* ViPERBassMono.cpp */,
+				7F4FBB0B2F66D447002A6C68 /* ViPERClarity.h */,
+				7F4FBB0C2F66D447002A6C68 /* ViPERClarity.cpp */,
+				7F4FBB0D2F66D447002A6C68 /* ViPERDDC.h */,
+				7F4FBB0E2F66D447002A6C68 /* ViPERDDC.cpp */,
+			);
+			path = effects;
+			sourceTree = "<group>";
+		};
+		7F4FBB472F66D447002A6C68 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				7F4FBB102F66D447002A6C68 /* AdaptiveBuffer.h */,
+				7F4FBB112F66D447002A6C68 /* AdaptiveBuffer.cpp */,
+				7F4FBB122F66D447002A6C68 /* Biquad.h */,
+				7F4FBB132F66D447002A6C68 /* Biquad.cpp */,
+				7F4FBB142F66D447002A6C68 /* CAllpassFilter.h */,
+				7F4FBB152F66D447002A6C68 /* CAllpassFilter.cpp */,
+				7F4FBB162F66D447002A6C68 /* CCombFilter.h */,
+				7F4FBB172F66D447002A6C68 /* CCombFilter.cpp */,
+				7F4FBB182F66D447002A6C68 /* CRevModel.h */,
+				7F4FBB192F66D447002A6C68 /* CRevModel.cpp */,
+				7F4FBB1A2F66D447002A6C68 /* Crossfeed.h */,
+				7F4FBB1B2F66D447002A6C68 /* Crossfeed.cpp */,
+				7F4FBB1C2F66D447002A6C68 /* DepthSurround.h */,
+				7F4FBB1D2F66D447002A6C68 /* DepthSurround.cpp */,
+				7F4FBB1E2F66D447002A6C68 /* DynamicBass.h */,
+				7F4FBB1F2F66D447002A6C68 /* DynamicBass.cpp */,
+				7F4FBB202F66D447002A6C68 /* FIR.h */,
+				7F4FBB212F66D447002A6C68 /* FIR.cpp */,
+				7F4FBB222F66D447002A6C68 /* Harmonic.h */,
+				7F4FBB232F66D447002A6C68 /* Harmonic.cpp */,
+				7F4FBB242F66D447002A6C68 /* HiFi.h */,
+				7F4FBB252F66D447002A6C68 /* HiFi.cpp */,
+				7F4FBB262F66D447002A6C68 /* HighShelf.h */,
+				7F4FBB272F66D447002A6C68 /* HighShelf.cpp */,
+				7F4FBB282F66D447002A6C68 /* IIR_1st.h */,
+				7F4FBB292F66D447002A6C68 /* IIR_1st.cpp */,
+				7F4FBB2A2F66D447002A6C68 /* IIR_NOrder_BW_BP.h */,
+				7F4FBB2B2F66D447002A6C68 /* IIR_NOrder_BW_BP.cpp */,
+				7F4FBB2C2F66D447002A6C68 /* IIR_NOrder_BW_LH.h */,
+				7F4FBB2D2F66D447002A6C68 /* IIR_NOrder_BW_LH.cpp */,
+				7F4FBB2E2F66D447002A6C68 /* MinPhaseIIRCoeffs.h */,
+				7F4FBB2F2F66D447002A6C68 /* MinPhaseIIRCoeffs.cpp */,
+				7F4FBB302F66D447002A6C68 /* MultiBiquad.h */,
+				7F4FBB312F66D447002A6C68 /* MultiBiquad.cpp */,
+				7F4FBB322F66D447002A6C68 /* NoiseSharpening.h */,
+				7F4FBB332F66D447002A6C68 /* NoiseSharpening.cpp */,
+				7F4FBB342F66D447002A6C68 /* PassFilter.h */,
+				7F4FBB352F66D447002A6C68 /* PassFilter.cpp */,
+				7F4FBB362F66D447002A6C68 /* PConvSingle.h */,
+				7F4FBB372F66D447002A6C68 /* PConvSingle.cpp */,
+				7F4FBB382F66D447002A6C68 /* pffft.h */,
+				7F4FBB392F66D447002A6C68 /* pffft.c */,
+				7F4FBB3A2F66D447002A6C68 /* PolesFilter.h */,
+				7F4FBB3B2F66D447002A6C68 /* PolesFilter.cpp */,
+				7F4FBB3C2F66D447002A6C68 /* Polyphase.h */,
+				7F4FBB3D2F66D447002A6C68 /* Polyphase.cpp */,
+				7F4FBB3E2F66D447002A6C68 /* Stereo3DSurround.h */,
+				7F4FBB3F2F66D447002A6C68 /* Stereo3DSurround.cpp */,
+				7F4FBB402F66D447002A6C68 /* Subwoofer.h */,
+				7F4FBB412F66D447002A6C68 /* Subwoofer.cpp */,
+				7F4FBB422F66D447002A6C68 /* TimeConstDelay.h */,
+				7F4FBB432F66D447002A6C68 /* TimeConstDelay.cpp */,
+				7F4FBB442F66D447002A6C68 /* WaveBuffer.h */,
+				7F4FBB452F66D447002A6C68 /* WaveBuffer.cpp */,
+				7F4FBB462F66D447002A6C68 /* WaveReader.h */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		7F4FBB4B2F66D447002A6C68 /* viper */ = {
+			isa = PBXGroup;
+			children = (
+				7F4FBB0F2F66D447002A6C68 /* effects */,
+				7F4FBB472F66D447002A6C68 /* utils */,
+				7F4FBB482F66D447002A6C68 /* constants.h */,
+				7F4FBB492F66D447002A6C68 /* ViPER.h */,
+				7F4FBB4A2F66D447002A6C68 /* ViPER.cpp */,
+			);
+			path = viper;
+			sourceTree = "<group>";
+		};
+		7F4FBB512F66D447002A6C68 /* ViPERDSP */ = {
+			isa = PBXGroup;
+			children = (
+				7F4FBAE32F66D447002A6C68 /* include */,
+				7F4FBB4B2F66D447002A6C68 /* viper */,
+			);
+			path = ViPERDSP;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7F4FB92F2F66D193002A6C68 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F4FBB522F66D447002A6C68 /* ViPERParams.h in Headers */,
+				7F4FBB532F66D447002A6C68 /* HighShelf.h in Headers */,
+				7F4FBB542F66D447002A6C68 /* VHE_L3.h in Headers */,
+				7F4FBB552F66D447002A6C68 /* DepthSurround.h in Headers */,
+				7F4FBB562F66D447002A6C68 /* Convolver.h in Headers */,
+				7F4FBB572F66D447002A6C68 /* VHE_L1.h in Headers */,
+				7F4FBB582F66D447002A6C68 /* IIRFilter.h in Headers */,
+				7F4FBB592F66D447002A6C68 /* Crossfeed.h in Headers */,
+				7F4FBB5A2F66D447002A6C68 /* Biquad.h in Headers */,
+				7F4FBB5B2F66D447002A6C68 /* ViPERDDC.h in Headers */,
+				7F4FBB5C2F66D447002A6C68 /* ViPERBass.h in Headers */,
+				7F4FBB5D2F66D447002A6C68 /* DiffSurround.h in Headers */,
+				7F4FBB5E2F66D447002A6C68 /* AnalogX.h in Headers */,
+				7F4FBB5F2F66D447002A6C68 /* MinPhaseIIRCoeffs.h in Headers */,
+				7F4FBB602F66D447002A6C68 /* ViPERBassMono.h in Headers */,
+				7F4FBB612F66D447002A6C68 /* PolesFilter.h in Headers */,
+				7F4FBB622F66D447002A6C68 /* PConvSingle.h in Headers */,
+				7F4FBB632F66D447002A6C68 /* ViPERClarity.h in Headers */,
+				7F4FBB642F66D447002A6C68 /* FETCompressor.h in Headers */,
+				7F4FBB652F66D447002A6C68 /* WaveBuffer.h in Headers */,
+				7F4FBB662F66D447002A6C68 /* pffft.h in Headers */,
+				7F4FBB672F66D447002A6C68 /* PassFilter.h in Headers */,
+				7F4FBB682F66D447002A6C68 /* Stereo3DSurround.h in Headers */,
+				7F4FBB692F66D447002A6C68 /* PlaybackGain.h in Headers */,
+				7F4FBB6A2F66D447002A6C68 /* SpeakerCorrection.h in Headers */,
+				7F4FBB6B2F66D447002A6C68 /* TubeSimulator.h in Headers */,
+				7F4FBB6C2F66D447002A6C68 /* constants.h in Headers */,
+				7F4FBB6D2F66D447002A6C68 /* Subwoofer.h in Headers */,
+				7F4FBB6E2F66D447002A6C68 /* Cure.h in Headers */,
+				7F4FBB6F2F66D447002A6C68 /* IIR_NOrder_BW_LH.h in Headers */,
+				7F4FBB702F66D447002A6C68 /* WaveReader.h in Headers */,
+				7F4FBB712F66D447002A6C68 /* DynamicBass.h in Headers */,
+				7F4FBB722F66D447002A6C68 /* NoiseSharpening.h in Headers */,
+				7F4FBB732F66D447002A6C68 /* Polyphase.h in Headers */,
+				7F4FBB742F66D447002A6C68 /* VHE_L4.h in Headers */,
+				7F4FBB752F66D447002A6C68 /* CRevModel.h in Headers */,
+				7F4FBB762F66D447002A6C68 /* Harmonic.h in Headers */,
+				7F4FBB772F66D447002A6C68 /* HiFi.h in Headers */,
+				7F4FBB782F66D447002A6C68 /* ColorfulMusic.h in Headers */,
+				7F4FBB792F66D447002A6C68 /* Reverberation.h in Headers */,
+				7F4FBB7A2F66D447002A6C68 /* CAllpassFilter.h in Headers */,
+				7F4FBB7B2F66D447002A6C68 /* SpectrumExtend.h in Headers */,
+				7F4FBB7C2F66D447002A6C68 /* FIR.h in Headers */,
+				7F4FBB7D2F66D447002A6C68 /* MultiBiquad.h in Headers */,
+				7F4FBB7E2F66D447002A6C68 /* log.h in Headers */,
+				7F4FBB7F2F66D447002A6C68 /* ViPER.h in Headers */,
+				7F4FBB802F66D447002A6C68 /* CCombFilter.h in Headers */,
+				7F4FBB812F66D447002A6C68 /* SoftwareLimiter.h in Headers */,
+				7F4FBB822F66D447002A6C68 /* VHE_L0.h in Headers */,
+				7F4FBB832F66D447002A6C68 /* TimeConstDelay.h in Headers */,
+				7F4FBB842F66D447002A6C68 /* VHE_L2.h in Headers */,
+				7F4FBB852F66D447002A6C68 /* IIR_1st.h in Headers */,
+				7F4FBB862F66D447002A6C68 /* DynamicSystem.h in Headers */,
+				7F4FBB872F66D447002A6C68 /* AdaptiveBuffer.h in Headers */,
+				7F4FBB882F66D447002A6C68 /* VHE.h in Headers */,
+				7F4FBB892F66D447002A6C68 /* IIR_NOrder_BW_BP.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		7F4FB91E2F65C8D4002A6C68 /* ViPER4Mac */ = {
@@ -70,6 +497,25 @@
 			productReference = 7F4FB91F2F65C8D4002A6C68 /* ViPER4Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
+		7F4FB9322F66D193002A6C68 /* ViPERDSP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F4FB9342F66D193002A6C68 /* Build configuration list for PBXNativeTarget "ViPERDSP" */;
+			buildPhases = (
+				7F4FB92F2F66D193002A6C68 /* Headers */,
+				7F4FB9302F66D193002A6C68 /* Sources */,
+				7F4FB9312F66D193002A6C68 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ViPERDSP;
+			packageProductDependencies = (
+			);
+			productName = ViPERDSP;
+			productReference = 7F4FB9332F66D193002A6C68 /* libViPERDSP.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -81,6 +527,9 @@
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					7F4FB91E2F65C8D4002A6C68 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					7F4FB9322F66D193002A6C68 = {
 						CreatedOnToolsVersion = 26.3;
 					};
 				};
@@ -100,6 +549,7 @@
 			projectRoot = "";
 			targets = (
 				7F4FB91E2F65C8D4002A6C68 /* ViPER4Mac */,
+				7F4FB9322F66D193002A6C68 /* ViPERDSP */,
 			);
 		};
 /* End PBXProject section */
@@ -119,6 +569,60 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F4FB9302F66D193002A6C68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F4FBB8A2F66D447002A6C68 /* pffft.c in Sources */,
+				7F4FBB8B2F66D447002A6C68 /* Harmonic.cpp in Sources */,
+				7F4FBB8C2F66D447002A6C68 /* ViPERBassMono.cpp in Sources */,
+				7F4FBB8D2F66D447002A6C68 /* DynamicBass.cpp in Sources */,
+				7F4FBB8E2F66D447002A6C68 /* Convolver.cpp in Sources */,
+				7F4FBB8F2F66D447002A6C68 /* Reverberation.cpp in Sources */,
+				7F4FBB902F66D447002A6C68 /* TubeSimulator.cpp in Sources */,
+				7F4FBB912F66D447002A6C68 /* AdaptiveBuffer.cpp in Sources */,
+				7F4FBB922F66D447002A6C68 /* ViPERBass.cpp in Sources */,
+				7F4FBB932F66D447002A6C68 /* ViPERClarity.cpp in Sources */,
+				7F4FBB942F66D447002A6C68 /* WaveBuffer.cpp in Sources */,
+				7F4FBB952F66D447002A6C68 /* IIR_NOrder_BW_BP.cpp in Sources */,
+				7F4FBB962F66D447002A6C68 /* VHE.cpp in Sources */,
+				7F4FBB972F66D447002A6C68 /* AnalogX.cpp in Sources */,
+				7F4FBB982F66D447002A6C68 /* FETCompressor.cpp in Sources */,
+				7F4FBB992F66D447002A6C68 /* IIRFilter.cpp in Sources */,
+				7F4FBB9A2F66D447002A6C68 /* SoftwareLimiter.cpp in Sources */,
+				7F4FBB9B2F66D447002A6C68 /* TimeConstDelay.cpp in Sources */,
+				7F4FBB9C2F66D447002A6C68 /* MultiBiquad.cpp in Sources */,
+				7F4FBB9D2F66D447002A6C68 /* Crossfeed.cpp in Sources */,
+				7F4FBB9E2F66D447002A6C68 /* ViPERDDC.cpp in Sources */,
+				7F4FBB9F2F66D447002A6C68 /* MinPhaseIIRCoeffs.cpp in Sources */,
+				7F4FBBA02F66D447002A6C68 /* PassFilter.cpp in Sources */,
+				7F4FBBA12F66D447002A6C68 /* IIR_1st.cpp in Sources */,
+				7F4FBBA22F66D447002A6C68 /* SpeakerCorrection.cpp in Sources */,
+				7F4FBBA32F66D447002A6C68 /* Subwoofer.cpp in Sources */,
+				7F4FBBA42F66D447002A6C68 /* CRevModel.cpp in Sources */,
+				7F4FBBA52F66D447002A6C68 /* IIR_NOrder_BW_LH.cpp in Sources */,
+				7F4FBBA62F66D447002A6C68 /* PlaybackGain.cpp in Sources */,
+				7F4FBBA72F66D447002A6C68 /* FIR.cpp in Sources */,
+				7F4FBBA82F66D447002A6C68 /* NoiseSharpening.cpp in Sources */,
+				7F4FBBA92F66D447002A6C68 /* ColorfulMusic.cpp in Sources */,
+				7F4FBBAA2F66D447002A6C68 /* HiFi.cpp in Sources */,
+				7F4FBBAB2F66D447002A6C68 /* ViPER.cpp in Sources */,
+				7F4FBBAC2F66D447002A6C68 /* DiffSurround.cpp in Sources */,
+				7F4FBBAD2F66D447002A6C68 /* HighShelf.cpp in Sources */,
+				7F4FBBAE2F66D447002A6C68 /* CAllpassFilter.cpp in Sources */,
+				7F4FBBAF2F66D447002A6C68 /* CCombFilter.cpp in Sources */,
+				7F4FBBB02F66D447002A6C68 /* PConvSingle.cpp in Sources */,
+				7F4FBBB12F66D447002A6C68 /* SpectrumExtend.cpp in Sources */,
+				7F4FBBB22F66D447002A6C68 /* Cure.cpp in Sources */,
+				7F4FBBB32F66D447002A6C68 /* DynamicSystem.cpp in Sources */,
+				7F4FBBB42F66D447002A6C68 /* Stereo3DSurround.cpp in Sources */,
+				7F4FBBB52F66D447002A6C68 /* Polyphase.cpp in Sources */,
+				7F4FBBB62F66D447002A6C68 /* PolesFilter.cpp in Sources */,
+				7F4FBBB72F66D447002A6C68 /* DepthSurround.cpp in Sources */,
+				7F4FBBB82F66D447002A6C68 /* Biquad.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,13 +682,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -235,11 +740,12 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.7;
+				MACOSX_DEPLOYMENT_TARGET = 15.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -303,6 +809,42 @@
 			};
 			name = Release;
 		};
+		7F4FB9352F66D193002A6C68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/ViPERDSP/viper",
+					"$(SRCROOT)/ViPERDSP/include",
+					"$(SRCROOT)/ViPERDSP",
+				);
+				OTHER_CFLAGS = "-DPFFFT_SIMD_DISABLE=0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7F4FB9362F66D193002A6C68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXECUTABLE_PREFIX = lib;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/ViPERDSP/viper",
+					"$(SRCROOT)/ViPERDSP/include",
+					"$(SRCROOT)/ViPERDSP",
+				);
+				OTHER_CFLAGS = "-DPFFFT_SIMD_DISABLE=0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -320,6 +862,15 @@
 			buildConfigurations = (
 				7F4FB92B2F65C8D5002A6C68 /* Debug */,
 				7F4FB92C2F65C8D5002A6C68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F4FB9342F66D193002A6C68 /* Build configuration list for PBXNativeTarget "ViPERDSP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F4FB9352F66D193002A6C68 /* Debug */,
+				7F4FB9362F66D193002A6C68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
