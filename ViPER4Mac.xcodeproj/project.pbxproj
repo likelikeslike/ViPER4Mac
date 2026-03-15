@@ -140,6 +140,7 @@
 		7FD0602C2F66F6C700DA4E0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FD0602B2F66F6C700DA4E0E /* Info.plist */; };
 		7FD060302F66F82000DA4E0E /* libViPERDSP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4FB9332F66D193002A6C68 /* libViPERDSP.a */; };
 		7FD060332F66FC9F00DA4E0E /* Tracer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE6B2F66EFD1002A6C68 /* Tracer.cpp */; };
+		7FD060372F66FE8E00DA4E0E /* ViPERBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060362F66FE8E00DA4E0E /* ViPERBridge.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -325,6 +326,9 @@
 		7FD0600D2F66F11400DA4E0E /* TPCircularBuffer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = TPCircularBuffer.c; sourceTree = "<group>"; };
 		7FD060292F66F49800DA4E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FD0602B2F66F6C700DA4E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FD060342F66FE0D00DA4E0E /* ViPER4Mac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViPER4Mac-Bridging-Header.h"; sourceTree = "<group>"; };
+		7FD060352F66FE1F00DA4E0E /* ViPERBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViPERBridge.h; sourceTree = "<group>"; };
+		7FD060362F66FE8E00DA4E0E /* ViPERBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViPERBridge.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +582,9 @@
 		7F4FBC422F66E9C0002A6C68 /* Bridge */ = {
 			isa = PBXGroup;
 			children = (
+				7FD060362F66FE8E00DA4E0E /* ViPERBridge.mm */,
+				7FD060342F66FE0D00DA4E0E /* ViPER4Mac-Bridging-Header.h */,
+				7FD060352F66FE1F00DA4E0E /* ViPERBridge.h */,
 			);
 			path = Bridge;
 			sourceTree = "<group>";
@@ -838,6 +845,7 @@
 				TargetAttributes = {
 					7F4FB91E2F65C8D4002A6C68 = {
 						CreatedOnToolsVersion = 26.3;
+						LastSwiftMigration = 2630;
 					};
 					7F4FB9322F66D193002A6C68 = {
 						CreatedOnToolsVersion = 26.3;
@@ -894,6 +902,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F4FBC3C2F66E33B002A6C68 /* ViPER4MacApp.swift in Sources */,
+				7FD060372F66FE8E00DA4E0E /* ViPERBridge.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1120,6 +1129,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1147,6 +1157,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1158,6 +1169,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
