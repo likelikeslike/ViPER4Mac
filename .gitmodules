@@ -1,3 +1,9 @@
 [submodule "ViPERDSP"]
 	path = ViPERDSP
 	url = https://github.com/likelikeslike/ViPERDSP.git
+[submodule "Vendor/TPCircularBuffer"]
+	path = Vendor/TPCircularBuffer
+	url = https://github.com/michaeltyson/TPCircularBuffer.git
+[submodule "Vendor/libASPL"]
+	path = Vendor/libASPL
+	url = https://github.com/gavv/libASPL.git
