@@ -139,6 +139,7 @@
 		7FD0602A2F66F49800DA4E0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FD060292F66F49800DA4E0E /* Info.plist */; };
 		7FD0602C2F66F6C700DA4E0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FD0602B2F66F6C700DA4E0E /* Info.plist */; };
 		7FD060302F66F82000DA4E0E /* libViPERDSP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4FB9332F66D193002A6C68 /* libViPERDSP.a */; };
+		7FD060332F66FC9F00DA4E0E /* Tracer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE6B2F66EFD1002A6C68 /* Tracer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -360,7 +361,6 @@
 				7F4FB9202F65C8D4002A6C68 /* Products */,
 				7F4FBC4B2F66EAC9002A6C68 /* ViPERDriver */,
 				7F4FBE912F66EFD1002A6C68 /* Vendor */,
-				7FD0602F2F66F82000DA4E0E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -699,13 +699,6 @@
 			path = TPCircularBuffer;
 			sourceTree = "<group>";
 		};
-		7FD0602F2F66F82000DA4E0E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -967,6 +960,7 @@
 				7FD060142F66F22D00DA4E0E /* Client.cpp in Sources */,
 				7FD060152F66F22D00DA4E0E /* VolumeControl.g.cpp in Sources */,
 				7FD060162F66F22D00DA4E0E /* Driver.cpp in Sources */,
+				7FD060332F66FC9F00DA4E0E /* Tracer.cpp in Sources */,
 				7FD060172F66F22D00DA4E0E /* Object.cpp in Sources */,
 				7FD060282F66F2AB00DA4E0E /* TPCircularBuffer.c in Sources */,
 				7FD060182F66F22D00DA4E0E /* Strings.cpp in Sources */,
@@ -1240,6 +1234,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Vendor/libASPL/include",
+					"$(SRCROOT)/Vendor/TPCircularBuffer",
+					"$(SRCROOT)/ViPERDriver",
+				);
 				INFOPLIST_FILE = ViPERDriver/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = "";
@@ -1259,11 +1258,7 @@
 				SKIP_INSTALL = NO;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				USER_HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/ViPERDriver",
-					"$(SRCROOT)/Vendor/TPCircularBuffer",
-					"$(SRCROOT)/Vendor/libASPL/include",
-				);
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = driver;
 			};
 			name = Debug;
@@ -1276,6 +1271,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Vendor/libASPL/include",
+					"$(SRCROOT)/Vendor/TPCircularBuffer",
+					"$(SRCROOT)/ViPERDriver",
+				);
 				INFOPLIST_FILE = ViPERDriver/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = "";
@@ -1295,11 +1295,7 @@
 				SKIP_INSTALL = NO;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				USER_HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/ViPERDriver",
-					"$(SRCROOT)/Vendor/TPCircularBuffer",
-					"$(SRCROOT)/Vendor/libASPL/include",
-				);
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = driver;
 			};
 			name = Release;
