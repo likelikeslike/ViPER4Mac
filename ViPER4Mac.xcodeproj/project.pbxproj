@@ -141,6 +141,8 @@
 		7FD060302F66F82000DA4E0E /* libViPERDSP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4FB9332F66D193002A6C68 /* libViPERDSP.a */; };
 		7FD060332F66FC9F00DA4E0E /* Tracer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE6B2F66EFD1002A6C68 /* Tracer.cpp */; };
 		7FD060372F66FE8E00DA4E0E /* ViPERBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060362F66FE8E00DA4E0E /* ViPERBridge.mm */; };
+		7FD0603D2F670BC600DA4E0E /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0603C2F670BC600DA4E0E /* AudioEngine.swift */; };
+		7FD060412F684E1F00DA4E0E /* FileLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060402F684E1F00DA4E0E /* FileLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -329,6 +331,8 @@
 		7FD060342F66FE0D00DA4E0E /* ViPER4Mac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViPER4Mac-Bridging-Header.h"; sourceTree = "<group>"; };
 		7FD060352F66FE1F00DA4E0E /* ViPERBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViPERBridge.h; sourceTree = "<group>"; };
 		7FD060362F66FE8E00DA4E0E /* ViPERBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViPERBridge.mm; sourceTree = "<group>"; };
+		7FD0603C2F670BC600DA4E0E /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		7FD060402F684E1F00DA4E0E /* FileLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLogger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -554,6 +558,7 @@
 		7F4FBC3E2F66E3BF002A6C68 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7FD060402F684E1F00DA4E0E /* FileLogger.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -561,6 +566,7 @@
 		7F4FBC3F2F66E3C5002A6C68 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				7FD0603C2F670BC600DA4E0E /* AudioEngine.swift */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -902,6 +908,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F4FBC3C2F66E33B002A6C68 /* ViPER4MacApp.swift in Sources */,
+				7FD0603D2F670BC600DA4E0E /* AudioEngine.swift in Sources */,
+				7FD060412F684E1F00DA4E0E /* FileLogger.swift in Sources */,
 				7FD060372F66FE8E00DA4E0E /* ViPERBridge.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1157,6 +1165,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ViPER4Mac/Bridge/ViPER4Mac-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
@@ -1197,6 +1206,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ViPER4Mac/Bridge/ViPER4Mac-Bridging-Header.h";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 			};
