@@ -143,6 +143,7 @@
 		7FD060372F66FE8E00DA4E0E /* ViPERBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060362F66FE8E00DA4E0E /* ViPERBridge.mm */; };
 		7FD0603D2F670BC600DA4E0E /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0603C2F670BC600DA4E0E /* AudioEngine.swift */; };
 		7FD060412F684E1F00DA4E0E /* FileLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060402F684E1F00DA4E0E /* FileLogger.swift */; };
+		7FD060432F6851EF00DA4E0E /* AudioOutputDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060422F6851EF00DA4E0E /* AudioOutputDetector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -333,6 +334,7 @@
 		7FD060362F66FE8E00DA4E0E /* ViPERBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViPERBridge.mm; sourceTree = "<group>"; };
 		7FD0603C2F670BC600DA4E0E /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		7FD060402F684E1F00DA4E0E /* FileLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLogger.swift; sourceTree = "<group>"; };
+		7FD060422F6851EF00DA4E0E /* AudioOutputDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioOutputDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -566,6 +568,7 @@
 		7F4FBC3F2F66E3C5002A6C68 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				7FD060422F6851EF00DA4E0E /* AudioOutputDetector.swift */,
 				7FD0603C2F670BC600DA4E0E /* AudioEngine.swift */,
 			);
 			path = Audio;
@@ -908,6 +911,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F4FBC3C2F66E33B002A6C68 /* ViPER4MacApp.swift in Sources */,
+				7FD060432F6851EF00DA4E0E /* AudioOutputDetector.swift in Sources */,
 				7FD0603D2F670BC600DA4E0E /* AudioEngine.swift in Sources */,
 				7FD060412F684E1F00DA4E0E /* FileLogger.swift in Sources */,
 				7FD060372F66FE8E00DA4E0E /* ViPERBridge.mm in Sources */,
