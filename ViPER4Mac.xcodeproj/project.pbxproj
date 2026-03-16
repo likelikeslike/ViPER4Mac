@@ -150,6 +150,8 @@
 		7FD060492F68550F00DA4E0E /* Stream.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE662F66EFD1002A6C68 /* Stream.json */; };
 		7FD0604A2F68550F00DA4E0E /* VolumeControl.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE712F66EFD1002A6C68 /* VolumeControl.json */; };
 		7FD0604E2F68566100DA4E0E /* ProfileFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0604D2F68566100DA4E0E /* ProfileFileManager.swift */; };
+		7FD060502F68577700DA4E0E /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0604F2F68577700DA4E0E /* SafeSubscript.swift */; };
+		7FD060522F68579B00DA4E0E /* ViPERState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060512F68579B00DA4E0E /* ViPERState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -342,6 +344,8 @@
 		7FD060402F684E1F00DA4E0E /* FileLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLogger.swift; sourceTree = "<group>"; };
 		7FD060422F6851EF00DA4E0E /* AudioOutputDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioOutputDetector.swift; sourceTree = "<group>"; };
 		7FD0604D2F68566100DA4E0E /* ProfileFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFileManager.swift; sourceTree = "<group>"; };
+		7FD0604F2F68577700DA4E0E /* SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
+		7FD060512F68579B00DA4E0E /* ViPERState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViPERState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -560,6 +564,7 @@
 		7F4FBC3E2F66E3BF002A6C68 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7FD060512F68579B00DA4E0E /* ViPERState.swift */,
 				7FD060402F684E1F00DA4E0E /* FileLogger.swift */,
 				7FD0604D2F68566100DA4E0E /* ProfileFileManager.swift */,
 			);
@@ -578,6 +583,7 @@
 		7F4FBC402F66E3CD002A6C68 /* Extensitons */ = {
 			isa = PBXGroup;
 			children = (
+				7FD0604F2F68577700DA4E0E /* SafeSubscript.swift */,
 			);
 			path = Extensitons;
 			sourceTree = "<group>";
@@ -915,7 +921,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FD060502F68577700DA4E0E /* SafeSubscript.swift in Sources */,
 				7F4FBC3C2F66E33B002A6C68 /* ViPER4MacApp.swift in Sources */,
+				7FD060522F68579B00DA4E0E /* ViPERState.swift in Sources */,
 				7FD060432F6851EF00DA4E0E /* AudioOutputDetector.swift in Sources */,
 				7FD0603D2F670BC600DA4E0E /* AudioEngine.swift in Sources */,
 				7FD060412F684E1F00DA4E0E /* FileLogger.swift in Sources */,
