@@ -136,14 +136,20 @@
 		7FD060262F66F22D00DA4E0E /* Dispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE592F66EFD1002A6C68 /* Dispatcher.cpp */; };
 		7FD060272F66F22D00DA4E0E /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE652F66EFD1002A6C68 /* Stream.cpp */; };
 		7FD060282F66F2AB00DA4E0E /* TPCircularBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0600D2F66F11400DA4E0E /* TPCircularBuffer.c */; };
-		7FD0602A2F66F49800DA4E0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FD060292F66F49800DA4E0E /* Info.plist */; };
-		7FD0602C2F66F6C700DA4E0E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7FD0602B2F66F6C700DA4E0E /* Info.plist */; };
 		7FD060302F66F82000DA4E0E /* libViPERDSP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4FB9332F66D193002A6C68 /* libViPERDSP.a */; };
 		7FD060332F66FC9F00DA4E0E /* Tracer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE6B2F66EFD1002A6C68 /* Tracer.cpp */; };
 		7FD060372F66FE8E00DA4E0E /* ViPERBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060362F66FE8E00DA4E0E /* ViPERBridge.mm */; };
 		7FD0603D2F670BC600DA4E0E /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0603C2F670BC600DA4E0E /* AudioEngine.swift */; };
 		7FD060412F684E1F00DA4E0E /* FileLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060402F684E1F00DA4E0E /* FileLogger.swift */; };
 		7FD060432F6851EF00DA4E0E /* AudioOutputDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060422F6851EF00DA4E0E /* AudioOutputDetector.swift */; };
+		7FD060442F68550F00DA4E0E /* Bridge.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE502F66EFD1002A6C68 /* Bridge.json */; };
+		7FD060452F68550F00DA4E0E /* Device.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE572F66EFD1002A6C68 /* Device.json */; };
+		7FD060462F68550F00DA4E0E /* MuteControl.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE5C2F66EFD1002A6C68 /* MuteControl.json */; };
+		7FD060472F68550F00DA4E0E /* Object.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE5F2F66EFD1002A6C68 /* Object.json */; };
+		7FD060482F68550F00DA4E0E /* Plugin.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE622F66EFD1002A6C68 /* Plugin.json */; };
+		7FD060492F68550F00DA4E0E /* Stream.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE662F66EFD1002A6C68 /* Stream.json */; };
+		7FD0604A2F68550F00DA4E0E /* VolumeControl.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE712F66EFD1002A6C68 /* VolumeControl.json */; };
+		7FD0604E2F68566100DA4E0E /* ProfileFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0604D2F68566100DA4E0E /* ProfileFileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -335,6 +341,7 @@
 		7FD0603C2F670BC600DA4E0E /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		7FD060402F684E1F00DA4E0E /* FileLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLogger.swift; sourceTree = "<group>"; };
 		7FD060422F6851EF00DA4E0E /* AudioOutputDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioOutputDetector.swift; sourceTree = "<group>"; };
+		7FD0604D2F68566100DA4E0E /* ProfileFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,13 +354,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7F4FB9312F66D193002A6C68 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F4FBC442F66EA6F002A6C68 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -561,6 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				7FD060402F684E1F00DA4E0E /* FileLogger.swift */,
+				7FD0604D2F68566100DA4E0E /* ProfileFileManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -789,8 +790,8 @@
 			buildConfigurationList = 7F4FB92A2F65C8D5002A6C68 /* Build configuration list for PBXNativeTarget "ViPER4Mac" */;
 			buildPhases = (
 				7F4FB91B2F65C8D4002A6C68 /* Sources */,
-				7F4FB91C2F65C8D4002A6C68 /* Frameworks */,
 				7F4FB91D2F65C8D4002A6C68 /* Resources */,
+				7F4FB91C2F65C8D4002A6C68 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -828,7 +829,6 @@
 			buildConfigurationList = 7F4FBC482F66EA6F002A6C68 /* Build configuration list for PBXNativeTarget "ViPERDriver" */;
 			buildPhases = (
 				7F4FBC432F66EA6F002A6C68 /* Sources */,
-				7F4FBC442F66EA6F002A6C68 /* Frameworks */,
 				7F4FBC452F66EA6F002A6C68 /* Resources */,
 			);
 			buildRules = (
@@ -890,7 +890,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FD0602C2F66F6C700DA4E0E /* Info.plist in Resources */,
 				7F4FBC3B2F66E33B002A6C68 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -899,7 +898,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FD0602A2F66F49800DA4E0E /* Info.plist in Resources */,
+				7FD060442F68550F00DA4E0E /* Bridge.json in Resources */,
+				7FD060452F68550F00DA4E0E /* Device.json in Resources */,
+				7FD060462F68550F00DA4E0E /* MuteControl.json in Resources */,
+				7FD060472F68550F00DA4E0E /* Object.json in Resources */,
+				7FD060482F68550F00DA4E0E /* Plugin.json in Resources */,
+				7FD060492F68550F00DA4E0E /* Stream.json in Resources */,
+				7FD0604A2F68550F00DA4E0E /* VolumeControl.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -915,6 +920,7 @@
 				7FD0603D2F670BC600DA4E0E /* AudioEngine.swift in Sources */,
 				7FD060412F684E1F00DA4E0E /* FileLogger.swift in Sources */,
 				7FD060372F66FE8E00DA4E0E /* ViPERBridge.mm in Sources */,
+				7FD0604E2F68566100DA4E0E /* ProfileFileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
