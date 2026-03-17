@@ -152,6 +152,9 @@
 		7FD0604E2F68566100DA4E0E /* ProfileFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0604D2F68566100DA4E0E /* ProfileFileManager.swift */; };
 		7FD060502F68577700DA4E0E /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0604F2F68577700DA4E0E /* SafeSubscript.swift */; };
 		7FD060522F68579B00DA4E0E /* ViPERState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060512F68579B00DA4E0E /* ViPERState.swift */; };
+		7FD060622F69BA7B00DA4E0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060612F69BA7B00DA4E0E /* AppDelegate.swift */; };
+		7FD060652F69BA8100DA4E0E /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060642F69BA8100DA4E0E /* MainWindow.swift */; };
+		7FD060662F69BA8100DA4E0E /* EqGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060632F69BA8100DA4E0E /* EqGraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -346,6 +349,9 @@
 		7FD0604D2F68566100DA4E0E /* ProfileFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFileManager.swift; sourceTree = "<group>"; };
 		7FD0604F2F68577700DA4E0E /* SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
 		7FD060512F68579B00DA4E0E /* ViPERState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViPERState.swift; sourceTree = "<group>"; };
+		7FD060612F69BA7B00DA4E0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7FD060632F69BA8100DA4E0E /* EqGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqGraphView.swift; sourceTree = "<group>"; };
+		7FD060642F69BA8100DA4E0E /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -533,6 +539,7 @@
 		7F4FBC372F66E33B002A6C68 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				7FD060612F69BA7B00DA4E0E /* AppDelegate.swift */,
 				7F4FBC362F66E33B002A6C68 /* ViPER4MacApp.swift */,
 			);
 			path = App;
@@ -591,6 +598,8 @@
 		7F4FBC412F66E3D8002A6C68 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7FD060632F69BA8100DA4E0E /* EqGraphView.swift */,
+				7FD060642F69BA8100DA4E0E /* MainWindow.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -922,8 +931,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FD060502F68577700DA4E0E /* SafeSubscript.swift in Sources */,
+				7FD060652F69BA8100DA4E0E /* MainWindow.swift in Sources */,
+				7FD060662F69BA8100DA4E0E /* EqGraphView.swift in Sources */,
 				7F4FBC3C2F66E33B002A6C68 /* ViPER4MacApp.swift in Sources */,
 				7FD060522F68579B00DA4E0E /* ViPERState.swift in Sources */,
+				7FD060622F69BA7B00DA4E0E /* AppDelegate.swift in Sources */,
 				7FD060432F6851EF00DA4E0E /* AudioOutputDetector.swift in Sources */,
 				7FD0603D2F670BC600DA4E0E /* AudioEngine.swift in Sources */,
 				7FD060412F684E1F00DA4E0E /* FileLogger.swift in Sources */,
@@ -1176,7 +1188,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.ViPER4Mac;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -1217,7 +1229,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.ViPER4Mac;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -1243,6 +1255,7 @@
 					"$(SRCROOT)/ViPERDSP",
 				);
 				OTHER_CFLAGS = "-DPFFFT_SIMD_DISABLE=0";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.dsp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -1261,6 +1274,7 @@
 					"$(SRCROOT)/ViPERDSP",
 				);
 				OTHER_CFLAGS = "-DPFFFT_SIMD_DISABLE=0";
+				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.dsp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
