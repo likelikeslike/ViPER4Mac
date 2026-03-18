@@ -558,7 +558,7 @@
 			children = (
 				7F4FBC422F66E9C0002A6C68 /* Bridge */,
 				7F4FBC412F66E3D8002A6C68 /* UI */,
-				7F4FBC402F66E3CD002A6C68 /* Extensitons */,
+				7F4FBC402F66E3CD002A6C68 /* Extensions */,
 				7F4FBC3F2F66E3C5002A6C68 /* Audio */,
 				7F4FBC3E2F66E3BF002A6C68 /* Model */,
 				7F4FBC372F66E33B002A6C68 /* App */,
@@ -587,12 +587,12 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
-		7F4FBC402F66E3CD002A6C68 /* Extensitons */ = {
+		7F4FBC402F66E3CD002A6C68 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				7FD0604F2F68577700DA4E0E /* SafeSubscript.swift */,
 			);
-			path = Extensitons;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7F4FBC412F66E3D8002A6C68 /* UI */ = {
