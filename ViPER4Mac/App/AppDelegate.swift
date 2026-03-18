@@ -9,6 +9,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   private(set) var popover: NSPopover?
 
   func applicationDidFinishLaunching(_ notification: Notification) {
+    let runningApps = NSRunningApplication.runningApplications(
+      withBundleIdentifier: Bundle.main.bundleIdentifier ?? ""
+    )
+    if runningApps.count > 1 {
+      logger.warning("Another instance is already running, terminating.")
+      NSApp.terminate(nil)
+      return
+    }
+
     AppDelegate.shared = self
     logger.info("applicationDidFinishLaunching")
     AudioEngine.shared.start()
