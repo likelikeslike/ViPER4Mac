@@ -69,9 +69,9 @@ enum EqLabels {
 
 enum EqPresets {
   static let names = [
-    "Acoustic", "Bass Booster", "Bass Reducer", "Classical",
-    "Deep", "Flat", "R&B", "Rock",
-    "Small Speakers", "Treble Booster", "Treble Reducer", "Vocal Booster",
+    Text("Acoustic"), Text("Bass Booster"), Text("Bass Reducer"), Text("Classical"),
+    Text("Deep"), Text("Flat"), Text("R&B"), Text("Rock"),
+    Text("Small Speakers"), Text("Treble Booster"), Text("Treble Reducer"), Text("Vocal Booster"),
   ]
 
   static let presets10: [[Float]] = [
@@ -395,7 +395,7 @@ struct EqEditContentView: View {
         Picker("", selection: $selectedPreset) {
           Text("Custom").tag(-1)
           ForEach(Array(EqPresets.names.enumerated()), id: \.offset) { i, name in
-            Text(name).tag(i)
+            name.tag(i)
           }
           let userPresets = state.eqPresetsForCurrentBandCount()
           if !userPresets.isEmpty {

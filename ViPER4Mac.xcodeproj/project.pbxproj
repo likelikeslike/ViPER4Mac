@@ -155,6 +155,7 @@
 		7FD060622F69BA7B00DA4E0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060612F69BA7B00DA4E0E /* AppDelegate.swift */; };
 		7FD060652F69BA8100DA4E0E /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060642F69BA8100DA4E0E /* MainWindow.swift */; };
 		7FD060662F69BA8100DA4E0E /* EqGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060632F69BA8100DA4E0E /* EqGraphView.swift */; };
+		7FD060852F6C3E3500DA4E0E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7FD060842F6C3E3500DA4E0E /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -352,6 +353,7 @@
 		7FD060612F69BA7B00DA4E0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FD060632F69BA8100DA4E0E /* EqGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqGraphView.swift; sourceTree = "<group>"; };
 		7FD060642F69BA8100DA4E0E /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
+		7FD060842F6C3E3500DA4E0E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -549,6 +551,7 @@
 			isa = PBXGroup;
 			children = (
 				7F4FBC382F66E33B002A6C68 /* Assets.xcassets */,
+				7FD060842F6C3E3500DA4E0E /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -905,6 +908,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FD060852F6C3E3500DA4E0E /* Localizable.xcstrings in Resources */,
 				7F4FBC3B2F66E33B002A6C68 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1100,6 +1104,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -1157,6 +1162,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -1187,7 +1193,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1229,7 +1235,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1300,7 +1306,7 @@
 				INFOPLIST_KEY_NSPrincipalClass = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Audio/Plug-Ins/HAL";
 				MACOSX_DEPLOYMENT_TARGET = 15.7;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					CoreAudio,
@@ -1337,7 +1343,7 @@
 				INFOPLIST_KEY_NSPrincipalClass = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Audio/Plug-Ins/HAL";
 				MACOSX_DEPLOYMENT_TARGET = 15.7;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					CoreAudio,

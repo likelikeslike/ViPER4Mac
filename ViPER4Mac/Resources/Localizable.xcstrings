@@ -1,0 +1,366 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+      "shouldTranslate" : false
+    },
+    "%u Hz" : {
+
+    },
+    "10" : {
+      "shouldTranslate" : false
+    },
+    "15" : {
+      "shouldTranslate" : false
+    },
+    "25" : {
+      "shouldTranslate" : false
+    },
+    "31" : {
+      "shouldTranslate" : false
+    },
+    "Acoustic" : {
+
+    },
+    "Active" : {
+
+    },
+    "Adapt" : {
+
+    },
+    "AnalogX" : {
+
+    },
+    "App Version" : {
+
+    },
+    "Attack" : {
+
+    },
+    "Audio Mode" : {
+
+    },
+    "Auditory System Protection" : {
+
+    },
+    "Auto Attack" : {
+
+    },
+    "Auto Gain" : {
+
+    },
+    "Auto Knee" : {
+
+    },
+    "Auto Release" : {
+
+    },
+    "Bands" : {
+
+    },
+    "Bass Booster" : {
+
+    },
+    "Bass Reducer" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Classical" : {
+
+    },
+    "Convolver" : {
+
+    },
+    "Crest" : {
+
+    },
+    "Cross Ch." : {
+
+    },
+    "Custom" : {
+
+    },
+    "Dampening" : {
+
+    },
+    "Deep" : {
+
+    },
+    "Delay" : {
+
+    },
+    "Delete" : {
+
+    },
+    "Delete selected preset" : {
+
+    },
+    "Depth" : {
+
+    },
+    "Device" : {
+
+    },
+    "Differential Surround" : {
+
+    },
+    "Driver" : {
+
+    },
+    "Dry" : {
+
+    },
+    "Dynamic System" : {
+
+    },
+    "Exciter" : {
+
+    },
+    "FET Compressor" : {
+
+    },
+    "Field Surround" : {
+
+    },
+    "File" : {
+
+    },
+    "FIR Equalizer" : {
+
+    },
+    "Flat" : {
+
+    },
+    "Frequency" : {
+
+    },
+    "Gain" : {
+
+    },
+    "Headphone" : {
+
+    },
+    "Headphone Surround+" : {
+
+    },
+    "Import" : {
+
+    },
+    "Inactive" : {
+
+    },
+    "Kernel" : {
+
+    },
+    "Knee" : {
+
+    },
+    "Knee Multi" : {
+
+    },
+    "Launch at Login" : {
+
+    },
+    "Load..." : {
+
+    },
+    "Max Attack" : {
+
+    },
+    "Max Gain" : {
+
+    },
+    "Max Release" : {
+
+    },
+    "Medium" : {
+
+    },
+    "Mid Image" : {
+
+    },
+    "Mild" : {
+
+    },
+    "Mode" : {
+
+    },
+    "N/A" : {
+
+    },
+    "Natural" : {
+
+    },
+    "No Clip" : {
+
+    },
+    "No presets" : {
+
+    },
+    "None" : {
+
+    },
+    "Not Found" : {
+
+    },
+    "Output Device" : {
+
+    },
+    "Output Gain" : {
+
+    },
+    "Output Pan" : {
+
+    },
+    "OZone+" : {
+
+    },
+    "Playback Gain Control" : {
+
+    },
+    "Preset" : {
+
+    },
+    "Preset name" : {
+
+    },
+    "Pure Bass+" : {
+
+    },
+    "Quality" : {
+
+    },
+    "Quit" : {
+
+    },
+    "R&B" : {
+
+    },
+    "Ratio" : {
+
+    },
+    "Release" : {
+
+    },
+    "Reverberation" : {
+
+    },
+    "Rock" : {
+
+    },
+    "Room Size" : {
+
+    },
+    "Sample Rate" : {
+
+    },
+    "Save" : {
+
+    },
+    "Save current DS as preset" : {
+
+    },
+    "Save current EQ as preset" : {
+
+    },
+    "Save DS Preset" : {
+
+    },
+    "Save EQ Preset" : {
+
+    },
+    "Side Gain Hi" : {
+
+    },
+    "Side Gain Lo" : {
+
+    },
+    "Small Speakers" : {
+
+    },
+    "Speaker" : {
+
+    },
+    "Speaker Optimization" : {
+
+    },
+    "Spectrum Extension" : {
+
+    },
+    "Streaming" : {
+
+    },
+    "Strength" : {
+
+    },
+    "Strong" : {
+
+    },
+    "Subwoofer" : {
+
+    },
+    "Threshold" : {
+
+    },
+    "Threshold Limit" : {
+
+    },
+    "Treble Booster" : {
+
+    },
+    "Treble Reducer" : {
+
+    },
+    "Tube Simulator (6N1J)" : {
+
+    },
+    "v%@" : {
+
+    },
+    "ViPER Bass" : {
+
+    },
+    "ViPER Bass Mono" : {
+
+    },
+    "ViPER Clarity" : {
+
+    },
+    "ViPER-DDC" : {
+
+    },
+    "ViPER4Mac" : {
+      "shouldTranslate" : false
+    },
+    "Vocal Booster" : {
+
+    },
+    "Wet" : {
+
+    },
+    "Widening" : {
+
+    },
+    "Width" : {
+
+    },
+    "X High Freq" : {
+
+    },
+    "X Low Freq" : {
+
+    },
+    "XHiFi" : {
+
+    },
+    "Y High Freq" : {
+
+    },
+    "Y Low Freq" : {
+
+    }
+  },
+  "version" : "1.1"
+}
