@@ -1,0 +1,4 @@
+#!/bin/bash
+killall coreaudiod 2>/dev/null || true
+sleep 2
+exit 0

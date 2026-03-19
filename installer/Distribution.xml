@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+    <title>ViPER4Mac</title>
+    <welcome file="welcome.html" />
+    <conclusion file="conclusion.html" />
+    <options customize="never" require-scripts="false" hostArchitectures="arm64" />
+    <volume-check>
+        <allowed-os-versions>
+            <os-version min="15.0" />
+        </allowed-os-versions>
+    </volume-check>
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.viper4mac.pkg" />
+        </line>
+    </choices-outline>
+    <choice id="default" />
+    <choice id="com.viper4mac.pkg" visible="false">
+        <pkg-ref id="com.viper4mac.pkg" />
+    </choice>
+    <pkg-ref id="com.viper4mac.pkg" version="1.0.0" onConclusion="none">ViPER4Mac-component.pkg</pkg-ref>
+</installer-gui-script>

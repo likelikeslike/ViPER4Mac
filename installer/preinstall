@@ -1,0 +1,7 @@
+#!/bin/bash
+osascript -e 'tell application "ViPER4Mac" to quit' 2>/dev/null
+sleep 1
+killall coreaudiod 2>/dev/null || true
+sleep 1
+rm -rf /Library/Audio/Plug-Ins/HAL/ViPER4Mac.driver
+exit 0
