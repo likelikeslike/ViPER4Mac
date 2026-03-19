@@ -255,25 +255,25 @@ struct PopoverContentView: View {
 
   private var effectSections: some View {
     VStack(spacing: 4) {
+      agcSection
+      compressorSection
+      ddcSection
+      spectrumSection
       eqSection
-      bassSection
-      bassMonoSection
-      claritySection
+      convolverSection
       surroundSection
       diffSurroundSection
+      vheSection
       reverbSection
       dynamicSystemSection
       toggleOnlyHeader(
         Text("Tube Simulator (6N1J)"), icon: "music.note", isOn: $state.tubeSimulatorEnabled
       )
-      analogXSection
+      bassSection
+      bassMonoSection
+      claritySection
       cureSection
-      compressorSection
-      vheSection
-      spectrumSection
-      agcSection
-      ddcSection
-      convolverSection
+      analogXSection
       if state.fxType == .speaker {
         toggleOnlyHeader(
           Text("Speaker Optimization"), icon: "hifispeaker.fill", isOn: $state.speakerCorrectionEnabled
