@@ -32,8 +32,8 @@ final class FileLogger {
 
   private func rotateIfNeeded() {
     guard let attrs = try? FileManager.default.attributesOfItem(atPath: logURL.path),
-      let size = attrs[.size] as? UInt64,
-      size > maxFileSize
+          let size = attrs[.size] as? UInt64,
+          size > maxFileSize
     else { return }
     fileHandle?.closeFile()
     let oldURL = logURL.deletingLastPathComponent().appendingPathComponent("viper.old.log")

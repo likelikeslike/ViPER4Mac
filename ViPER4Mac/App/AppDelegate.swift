@@ -3,12 +3,12 @@ import SwiftUI
 
 private let logger = AppLogger(category: "AppDelegate")
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
   static var shared: AppDelegate?
   private var statusItem: NSStatusItem?
   private(set) var popover: NSPopover?
 
-  func applicationDidFinishLaunching(_ notification: Notification) {
+  func applicationDidFinishLaunching(_: Notification) {
     let runningApps = NSRunningApplication.runningApplications(
       withBundleIdentifier: Bundle.main.bundleIdentifier ?? ""
     )
@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     setupOutputDetector()
   }
 
-  func applicationWillTerminate(_ notification: Notification) {
+  func applicationWillTerminate(_: Notification) {
     ViPERState.shared.saveSettings()
     AudioOutputDetector.shared.stop()
     AudioEngine.shared.stop()
@@ -62,6 +62,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       ViPERState.shared.refreshDriverStatus()
     }
   }
+
   @objc private func togglePopover() {
     guard let popover, let button = statusItem?.button else { return }
     if popover.isShown {

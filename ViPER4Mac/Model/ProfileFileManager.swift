@@ -83,8 +83,8 @@ final class ProfileFileManager {
     }
     return
       contents
-      .filter { ext.contains(($0 as NSString).pathExtension.lowercased()) }
-      .sorted()
+        .filter { ext.contains(($0 as NSString).pathExtension.lowercased()) }
+        .sorted()
   }
 
   func fileURL(name: String, type: FileType) -> URL {

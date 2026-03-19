@@ -67,7 +67,7 @@ final class AudioOutputDetector {
   func checkAndNotify() {
     let newType = detectOutputType()
     if newType != currentOutputType {
-      logger.info("Output type changed: \(self.currentOutputType.rawValue) -> \(newType.rawValue)")
+      logger.info("Output type changed: \(currentOutputType.rawValue) -> \(newType.rawValue)")
       currentOutputType = newType
       onOutputTypeChanged?(newType)
     }
@@ -191,18 +191,16 @@ final class AudioOutputDetector {
       mElement: kAudioObjectPropertyElementMain
     )
     var dataSize: UInt32 = 0
-    guard
-      AudioObjectGetPropertyDataSize(
-        AudioObjectID(kAudioObjectSystemObject), &addr, 0, nil, &dataSize
-      ) == noErr
+    guard AudioObjectGetPropertyDataSize(
+      AudioObjectID(kAudioObjectSystemObject), &addr, 0, nil, &dataSize
+    ) == noErr
     else { return [] }
 
     let count = Int(dataSize) / MemoryLayout<AudioDeviceID>.size
     var deviceIDs = [AudioDeviceID](repeating: 0, count: count)
-    guard
-      AudioObjectGetPropertyData(
-        AudioObjectID(kAudioObjectSystemObject), &addr, 0, nil, &dataSize, &deviceIDs
-      ) == noErr
+    guard AudioObjectGetPropertyData(
+      AudioObjectID(kAudioObjectSystemObject), &addr, 0, nil, &dataSize, &deviceIDs
+    ) == noErr
     else { return [] }
     return deviceIDs
   }
@@ -222,8 +220,7 @@ final class AudioOutputDetector {
 }
 
 private let defaultDeviceChangedCallback: AudioObjectPropertyListenerProc = {
-  (objectID, numAddresses, addresses, clientData) -> OSStatus in
-
+  _, _, _, clientData -> OSStatus in
   guard let clientData else { return noErr }
   let detector = Unmanaged<AudioOutputDetector>.fromOpaque(clientData).takeUnretainedValue()
 

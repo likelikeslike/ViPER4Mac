@@ -118,7 +118,8 @@ struct PopoverContentView: View {
           Image(systemName: "info.circle")
             .font(.caption)
             .foregroundStyle(
-              state.driverInstalled && state.isProcessing ? Color.viperAccent : .secondary)
+              state.driverInstalled && state.isProcessing ? Color.viperAccent : .secondary
+            )
         }
         .buttonStyle(.borderless)
         .popover(isPresented: $showDriverStatus, arrowEdge: .bottom) {
@@ -235,16 +236,18 @@ struct PopoverContentView: View {
       let volDb = volPct > 0 ? 20.0 * log10(Double(volPct) / 100.0) : -99.9
       steppedSlider(
         "Output Gain", value: $state.outputVolume, maxIndex: volValues.count - 1,
-        steps: volValues.count - 2, label: String(format: "%.1fdB", volDb))
+        steps: volValues.count - 2, label: String(format: "%.1fdB", volDb)
+      )
 
-      paramSlider("Output Pan", intValue: $state.channelPan, range: -100...100)
+      paramSlider("Output Pan", intValue: $state.channelPan, range: -100 ... 100)
 
       let limValues = ViPERState.limiterValues
       let limPct = limValues[safe: state.limiter] ?? 100
       let limDb = limPct > 0 ? 20.0 * log10(Double(limPct) / 100.0) : -99.9
       steppedSlider(
         "Threshold Limit", value: $state.limiter, maxIndex: limValues.count - 1,
-        steps: limValues.count - 2, label: String(format: "%.1fdB", limDb))
+        steps: limValues.count - 2, label: String(format: "%.1fdB", limDb)
+      )
     }
   }
 
@@ -261,7 +264,8 @@ struct PopoverContentView: View {
       reverbSection
       dynamicSystemSection
       toggleOnlyHeader(
-        "Tube Simulator (6N1J)", icon: "music.note", isOn: $state.tubeSimulatorEnabled)
+        "Tube Simulator (6N1J)", icon: "music.note", isOn: $state.tubeSimulatorEnabled
+      )
       analogXSection
       cureSection
       compressorSection
@@ -272,7 +276,8 @@ struct PopoverContentView: View {
       convolverSection
       if state.fxType == .speaker {
         toggleOnlyHeader(
-          "Speaker Optimization", icon: "hifispeaker.fill", isOn: $state.speakerCorrectionEnabled)
+          "Speaker Optimization", icon: "hifispeaker.fill", isOn: $state.speakerCorrectionEnabled
+        )
       }
     }
   }
@@ -282,7 +287,8 @@ struct PopoverContentView: View {
   private var eqSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        "FIR Equalizer", icon: "slider.vertical.3", id: "eq", isOn: $state.equalizerEnabled)
+        "FIR Equalizer", icon: "slider.vertical.3", id: "eq", isOn: $state.equalizerEnabled
+      )
       if expandedSections.contains("eq") {
         EqCurveGraph(
           bands: state.equalizerBands,
@@ -310,12 +316,13 @@ struct PopoverContentView: View {
           }
           .pickerStyle(.segmented)
           paramSlider(
-            "Frequency", intValue: $state.viperBassFrequency, range: 0...135,
-            displayFn: { "\($0 + 15)Hz" })
+            "Frequency", intValue: $state.viperBassFrequency, range: 0 ... 135,
+            displayFn: { "\($0 + 15)Hz" }
+          )
           steppedSlider(
             "Gain", value: $state.viperBassGain, maxIndex: 19, steps: 18,
             label:
-              ViPERState.bassGainDbLabels[safe: state.viperBassGain].map { "\($0)dB" } ?? "--"
+            ViPERState.bassGainDbLabels[safe: state.viperBassGain].map { "\($0)dB" } ?? "--"
           )
         }
         .padding(.leading, 4)
@@ -326,7 +333,8 @@ struct PopoverContentView: View {
   private var bassMonoSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        "ViPER Bass Mono", icon: "waveform", id: "bassMono", isOn: $state.viperBassMonoEnabled)
+        "ViPER Bass Mono", icon: "waveform", id: "bassMono", isOn: $state.viperBassMonoEnabled
+      )
       if expandedSections.contains("bassMono") {
         VStack(spacing: 4) {
           Picker("Mode", selection: $state.viperBassMonoMode) {
@@ -336,12 +344,13 @@ struct PopoverContentView: View {
           }
           .pickerStyle(.segmented)
           paramSlider(
-            "Frequency", intValue: $state.viperBassMonoFrequency, range: 0...135,
-            displayFn: { "\($0 + 15)Hz" })
+            "Frequency", intValue: $state.viperBassMonoFrequency, range: 0 ... 135,
+            displayFn: { "\($0 + 15)Hz" }
+          )
           steppedSlider(
             "Gain", value: $state.viperBassMonoGain, maxIndex: 19, steps: 18,
             label:
-              ViPERState.bassGainDbLabels[safe: state.viperBassMonoGain].map { "\($0)dB" } ?? "--"
+            ViPERState.bassGainDbLabels[safe: state.viperBassMonoGain].map { "\($0)dB" } ?? "--"
           )
         }
         .padding(.leading, 4)
@@ -363,7 +372,7 @@ struct PopoverContentView: View {
           steppedSlider(
             "Gain", value: $state.viperClarityGain, maxIndex: 9, steps: 8,
             label:
-              ViPERState.clarityGainDbLabels[safe: state.viperClarityGain].map { "\($0)dB" } ?? "--"
+            ViPERState.clarityGainDbLabels[safe: state.viperClarityGain].map { "\($0)dB" } ?? "--"
           )
         }
         .padding(.leading, 4)
@@ -375,7 +384,8 @@ struct PopoverContentView: View {
     VStack(spacing: 4) {
       sectionHeader(
         "Field Surround", icon: "dot.radiowaves.left.and.right", id: "surround",
-        isOn: $state.fieldSurroundEnabled)
+        isOn: $state.fieldSurroundEnabled
+      )
       if expandedSections.contains("surround") {
         VStack(spacing: 4) {
           steppedSlider("Widening", value: $state.fieldSurroundWidening, maxIndex: 8, steps: 7)
@@ -391,13 +401,15 @@ struct PopoverContentView: View {
     VStack(spacing: 4) {
       sectionHeader(
         "Differential Surround", icon: "person.wave.2", id: "diffsurr",
-        isOn: $state.diffSurroundEnabled)
+        isOn: $state.diffSurroundEnabled
+      )
       if expandedSections.contains("diffsurr") {
         VStack(spacing: 4) {
           let delayVal = ViPERState.diffSurroundDelayValues[safe: state.diffSurroundDelay] ?? 500
           steppedSlider(
             "Delay", value: $state.diffSurroundDelay, maxIndex: 19, steps: 18,
-            label: "\(delayVal / 100)ms")
+            label: "\(delayVal / 100)ms"
+          )
         }
         .padding(.leading, 4)
       }
@@ -407,19 +419,23 @@ struct PopoverContentView: View {
   private var reverbSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        "Reverberation", icon: "aqi.medium", id: "reverb", isOn: $state.reverberationEnabled)
+        "Reverberation", icon: "aqi.medium", id: "reverb", isOn: $state.reverberationEnabled
+      )
       if expandedSections.contains("reverb") {
         VStack(spacing: 4) {
           steppedSlider("Room Size", value: $state.reverberationRoomSize, maxIndex: 10, steps: 9)
           steppedSlider("Width", value: $state.reverberationRoomWidth, maxIndex: 10, steps: 9)
           steppedSlider(
-            "Dampening", value: $state.reverberationRoomDampening, maxIndex: 10, steps: 9)
+            "Dampening", value: $state.reverberationRoomDampening, maxIndex: 10, steps: 9
+          )
           paramSlider(
-            "Wet", intValue: $state.reverberationWetSignal, range: 0...100,
-            displayFn: { "\($0)%" })
+            "Wet", intValue: $state.reverberationWetSignal, range: 0 ... 100,
+            displayFn: { "\($0)%" }
+          )
           paramSlider(
-            "Dry", intValue: $state.reverberationDrySignal, range: 0...100,
-            displayFn: { "\($0)%" })
+            "Dry", intValue: $state.reverberationDrySignal, range: 0 ... 100,
+            displayFn: { "\($0)%" }
+          )
         }
         .padding(.leading, 4)
       }
@@ -429,12 +445,13 @@ struct PopoverContentView: View {
   private var dynamicSystemSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        "Dynamic System", icon: "hifispeaker.fill", id: "dynsys", isOn: $state.dynamicSystemEnabled)
+        "Dynamic System", icon: "hifispeaker.fill", id: "dynsys", isOn: $state.dynamicSystemEnabled
+      )
       if expandedSections.contains("dynsys") {
         VStack(spacing: 4) {
           HStack {
             Picker("Device", selection: $state.dynamicSystemDevice) {
-              ForEach(0..<ViPERState.dynamicSystemDevices.count, id: \.self) { i in
+              ForEach(0 ..< ViPERState.dynamicSystemDevices.count, id: \.self) { i in
                 Text(ViPERState.dynamicSystemDevices[i].name).tag(i)
               }
               if !state.dsPresetFiles.isEmpty {
@@ -503,26 +520,33 @@ struct PopoverContentView: View {
             .padding(20)
           }
           paramSlider(
-            "Strength", intValue: $state.dynamicSystemStrength, range: 0...100,
-            displayFn: { "\($0)%" })
+            "Strength", intValue: $state.dynamicSystemStrength, range: 0 ... 100,
+            displayFn: { "\($0)%" }
+          )
           paramSlider(
-            "X Low Freq", intValue: $state.dsXLow, range: 0...2400,
-            displayFn: { "\($0) Hz" })
+            "X Low Freq", intValue: $state.dsXLow, range: 0 ... 2400,
+            displayFn: { "\($0) Hz" }
+          )
           paramSlider(
-            "X High Freq", intValue: $state.dsXHigh, range: 0...12000,
-            displayFn: { "\($0) Hz" })
+            "X High Freq", intValue: $state.dsXHigh, range: 0 ... 12000,
+            displayFn: { "\($0) Hz" }
+          )
           paramSlider(
-            "Y Low Freq", intValue: $state.dsYLow, range: 0...200,
-            displayFn: { "\($0) Hz" })
+            "Y Low Freq", intValue: $state.dsYLow, range: 0 ... 200,
+            displayFn: { "\($0) Hz" }
+          )
           paramSlider(
-            "Y High Freq", intValue: $state.dsYHigh, range: 0...300,
-            displayFn: { "\($0) Hz" })
+            "Y High Freq", intValue: $state.dsYHigh, range: 0 ... 300,
+            displayFn: { "\($0) Hz" }
+          )
           paramSlider(
-            "Side Gain Lo", intValue: $state.dsSideGainLow, range: 0...100,
-            displayFn: { "\($0)%" })
+            "Side Gain Lo", intValue: $state.dsSideGainLow, range: 0 ... 100,
+            displayFn: { "\($0)%" }
+          )
           paramSlider(
-            "Side Gain Hi", intValue: $state.dsSideGainHigh, range: 0...100,
-            displayFn: { "\($0)%" })
+            "Side Gain Hi", intValue: $state.dsSideGainHigh, range: 0 ... 100,
+            displayFn: { "\($0)%" }
+          )
         }
         .padding(.leading, 4)
       }
@@ -547,7 +571,8 @@ struct PopoverContentView: View {
   private var cureSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        "Auditory System Protection", icon: "cross.case.fill", id: "cure", isOn: $state.cureEnabled)
+        "Auditory System Protection", icon: "cross.case.fill", id: "cure", isOn: $state.cureEnabled
+      )
       if expandedSections.contains("cure") {
         Picker("Preset", selection: $state.cureCrossfeedStrength) {
           Text("Mild").tag(0)
@@ -564,32 +589,37 @@ struct PopoverContentView: View {
     VStack(spacing: 4) {
       sectionHeader(
         "FET Compressor", icon: "rectangle.compress.vertical", id: "comp",
-        isOn: $state.fetCompressorEnabled)
+        isOn: $state.fetCompressorEnabled
+      )
       if expandedSections.contains("comp") {
         VStack(spacing: 4) {
-          paramSlider("Threshold", intValue: $state.fetCompressorThreshold, range: 0...200)
-          paramSlider("Ratio", intValue: $state.fetCompressorRatio, range: 0...200)
+          paramSlider("Threshold", intValue: $state.fetCompressorThreshold, range: 0 ... 200)
+          paramSlider("Ratio", intValue: $state.fetCompressorRatio, range: 0 ... 200)
           toggleRow("Auto Knee", isOn: $state.fetCompressorAutoKnee)
           paramSlider(
-            "Knee", intValue: $state.fetCompressorKnee, range: 0...200,
-            enabled: !state.fetCompressorAutoKnee)
-          paramSlider("Knee Multi", intValue: $state.fetCompressorKneeMulti, range: 0...200)
+            "Knee", intValue: $state.fetCompressorKnee, range: 0 ... 200,
+            enabled: !state.fetCompressorAutoKnee
+          )
+          paramSlider("Knee Multi", intValue: $state.fetCompressorKneeMulti, range: 0 ... 200)
           toggleRow("Auto Gain", isOn: $state.fetCompressorAutoGain)
           paramSlider(
-            "Gain", intValue: $state.fetCompressorGain, range: 0...200,
-            enabled: !state.fetCompressorAutoGain)
+            "Gain", intValue: $state.fetCompressorGain, range: 0 ... 200,
+            enabled: !state.fetCompressorAutoGain
+          )
           toggleRow("Auto Attack", isOn: $state.fetCompressorAutoAttack)
           paramSlider(
-            "Attack", intValue: $state.fetCompressorAttack, range: 0...200,
-            enabled: !state.fetCompressorAutoAttack)
-          paramSlider("Max Attack", intValue: $state.fetCompressorMaxAttack, range: 0...200)
+            "Attack", intValue: $state.fetCompressorAttack, range: 0 ... 200,
+            enabled: !state.fetCompressorAutoAttack
+          )
+          paramSlider("Max Attack", intValue: $state.fetCompressorMaxAttack, range: 0 ... 200)
           toggleRow("Auto Release", isOn: $state.fetCompressorAutoRelease)
           paramSlider(
-            "Release", intValue: $state.fetCompressorRelease, range: 0...200,
-            enabled: !state.fetCompressorAutoRelease)
-          paramSlider("Max Release", intValue: $state.fetCompressorMaxRelease, range: 0...200)
-          paramSlider("Crest", intValue: $state.fetCompressorCrest, range: 0...300)
-          paramSlider("Adapt", intValue: $state.fetCompressorAdapt, range: 0...200)
+            "Release", intValue: $state.fetCompressorRelease, range: 0 ... 200,
+            enabled: !state.fetCompressorAutoRelease
+          )
+          paramSlider("Max Release", intValue: $state.fetCompressorMaxRelease, range: 0 ... 200)
+          paramSlider("Crest", intValue: $state.fetCompressorCrest, range: 0 ... 300)
+          paramSlider("Adapt", intValue: $state.fetCompressorAdapt, range: 0 ... 200)
           toggleRow("No Clip", isOn: $state.fetCompressorNoClip)
         }
         .padding(.leading, 4)
@@ -610,13 +640,15 @@ struct PopoverContentView: View {
   private var spectrumSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        "Spectrum Extension", icon: "water.waves", id: "vse", isOn: $state.spectrumExtensionEnabled)
+        "Spectrum Extension", icon: "water.waves", id: "vse", isOn: $state.spectrumExtensionEnabled
+      )
       if expandedSections.contains("vse") {
         VStack(spacing: 4) {
           steppedSlider("Strength", value: $state.spectrumExtensionBark, maxIndex: 10, steps: 9)
           paramSlider(
-            "Exciter", intValue: $state.spectrumExtensionBarkReconstruct, range: 0...100,
-            displayFn: { "\($0)%" })
+            "Exciter", intValue: $state.spectrumExtensionBarkReconstruct, range: 0 ... 100,
+            displayFn: { "\($0)%" }
+          )
         }
         .padding(.leading, 4)
       }
@@ -627,7 +659,8 @@ struct PopoverContentView: View {
     VStack(spacing: 4) {
       sectionHeader(
         "Playback Gain Control", icon: "chart.line.uptrend.xyaxis", id: "agc",
-        isOn: $state.playbackGainEnabled)
+        isOn: $state.playbackGainEnabled
+      )
       if expandedSections.contains("agc") {
         VStack(spacing: 4) {
           steppedSlider("Strength", value: $state.playbackGainStrength, maxIndex: 2, steps: 1)
@@ -638,7 +671,8 @@ struct PopoverContentView: View {
           steppedSlider(
             "Threshold", value: $state.playbackGainOutputThreshold,
             maxIndex: threshValues.count - 1, steps: threshValues.count - 2,
-            label: String(format: "%.1fdB", threshDb))
+            label: String(format: "%.1fdB", threshDb)
+          )
         }
         .padding(.leading, 4)
       }
@@ -706,7 +740,8 @@ struct PopoverContentView: View {
   private var convolverSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        "Convolver", icon: "waveform.circle", id: "conv", isOn: $state.convolutionEnabled)
+        "Convolver", icon: "waveform.circle", id: "conv", isOn: $state.convolutionEnabled
+      )
       if expandedSections.contains("conv") {
         VStack(spacing: 4) {
           HStack(spacing: 6) {
@@ -741,7 +776,7 @@ struct PopoverContentView: View {
             Button("Import") {
               let panel = NSOpenPanel()
               panel.allowedContentTypes = [UTType.wav, UTType(filenameExtension: "irs")].compactMap
-              { $0 }
+                { $0 }
               panel.allowsOtherFileTypes = true
               panel.allowsMultipleSelection = false
               panel.canChooseDirectories = false
@@ -758,8 +793,9 @@ struct PopoverContentView: View {
             .disabled(state.convolutionKernelPath.isEmpty)
           }
           paramSlider(
-            "Cross Ch.", intValue: $state.convolutionCrossChannel, range: 0...100,
-            displayFn: { "\($0)%" })
+            "Cross Ch.", intValue: $state.convolutionCrossChannel, range: 0 ... 100,
+            displayFn: { "\($0)%" }
+          )
         }
         .padding(.leading, 4)
       }
@@ -800,29 +836,35 @@ struct PopoverContentView: View {
       statusRow(
         "App Version",
         value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-          ?? "?")
+          ?? "?"
+      )
       statusRow(
         "Driver",
         value: state.driverInstalled
           ? "v\(state.driverVersion)" : "Not Found",
-        color: state.driverInstalled ? .green : .red)
+        color: state.driverInstalled ? .green : .red
+      )
       statusRow(
         "Processing",
         value: state.isProcessing ? "Active" : "Inactive",
-        color: state.isProcessing ? .green : .orange)
+        color: state.isProcessing ? .green : .orange
+      )
 
       Divider()
 
       statusRow(
         "Audio Mode",
-        value: state.fxType == .headphone ? "Headphone" : "Speaker")
+        value: state.fxType == .headphone ? "Headphone" : "Speaker"
+      )
       statusRow(
         "Sample Rate",
         value: state.currentSampleRate > 0
-          ? "\(state.currentSampleRate) Hz" : "N/A")
+          ? "\(state.currentSampleRate) Hz" : "N/A"
+      )
       statusRow(
         "Output Device",
-        value: state.outputDeviceName)
+        value: state.outputDeviceName
+      )
     }
     .padding(12)
     .frame(width: 220)
@@ -866,7 +908,7 @@ struct PopoverContentView: View {
 
   private func steppedSlider(
     _ label: String, value: Binding<Int>, maxIndex: Int,
-    steps: Int, label displayLabel: String? = nil
+    steps _: Int, label displayLabel: String? = nil
   ) -> some View {
     let floatBinding = Binding<Float>(
       get: { Float(value.wrappedValue) },
@@ -877,7 +919,7 @@ struct PopoverContentView: View {
         .font(.caption)
         .foregroundStyle(.secondary)
         .frame(width: 65, alignment: .leading)
-      Slider(value: floatBinding, in: 0...Float(maxIndex), step: 1)
+      Slider(value: floatBinding, in: 0 ... Float(maxIndex), step: 1)
         .tint(.viperPurple)
       Text(displayLabel ?? "\(value.wrappedValue)")
         .font(.caption)
@@ -901,7 +943,7 @@ struct PopoverContentView: View {
         .font(.caption)
         .foregroundStyle(.secondary)
         .frame(width: 65, alignment: .leading)
-      Slider(value: floatBinding, in: Float(range.lowerBound)...Float(range.upperBound))
+      Slider(value: floatBinding, in: Float(range.lowerBound) ... Float(range.upperBound))
         .tint(.viperPurple)
         .disabled(!enabled)
       Text(display)

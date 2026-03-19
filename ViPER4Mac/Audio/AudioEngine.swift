@@ -48,10 +48,11 @@ final class AudioEngine {
       }
     }
   }
+
   fileprivate var inputCallbackCount: UInt64 = 0
   fileprivate var outputCallbackCount: UInt64 = 0
 
-  fileprivate var ringBuffer: UnsafeMutablePointer<Float>?
+  private var ringBuffer: UnsafeMutablePointer<Float>?
   private let ringCapacityFrames = 16384
   let channelCount: UInt32 = 2
   private var ringWritePos: Int = 0
@@ -60,7 +61,7 @@ final class AudioEngine {
 
   private var inputASBD = AudioStreamBasicDescription()
   fileprivate var sharedRingPtr: UnsafeMutableRawPointer?
-  fileprivate let shmSize: Int =
+  private let shmSize: Int =
     MemoryLayout<UInt64>.size * 2 + 16384 * 2 * MemoryLayout<Float>.size
   fileprivate var lastNonSilentTime: UInt64 = 0
 
@@ -171,7 +172,7 @@ final class AudioEngine {
     installDeviceListListener()
     installVolumeListeners()
     logger.info(
-      "Audio engine started. Virtual=\(self.inputDeviceID) Output=\(self.outputDeviceID) DSP=\(self.processingEnabled)"
+      "Audio engine started. Virtual=\(inputDeviceID) Output=\(outputDeviceID) DSP=\(processingEnabled)"
     )
   }
 
@@ -228,7 +229,7 @@ final class AudioEngine {
       return
     }
     sharedRingPtr = ptr
-    logger.info("Shared memory mapped, size=\(self.shmSize)")
+    logger.info("Shared memory mapped, size=\(shmSize)")
   }
 
   private func unmapSharedMemory() {
@@ -420,9 +421,11 @@ final class AudioEngine {
     )
 
     let s1 = AudioObjectAddPropertyListener(
-      inputDeviceID, &volAddr, engineVolumeChangedCallback, selfPtr)
+      inputDeviceID, &volAddr, engineVolumeChangedCallback, selfPtr
+    )
     let s2 = AudioObjectAddPropertyListener(
-      inputDeviceID, &muteAddr, engineVolumeChangedCallback, selfPtr)
+      inputDeviceID, &muteAddr, engineVolumeChangedCallback, selfPtr
+    )
     if s1 == noErr && s2 == noErr {
       volumeListenerInstalled = true
       logger.info("Volume/mute listeners installed on virtual device")
@@ -450,13 +453,14 @@ final class AudioEngine {
 
     AudioObjectRemovePropertyListener(inputDeviceID, &volAddr, engineVolumeChangedCallback, selfPtr)
     AudioObjectRemovePropertyListener(
-      inputDeviceID, &muteAddr, engineVolumeChangedCallback, selfPtr)
+      inputDeviceID, &muteAddr, engineVolumeChangedCallback, selfPtr
+    )
     volumeListenerInstalled = false
   }
 
   func syncVolumeToOutput() {
     guard inputDeviceID != kAudioObjectUnknown,
-      outputDeviceID != kAudioObjectUnknown
+          outputDeviceID != kAudioObjectUnknown
     else { return }
 
     var volAddr = AudioObjectPropertyAddress(
@@ -490,10 +494,12 @@ final class AudioEngine {
 
     AudioObjectSetPropertyData(
       outputDeviceID, &outVolAddr, 0, nil,
-      UInt32(MemoryLayout<Float32>.size), &volume)
+      UInt32(MemoryLayout<Float32>.size), &volume
+    )
     AudioObjectSetPropertyData(
       outputDeviceID, &outMuteAddr, 0, nil,
-      UInt32(MemoryLayout<UInt32>.size), &muted)
+      UInt32(MemoryLayout<UInt32>.size), &muted
+    )
 
     logger.info("Volume synced to output: vol=\(volume) muted=\(muted)")
   }
@@ -553,7 +559,7 @@ final class AudioEngine {
     if newDefault == outputDeviceID { return }
     if !hasOutputStreams(newDefault) { return }
     if !isDeviceAlive(newDefault) {
-      logger.info("Ignoring change to dead device: \(self.getDeviceName(newDefault))")
+      logger.info("Ignoring change to dead device: \(getDeviceName(newDefault))")
       return
     }
     switchOutputDevice(to: newDefault)
@@ -566,9 +572,9 @@ final class AudioEngine {
     let allDevices = getAllDeviceIDs()
     let outputStillExists =
       allDevices.contains(outputDeviceID)
-      && hasOutputStreams(outputDeviceID)
-      && getDeviceUID(outputDeviceID) != viperUID
-      && isDeviceAlive(outputDeviceID)
+        && hasOutputStreams(outputDeviceID)
+        && getDeviceUID(outputDeviceID) != viperUID
+        && isDeviceAlive(outputDeviceID)
 
     if outputStillExists {
       let newDefault = getDefaultOutputDevice()
@@ -588,7 +594,7 @@ final class AudioEngine {
     }
 
     logger.info(
-      "Output device disappeared: \(self.getDeviceName(self.outputDeviceID)) -> \(self.getDeviceName(fallback))"
+      "Output device disappeared: \(getDeviceName(outputDeviceID)) -> \(getDeviceName(fallback))"
     )
     switchOutputDevice(to: fallback)
   }
@@ -647,7 +653,7 @@ final class AudioEngine {
     let capacity = ringCapacityFrames * Int(channelCount)
 
     os_unfair_lock_lock(&ringLock)
-    for i in 0..<samplesToWrite {
+    for i in 0 ..< samplesToWrite {
       ring[(ringWritePos + i) % capacity] = data[i]
     }
     ringWritePos = (ringWritePos + samplesToWrite) % capacity
@@ -660,7 +666,7 @@ final class AudioEngine {
     let capacity = ringCapacityFrames * Int(channelCount)
 
     os_unfair_lock_lock(&ringLock)
-    for i in 0..<samplesToRead {
+    for i in 0 ..< samplesToRead {
       data[i] = ring[(ringReadPos + i) % capacity]
     }
     ringReadPos = (ringReadPos + samplesToRead) % capacity
@@ -714,18 +720,16 @@ final class AudioEngine {
       mElement: kAudioObjectPropertyElementMain
     )
     var dataSize: UInt32 = 0
-    guard
-      AudioObjectGetPropertyDataSize(
-        AudioObjectID(kAudioObjectSystemObject), &propAddr, 0, nil, &dataSize
-      ) == noErr
+    guard AudioObjectGetPropertyDataSize(
+      AudioObjectID(kAudioObjectSystemObject), &propAddr, 0, nil, &dataSize
+    ) == noErr
     else { return [] }
 
     let count = Int(dataSize) / MemoryLayout<AudioDeviceID>.size
     var deviceIDs = [AudioDeviceID](repeating: 0, count: count)
-    guard
-      AudioObjectGetPropertyData(
-        AudioObjectID(kAudioObjectSystemObject), &propAddr, 0, nil, &dataSize, &deviceIDs
-      ) == noErr
+    guard AudioObjectGetPropertyData(
+      AudioObjectID(kAudioObjectSystemObject), &propAddr, 0, nil, &dataSize, &deviceIDs
+    ) == noErr
     else { return [] }
 
     return deviceIDs
@@ -739,10 +743,9 @@ final class AudioEngine {
     )
     var uid: CFString = "" as CFString
     var dataSize = UInt32(MemoryLayout<CFString>.size)
-    guard
-      AudioObjectGetPropertyData(
-        deviceID, &propAddr, 0, nil, &dataSize, &uid
-      ) == noErr
+    guard AudioObjectGetPropertyData(
+      deviceID, &propAddr, 0, nil, &dataSize, &uid
+    ) == noErr
     else { return "" }
     return uid as String
   }
@@ -754,10 +757,9 @@ final class AudioEngine {
       mElement: kAudioObjectPropertyElementMain
     )
     var dataSize: UInt32 = 0
-    guard
-      AudioObjectGetPropertyDataSize(
-        deviceID, &propAddr, 0, nil, &dataSize
-      ) == noErr
+    guard AudioObjectGetPropertyDataSize(
+      deviceID, &propAddr, 0, nil, &dataSize
+    ) == noErr
     else { return false }
     return dataSize > 0
   }
@@ -835,10 +837,9 @@ final class AudioEngine {
     )
     var name: CFString = "" as CFString
     var dataSize = UInt32(MemoryLayout<CFString>.size)
-    guard
-      AudioObjectGetPropertyData(
-        deviceID, &propAddr, 0, nil, &dataSize, &name
-      ) == noErr
+    guard AudioObjectGetPropertyData(
+      deviceID, &propAddr, 0, nil, &dataSize, &name
+    ) == noErr
     else { return "Unknown" }
     return name as String
   }
@@ -852,19 +853,22 @@ final class AudioEngine {
     findViPERDevice() != nil
   }
 
-  var lastNonSilentTimeMs: UInt64 { lastNonSilentTime }
+  var lastNonSilentTimeMs: UInt64 {
+    lastNonSilentTime
+  }
 
   func getAvailableOutputDevices() -> [OutputDeviceInfo] {
     let viperUID = viperDeviceUID as String
     return getAllDeviceIDs().compactMap { deviceID in
       let uid = getDeviceUID(deviceID)
       guard uid != viperUID,
-        hasOutputStreams(deviceID),
-        isDeviceAlive(deviceID)
+            hasOutputStreams(deviceID),
+            isDeviceAlive(deviceID)
       else { return nil }
       return OutputDeviceInfo(id: deviceID, name: getDeviceName(deviceID), uid: uid)
     }
   }
+
   private func matchSampleRates() {
     let outputRate = getSampleRate(for: outputDeviceID)
     var propAddr = AudioObjectPropertyAddress(
@@ -883,8 +887,7 @@ final class AudioEngine {
 // MARK: - IOProc Callback (input from virtual device)
 
 private let inputIOProcCallback: AudioDeviceIOProc = {
-  (device, now, inputData, inputTime, outputData, outputTime, clientData) -> OSStatus in
-
+  _, _, _, _, outputData, _, clientData -> OSStatus in
   guard let clientData else { return noErr }
   let engine = Unmanaged<AudioEngine>.fromOpaque(clientData).takeUnretainedValue()
 
@@ -902,9 +905,11 @@ private let inputIOProcCallback: AudioDeviceIOProc = {
   let ringCapacity = 16384 * 2
   let writePosPtr = shmPtr.assumingMemoryBound(to: UInt64.self)
   let readPosPtr = shmPtr.advanced(by: MemoryLayout<UInt64>.size).assumingMemoryBound(
-    to: UInt64.self)
+    to: UInt64.self
+  )
   let samplesBase = shmPtr.advanced(by: MemoryLayout<UInt64>.size * 2).assumingMemoryBound(
-    to: Float.self)
+    to: Float.self
+  )
 
   let outBufList = UnsafeMutableAudioBufferListPointer(outputData)
   let frameCount: Int
@@ -933,7 +938,7 @@ private let inputIOProcCallback: AudioDeviceIOProc = {
   let actualSamples = actualFrames * ch
 
   let readStart = Int(rp)
-  for i in 0..<actualSamples {
+  for i in 0 ..< actualSamples {
     let idx = (readStart + i) % ringCapacity
     tempBuf[i] = samplesBase[idx]
   }
@@ -942,7 +947,7 @@ private let inputIOProcCallback: AudioDeviceIOProc = {
   OSMemoryBarrier()
 
   var maxSample: Float = 0.0
-  for i in 0..<actualSamples {
+  for i in 0 ..< actualSamples {
     let s = abs(tempBuf[i])
     if s > maxSample { maxSample = s }
   }
@@ -965,8 +970,7 @@ private let inputIOProcCallback: AudioDeviceIOProc = {
 // MARK: - Output AUHAL Render Callback
 
 private let outputCallback: AURenderCallback = {
-  (inRefCon, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, ioData) -> OSStatus in
-
+  inRefCon, _, _, _, inNumberFrames, ioData -> OSStatus in
   let engine = Unmanaged<AudioEngine>.fromOpaque(inRefCon).takeUnretainedValue()
   engine.outputCallbackCount += 1
 
@@ -987,7 +991,7 @@ private let outputCallback: AURenderCallback = {
   if engine.outputCallbackCount % 5000 == 1 {
     var maxOut: Float = 0.0
     let sampleCount = frameCount * Int(engine.channelCount)
-    for i in 0..<sampleCount {
+    for i in 0 ..< sampleCount {
       let s = abs(floatPtr[i])
       if s > maxOut { maxOut = s }
     }
@@ -1000,8 +1004,7 @@ private let outputCallback: AURenderCallback = {
 // MARK: - Engine Device Change Callback
 
 private let engineDeviceChangedCallback: AudioObjectPropertyListenerProc = {
-  (objectID, numAddresses, addresses, clientData) -> OSStatus in
-
+  _, _, _, clientData -> OSStatus in
   guard let clientData else { return noErr }
   let engine = Unmanaged<AudioEngine>.fromOpaque(clientData).takeUnretainedValue()
 
@@ -1013,8 +1016,7 @@ private let engineDeviceChangedCallback: AudioObjectPropertyListenerProc = {
 }
 
 private let engineDeviceListChangedCallback: AudioObjectPropertyListenerProc = {
-  (objectID, numAddresses, addresses, clientData) -> OSStatus in
-
+  _, _, _, clientData -> OSStatus in
   guard let clientData else { return noErr }
   let engine = Unmanaged<AudioEngine>.fromOpaque(clientData).takeUnretainedValue()
 
@@ -1026,8 +1028,7 @@ private let engineDeviceListChangedCallback: AudioObjectPropertyListenerProc = {
 }
 
 private let engineVolumeChangedCallback: AudioObjectPropertyListenerProc = {
-  (objectID, numAddresses, addresses, clientData) -> OSStatus in
-
+  _, _, _, clientData -> OSStatus in
   guard let clientData else { return noErr }
   let engine = Unmanaged<AudioEngine>.fromOpaque(clientData).takeUnretainedValue()
 

@@ -259,13 +259,14 @@ struct EqCurveGraph: View {
         label = "\(Int(db))"
       }
       let text = Text(label).font(.system(size: 7, design: .monospaced)).foregroundColor(
-        dbLabelColor)
+        dbLabelColor
+      )
       context.draw(text, at: CGPoint(x: paddingLeft - 4, y: y), anchor: .trailing)
     }
 
     guard bands.count >= bandCount, bandCount > 1 else { return }
 
-    let points: [CGPoint] = (0..<bandCount).map { i in
+    let points: [CGPoint] = (0 ..< bandCount).map { i in
       let x = paddingLeft + graphWidth * CGFloat(i) / CGFloat(bandCount - 1)
       let db = min(max(bands[i], dbMin), dbMax)
       let y = paddingTop + graphHeight * CGFloat(1.0 - (db - dbMin) / (dbMax - dbMin))
@@ -287,7 +288,9 @@ struct EqCurveGraph: View {
       with: .linearGradient(
         gradient,
         startPoint: CGPoint(x: 0, y: paddingTop),
-        endPoint: CGPoint(x: 0, y: paddingTop + graphHeight)))
+        endPoint: CGPoint(x: 0, y: paddingTop + graphHeight)
+      )
+    )
 
     context.stroke(curvePath, with: .color(.accentColor), lineWidth: 2)
 
@@ -295,7 +298,8 @@ struct EqCurveGraph: View {
     for pt in points {
       let dotRect = CGRect(
         x: pt.x - dotRadius, y: pt.y - dotRadius,
-        width: dotRadius * 2, height: dotRadius * 2)
+        width: dotRadius * 2, height: dotRadius * 2
+      )
       context.fill(Path(ellipseIn: dotRect), with: .color(.accentColor))
     }
 
@@ -307,7 +311,8 @@ struct EqCurveGraph: View {
       if i % step == 0 {
         let label = graphLabels[safe: i] ?? ""
         let text = Text(label).font(.system(size: fontSize, design: .monospaced)).foregroundColor(
-          freqLabelColor)
+          freqLabelColor
+        )
         context.draw(text, at: CGPoint(x: pt.x, y: paddingTop + graphHeight + 10), anchor: .center)
       }
     }
@@ -328,17 +333,19 @@ private func buildSplinePath(points: [CGPoint]) -> Path {
   guard !points.isEmpty else { return path }
   path.move(to: points[0])
   let tension: CGFloat = 0.3
-  for i in 0..<(points.count - 1) {
+  for i in 0 ..< (points.count - 1) {
     let prev = points[max(0, i - 1)]
     let curr = points[i]
     let next = points[i + 1]
     let afterNext = points[min(points.count - 1, i + 2)]
     let cp1 = CGPoint(
       x: curr.x + (next.x - prev.x) * tension,
-      y: curr.y + (next.y - prev.y) * tension)
+      y: curr.y + (next.y - prev.y) * tension
+    )
     let cp2 = CGPoint(
       x: next.x - (afterNext.x - curr.x) * tension,
-      y: next.y - (afterNext.y - curr.y) * tension)
+      y: next.y - (afterNext.y - curr.y) * tension
+    )
     path.addCurve(to: next, control1: cp1, control2: cp2)
   }
   return path
@@ -411,7 +418,7 @@ struct EqEditContentView: View {
             let bands = presets[newValue]
             state.equalizerBands = bands
             state.equalizerBandsMap[state.equalizerBandCount] = bands
-            for i in 0..<bands.count {
+            for i in 0 ..< bands.count {
               state.sendEQBand(index: i, level: bands[i])
             }
           }
@@ -473,7 +480,7 @@ struct EqEditContentView: View {
       ScrollView {
         VStack(spacing: 2) {
           let labels = EqLabels.fullLabels(for: state.equalizerBandCount)
-          ForEach(Array(0..<state.equalizerBandCount), id: \.self) { i in
+          ForEach(Array(0 ..< state.equalizerBandCount), id: \.self) { i in
             eqBandRow(index: i, label: labels[safe: i] ?? "")
           }
         }
@@ -511,7 +518,8 @@ struct EqEditContentView: View {
               selectedPreset = -1
             }
           }
-        ), in: Double(dbMin)...Double(dbMax))
+        ), in: Double(dbMin) ... Double(dbMax)
+      )
       Button {
         adjustBand(index: i, delta: 0.1)
       } label: {
@@ -538,7 +546,7 @@ struct EqEditContentView: View {
   }
 }
 
-final class EqEditWindow {
+enum EqEditWindow {
   private static var panel: NSPanel?
 
   static func show() {
@@ -565,13 +573,13 @@ final class EqEditWindow {
     positionBesidePopover(p)
     p.makeKeyAndOrderFront(nil)
 
-    self.panel = p
+    panel = p
 
     NotificationCenter.default.addObserver(
       forName: NSWindow.willCloseNotification, object: p, queue: .main
     ) { _ in
       AppDelegate.shared?.popover?.behavior = .transient
-      self.panel = nil
+      panel = nil
     }
   }
 

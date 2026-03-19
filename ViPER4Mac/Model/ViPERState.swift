@@ -179,7 +179,9 @@ struct DynSysPreset: Codable {
 final class ViPERState: ObservableObject {
   static let shared = ViPERState()
 
-  var bridge: ViPERBridge { AudioEngine.shared.viperBridge }
+  var bridge: ViPERBridge {
+    AudioEngine.shared.viperBridge
+  }
 
   static let outputVolumeValues = [
     1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
@@ -189,7 +191,7 @@ final class ViPERState: ObservableObject {
   static let agcRatioValues = [50, 100, 300]
   static let agcMaxGainValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 3000]
   static let vseBarkValues = [2200, 2800, 3400, 4000, 4600, 5200, 5800, 6400, 7000, 7600, 8200]
-  static let diffSurroundDelayValues = (1...20).map { $0 * 100 }
+  static let diffSurroundDelayValues = (1 ... 20).map { $0 * 100 }
   static let fieldSurroundWideningValues = [0, 100, 200, 300, 400, 500, 600, 700, 800]
   static let bassGainDbLabels = [
     "3.5", "6.0", "8.0", "9.5", "10.9", "12.0",
@@ -329,6 +331,7 @@ final class ViPERState: ObservableObject {
       }
     }
   }
+
   @Published var fxType: FXType = .headphone
 
   @Published var outputVolume: Int = 11
@@ -438,8 +441,8 @@ final class ViPERState: ObservableObject {
   @Published var selectedOutputDeviceID: AudioDeviceID = 0 {
     didSet {
       guard selectedOutputDeviceID != oldValue,
-        selectedOutputDeviceID != 0,
-        selectedOutputDeviceID != AudioEngine.shared.outputDeviceID
+            selectedOutputDeviceID != 0,
+            selectedOutputDeviceID != AudioEngine.shared.outputDeviceID
       else { return }
       AudioEngine.shared.switchOutputDevice(to: selectedOutputDeviceID)
     }
@@ -457,8 +460,13 @@ final class ViPERState: ObservableObject {
 
   private(set) var activeDeviceType: FXType = .headphone
 
-  private var isSpk: Bool { fxType == .speaker }
-  private var isActiveSpk: Bool { activeDeviceType == .speaker }
+  private var isSpk: Bool {
+    fxType == .speaker
+  }
+
+  private var isActiveSpk: Bool {
+    activeDeviceType == .speaker
+  }
 
   private var cancellables = Set<AnyCancellable>()
 
@@ -472,7 +480,7 @@ final class ViPERState: ObservableObject {
     reloadActiveFiles()
     dispatchFullModeState()
     startStatusTimer()
-    logger.info("Init: device=\(self.activeDeviceType == .headphone ? "headphone" : "speaker")")
+    logger.info("Init: device=\(activeDeviceType == .headphone ? "headphone" : "speaker")")
   }
 
   private func startStatusTimer() {
@@ -502,7 +510,7 @@ final class ViPERState: ObservableObject {
   private static func readDriverVersion() -> String {
     let driverPath = "/Library/Audio/Plug-Ins/HAL/ViPER4Mac.driver"
     guard let bundle = Bundle(path: driverPath),
-      let version = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+          let version = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     else { return "N/A" }
     return version
   }
@@ -513,7 +521,7 @@ final class ViPERState: ObservableObject {
       if FileManager.default.fileExists(atPath: url.path) {
         loadDDCFile(at: url)
       } else {
-        logger.info("DDC file missing, clearing: \(self.ddcFilePath)")
+        logger.info("DDC file missing, clearing: \(ddcFilePath)")
         ddcFilePath = ""
         ddcEnabled = false
       }
@@ -523,7 +531,7 @@ final class ViPERState: ObservableObject {
       if FileManager.default.fileExists(atPath: url.path) {
         loadConvolverKernel(at: url)
       } else {
-        logger.info("Convolver kernel missing, clearing: \(self.convolutionKernelPath)")
+        logger.info("Convolver kernel missing, clearing: \(convolutionKernelPath)")
         convolutionKernelPath = ""
         convolutionEnabled = false
       }
@@ -534,7 +542,8 @@ final class ViPERState: ObservableObject {
     logger.debug("DSP param=\(param) v1=\(val1) v2=\(val2) v3=\(val3) v4=\(val4)")
     bridge.setParameter(
       Int32(param), value1: Int32(val1), value2: Int32(val2),
-      value3: Int32(val3), value4: Int32(val4))
+      value3: Int32(val3), value4: Int32(val4)
+    )
   }
 
   private func saveToMode(isSpk spk: Bool) {
@@ -702,7 +711,7 @@ final class ViPERState: ObservableObject {
   }
 
   private func dispatchFullModeState() {
-    logger.info("Dispatching full state: mode=\(self.isActiveSpk ? "speaker" : "headphone")")
+    logger.info("Dispatching full state: mode=\(isActiveSpk ? "speaker" : "headphone")")
     send(Param.SET_RESET_STATUS, 1)
     send(Param.FX_TYPE_SWITCH, activeDeviceType.rawValue)
     let spk = isActiveSpk
@@ -732,7 +741,7 @@ final class ViPERState: ObservableObject {
     send(convCcParam, convolutionCrossChannel)
     send(eqEnParam, equalizerEnabled ? 1 : 0)
     send(eqCountParam, equalizerBandCount)
-    for i in 0..<equalizerBands.count {
+    for i in 0 ..< equalizerBands.count {
       send(eqBandParam, i, Int(equalizerBands[i] * 100))
     }
     send(revEnParam, reverberationEnabled ? 1 : 0)
@@ -771,77 +780,95 @@ final class ViPERState: ObservableObject {
     send(spk ? Param.SPK_BASS_MONO_MODE : Param.HP_BASS_MONO_MODE, viperBassMonoMode)
     send(
       spk ? Param.SPK_BASS_MONO_FREQUENCY : Param.HP_BASS_MONO_FREQUENCY,
-      viperBassMonoFrequency + 15)
+      viperBassMonoFrequency + 15
+    )
     send(spk ? Param.SPK_BASS_MONO_GAIN : Param.HP_BASS_MONO_GAIN, viperBassMonoGain * 50 + 50)
     send(spk ? Param.SPK_CLARITY_ENABLE : Param.HP_CLARITY_ENABLE, viperClarityEnabled ? 1 : 0)
     send(spk ? Param.SPK_CLARITY_MODE : Param.HP_CLARITY_MODE, viperClarityMode)
     send(spk ? Param.SPK_CLARITY_GAIN : Param.HP_CLARITY_GAIN, viperClarityGain * 50)
     send(
       spk ? Param.SPK_FIELD_SURROUND_ENABLE : Param.HP_FIELD_SURROUND_ENABLE,
-      fieldSurroundEnabled ? 1 : 0)
+      fieldSurroundEnabled ? 1 : 0
+    )
     send(
       spk ? Param.SPK_FIELD_SURROUND_WIDENING : Param.HP_FIELD_SURROUND_WIDENING,
-      Self.fieldSurroundWideningValues[safe: fieldSurroundWidening] ?? 0)
+      Self.fieldSurroundWideningValues[safe: fieldSurroundWidening] ?? 0
+    )
     send(
       spk ? Param.SPK_FIELD_SURROUND_MID_IMAGE : Param.HP_FIELD_SURROUND_MID_IMAGE,
-      fieldSurroundMidImage * 10 + 100)
+      fieldSurroundMidImage * 10 + 100
+    )
     send(
       spk ? Param.SPK_FIELD_SURROUND_DEPTH : Param.HP_FIELD_SURROUND_DEPTH,
-      fieldSurroundDepth * 75 + 200)
+      fieldSurroundDepth * 75 + 200
+    )
     send(
       spk ? Param.SPK_DIFF_SURROUND_ENABLE : Param.HP_DIFF_SURROUND_ENABLE,
-      diffSurroundEnabled ? 1 : 0)
+      diffSurroundEnabled ? 1 : 0
+    )
     send(
       spk ? Param.SPK_DIFF_SURROUND_DELAY : Param.HP_DIFF_SURROUND_DELAY,
-      Self.diffSurroundDelayValues[safe: diffSurroundDelay] ?? 500)
+      Self.diffSurroundDelayValues[safe: diffSurroundDelay] ?? 500
+    )
     send(
       spk ? Param.SPK_DYNAMIC_SYSTEM_ENABLE : Param.HP_DYNAMIC_SYSTEM_ENABLE,
-      dynamicSystemEnabled ? 1 : 0)
+      dynamicSystemEnabled ? 1 : 0
+    )
     send(
       spk ? Param.SPK_DYNAMIC_SYSTEM_X_COEFFICIENTS : Param.HP_DYNAMIC_SYSTEM_X_COEFFICIENTS,
-      dsXLow, dsXHigh)
+      dsXLow, dsXHigh
+    )
     send(
       spk ? Param.SPK_DYNAMIC_SYSTEM_Y_COEFFICIENTS : Param.HP_DYNAMIC_SYSTEM_Y_COEFFICIENTS,
-      dsYLow, dsYHigh)
+      dsYLow, dsYHigh
+    )
     send(
       spk ? Param.SPK_DYNAMIC_SYSTEM_SIDE_GAIN : Param.HP_DYNAMIC_SYSTEM_SIDE_GAIN, dsSideGainLow,
-      dsSideGainHigh)
+      dsSideGainHigh
+    )
     send(
       spk ? Param.SPK_DYNAMIC_SYSTEM_STRENGTH : Param.HP_DYNAMIC_SYSTEM_STRENGTH,
-      dynamicSystemStrength * 20 + 100)
+      dynamicSystemStrength * 20 + 100
+    )
     send(
       spk ? Param.SPK_TUBE_SIMULATOR_ENABLE : Param.HP_TUBE_SIMULATOR_ENABLE,
-      tubeSimulatorEnabled ? 1 : 0)
+      tubeSimulatorEnabled ? 1 : 0
+    )
     send(spk ? Param.SPK_ANALOGX_ENABLE : Param.HP_ANALOGX_ENABLE, analogXEnabled ? 1 : 0)
     send(spk ? Param.SPK_ANALOGX_MODE : Param.HP_ANALOGX_MODE, analogXMode)
     send(spk ? Param.SPK_CURE_ENABLE : Param.HP_CURE_ENABLE, cureEnabled ? 1 : 0)
     send(spk ? Param.SPK_CURE_STRENGTH : Param.HP_CURE_STRENGTH, cureCrossfeedStrength)
     send(
       spk ? Param.SPK_HEADPHONE_SURROUND_ENABLE : Param.HP_HEADPHONE_SURROUND_ENABLE,
-      vheEnabled ? 1 : 0)
+      vheEnabled ? 1 : 0
+    )
     send(
       spk ? Param.SPK_HEADPHONE_SURROUND_STRENGTH : Param.HP_HEADPHONE_SURROUND_STRENGTH, vheQuality
     )
     send(
       spk ? Param.SPK_SPECTRUM_EXTENSION_ENABLE : Param.HP_SPECTRUM_EXTENSION_ENABLE,
-      spectrumExtensionEnabled ? 1 : 0)
+      spectrumExtensionEnabled ? 1 : 0
+    )
     send(
       spk ? Param.SPK_SPECTRUM_EXTENSION_BARK : Param.HP_SPECTRUM_EXTENSION_BARK,
-      Self.vseBarkValues[safe: spectrumExtensionBark] ?? 7600)
+      Self.vseBarkValues[safe: spectrumExtensionBark] ?? 7600
+    )
     send(
       spk
         ? Param.SPK_SPECTRUM_EXTENSION_BARK_RECONSTRUCT
         : Param.HP_SPECTRUM_EXTENSION_BARK_RECONSTRUCT,
-      Int(Double(spectrumExtensionBarkReconstruct) * 5.6))
+      Int(Double(spectrumExtensionBarkReconstruct) * 5.6)
+    )
     send(
-      spk ? Param.SPK_DDC_ENABLE : Param.HP_DDC_ENABLE, ddcEnabled && !ddcFilePath.isEmpty ? 1 : 0)
+      spk ? Param.SPK_DDC_ENABLE : Param.HP_DDC_ENABLE, ddcEnabled && !ddcFilePath.isEmpty ? 1 : 0
+    )
     send(Param.SPK_SPEAKER_CORRECTION_ENABLE, speakerCorrectionEnabled ? 1 : 0)
   }
 
   func handleDeviceTypeChange(_ newType: AudioOutputDetector.OutputType) {
     let fxType: FXType = newType == .headphone ? .headphone : .speaker
     guard fxType != activeDeviceType else { return }
-    logger.info("Device type changed: \(fxType.rawValue) active=\(self.activeDeviceType.rawValue)")
+    logger.info("Device type changed: \(fxType.rawValue) active=\(activeDeviceType.rawValue)")
 
     saveToMode(isSpk: isSpk)
     activeDeviceType = fxType
@@ -912,7 +939,8 @@ final class ViPERState: ObservableObject {
     $viperBassMonoEnabled.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_BASS_MONO_ENABLE : Param.HP_BASS_MONO_ENABLE, on ? 1 : 0)
+        self.isActiveSpk ? Param.SPK_BASS_MONO_ENABLE : Param.HP_BASS_MONO_ENABLE, on ? 1 : 0
+      )
     }.store(in: &cancellables)
 
     $viperBassMonoMode.dropFirst().sink { [weak self] v in
@@ -923,7 +951,8 @@ final class ViPERState: ObservableObject {
     $viperBassMonoFrequency.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_BASS_MONO_FREQUENCY : Param.HP_BASS_MONO_FREQUENCY, v + 15)
+        self.isActiveSpk ? Param.SPK_BASS_MONO_FREQUENCY : Param.HP_BASS_MONO_FREQUENCY, v + 15
+      )
     }.store(in: &cancellables)
 
     $viperBassMonoGain.dropFirst().sink { [weak self] v in
@@ -950,35 +979,40 @@ final class ViPERState: ObservableObject {
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FIELD_SURROUND_ENABLE : Param.HP_FIELD_SURROUND_ENABLE,
-        on ? 1 : 0)
+        on ? 1 : 0
+      )
     }.store(in: &cancellables)
 
     $fieldSurroundWidening.dropFirst().sink { [weak self] idx in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       let v = Self.fieldSurroundWideningValues[safe: idx] ?? 0
       self.send(
-        self.isActiveSpk ? Param.SPK_FIELD_SURROUND_WIDENING : Param.HP_FIELD_SURROUND_WIDENING, v)
+        self.isActiveSpk ? Param.SPK_FIELD_SURROUND_WIDENING : Param.HP_FIELD_SURROUND_WIDENING, v
+      )
     }.store(in: &cancellables)
 
     $fieldSurroundMidImage.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FIELD_SURROUND_MID_IMAGE : Param.HP_FIELD_SURROUND_MID_IMAGE,
-        v * 10 + 100)
+        v * 10 + 100
+      )
     }.store(in: &cancellables)
 
     $fieldSurroundDepth.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FIELD_SURROUND_DEPTH : Param.HP_FIELD_SURROUND_DEPTH,
-        v * 75 + 200)
+        v * 75 + 200
+      )
     }.store(in: &cancellables)
 
     $diffSurroundEnabled.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_DIFF_SURROUND_ENABLE : Param.HP_DIFF_SURROUND_ENABLE,
-        on ? 1 : 0)
+        on ? 1 : 0
+      )
     }.store(in: &cancellables)
 
     $diffSurroundDelay.dropFirst().sink { [weak self] idx in
@@ -1005,26 +1039,30 @@ final class ViPERState: ObservableObject {
     $reverberationRoomDampening.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_REVERB_ROOM_DAMPENING : Param.HP_REVERB_ROOM_DAMPENING, v)
+        self.isActiveSpk ? Param.SPK_REVERB_ROOM_DAMPENING : Param.HP_REVERB_ROOM_DAMPENING, v
+      )
     }.store(in: &cancellables)
 
     $reverberationWetSignal.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_REVERB_ROOM_WET_SIGNAL : Param.HP_REVERB_ROOM_WET_SIGNAL, v)
+        self.isActiveSpk ? Param.SPK_REVERB_ROOM_WET_SIGNAL : Param.HP_REVERB_ROOM_WET_SIGNAL, v
+      )
     }.store(in: &cancellables)
 
     $reverberationDrySignal.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_REVERB_ROOM_DRY_SIGNAL : Param.HP_REVERB_ROOM_DRY_SIGNAL, v)
+        self.isActiveSpk ? Param.SPK_REVERB_ROOM_DRY_SIGNAL : Param.HP_REVERB_ROOM_DRY_SIGNAL, v
+      )
     }.store(in: &cancellables)
 
     $dynamicSystemEnabled.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_DYNAMIC_SYSTEM_ENABLE : Param.HP_DYNAMIC_SYSTEM_ENABLE,
-        on ? 1 : 0)
+        on ? 1 : 0
+      )
     }.store(in: &cancellables)
 
     $dynamicSystemDevice.dropFirst().sink { [weak self] idx in
@@ -1036,7 +1074,8 @@ final class ViPERState: ObservableObject {
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_DYNAMIC_SYSTEM_STRENGTH : Param.HP_DYNAMIC_SYSTEM_STRENGTH,
-        v * 20 + 100)
+        v * 20 + 100
+      )
     }.store(in: &cancellables)
 
     $dsXLow.dropFirst().sink { [weak self] v in
@@ -1044,7 +1083,8 @@ final class ViPERState: ObservableObject {
       self.send(
         self.isActiveSpk
           ? Param.SPK_DYNAMIC_SYSTEM_X_COEFFICIENTS : Param.HP_DYNAMIC_SYSTEM_X_COEFFICIENTS, v,
-        self.dsXHigh)
+        self.dsXHigh
+      )
     }.store(in: &cancellables)
 
     $dsXHigh.dropFirst().sink { [weak self] v in
@@ -1052,7 +1092,8 @@ final class ViPERState: ObservableObject {
       self.send(
         self.isActiveSpk
           ? Param.SPK_DYNAMIC_SYSTEM_X_COEFFICIENTS : Param.HP_DYNAMIC_SYSTEM_X_COEFFICIENTS,
-        self.dsXLow, v)
+        self.dsXLow, v
+      )
     }.store(in: &cancellables)
 
     $dsYLow.dropFirst().sink { [weak self] v in
@@ -1060,7 +1101,8 @@ final class ViPERState: ObservableObject {
       self.send(
         self.isActiveSpk
           ? Param.SPK_DYNAMIC_SYSTEM_Y_COEFFICIENTS : Param.HP_DYNAMIC_SYSTEM_Y_COEFFICIENTS, v,
-        self.dsYHigh)
+        self.dsYHigh
+      )
     }.store(in: &cancellables)
 
     $dsYHigh.dropFirst().sink { [weak self] v in
@@ -1068,28 +1110,32 @@ final class ViPERState: ObservableObject {
       self.send(
         self.isActiveSpk
           ? Param.SPK_DYNAMIC_SYSTEM_Y_COEFFICIENTS : Param.HP_DYNAMIC_SYSTEM_Y_COEFFICIENTS,
-        self.dsYLow, v)
+        self.dsYLow, v
+      )
     }.store(in: &cancellables)
 
     $dsSideGainLow.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_DYNAMIC_SYSTEM_SIDE_GAIN : Param.HP_DYNAMIC_SYSTEM_SIDE_GAIN,
-        v, self.dsSideGainHigh)
+        v, self.dsSideGainHigh
+      )
     }.store(in: &cancellables)
 
     $dsSideGainHigh.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_DYNAMIC_SYSTEM_SIDE_GAIN : Param.HP_DYNAMIC_SYSTEM_SIDE_GAIN,
-        self.dsSideGainLow, v)
+        self.dsSideGainLow, v
+      )
     }.store(in: &cancellables)
 
     $tubeSimulatorEnabled.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_TUBE_SIMULATOR_ENABLE : Param.HP_TUBE_SIMULATOR_ENABLE,
-        on ? 1 : 0)
+        on ? 1 : 0
+      )
     }.store(in: &cancellables)
 
     $analogXEnabled.dropFirst().sink { [weak self] on in
@@ -1116,28 +1162,32 @@ final class ViPERState: ObservableObject {
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_HEADPHONE_SURROUND_ENABLE : Param.HP_HEADPHONE_SURROUND_ENABLE,
-        on ? 1 : 0)
+        on ? 1 : 0
+      )
     }.store(in: &cancellables)
 
     $vheQuality.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk
-          ? Param.SPK_HEADPHONE_SURROUND_STRENGTH : Param.HP_HEADPHONE_SURROUND_STRENGTH, v)
+          ? Param.SPK_HEADPHONE_SURROUND_STRENGTH : Param.HP_HEADPHONE_SURROUND_STRENGTH, v
+      )
     }.store(in: &cancellables)
 
     $spectrumExtensionEnabled.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_SPECTRUM_EXTENSION_ENABLE : Param.HP_SPECTRUM_EXTENSION_ENABLE,
-        on ? 1 : 0)
+        on ? 1 : 0
+      )
     }.store(in: &cancellables)
 
     $spectrumExtensionBark.dropFirst().sink { [weak self] idx in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       let v = Self.vseBarkValues[safe: idx] ?? 7600
       self.send(
-        self.isActiveSpk ? Param.SPK_SPECTRUM_EXTENSION_BARK : Param.HP_SPECTRUM_EXTENSION_BARK, v)
+        self.isActiveSpk ? Param.SPK_SPECTRUM_EXTENSION_BARK : Param.HP_SPECTRUM_EXTENSION_BARK, v
+      )
     }.store(in: &cancellables)
 
     $spectrumExtensionBarkReconstruct.dropFirst().sink { [weak self] v in
@@ -1145,14 +1195,16 @@ final class ViPERState: ObservableObject {
       self.send(
         self.isActiveSpk
           ? Param.SPK_SPECTRUM_EXTENSION_BARK_RECONSTRUCT
-          : Param.HP_SPECTRUM_EXTENSION_BARK_RECONSTRUCT, Int(Double(v) * 5.6))
+          : Param.HP_SPECTRUM_EXTENSION_BARK_RECONSTRUCT, Int(Double(v) * 5.6)
+      )
     }.store(in: &cancellables)
 
     $fetCompressorEnabled.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_ENABLE : Param.HP_FET_COMPRESSOR_ENABLE,
-        on ? 100 : 0)
+        on ? 100 : 0
+      )
     }.store(in: &cancellables)
     $fetCompressorThreshold.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
@@ -1163,13 +1215,15 @@ final class ViPERState: ObservableObject {
     $fetCompressorRatio.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_RATIO : Param.HP_FET_COMPRESSOR_RATIO, v)
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_RATIO : Param.HP_FET_COMPRESSOR_RATIO, v
+      )
     }.store(in: &cancellables)
     $fetCompressorAutoKnee.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_AUTO_KNEE : Param.HP_FET_COMPRESSOR_AUTO_KNEE,
-        on ? 100 : 0)
+        on ? 100 : 0
+      )
     }.store(in: &cancellables)
     $fetCompressorKnee.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
@@ -1179,13 +1233,15 @@ final class ViPERState: ObservableObject {
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_KNEE_MULTI : Param.HP_FET_COMPRESSOR_KNEE_MULTI,
-        v)
+        v
+      )
     }.store(in: &cancellables)
     $fetCompressorAutoGain.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_AUTO_GAIN : Param.HP_FET_COMPRESSOR_AUTO_GAIN,
-        on ? 100 : 0)
+        on ? 100 : 0
+      )
     }.store(in: &cancellables)
     $fetCompressorGain.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
@@ -1201,47 +1257,55 @@ final class ViPERState: ObservableObject {
     $fetCompressorAttack.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_ATTACK : Param.HP_FET_COMPRESSOR_ATTACK, v)
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_ATTACK : Param.HP_FET_COMPRESSOR_ATTACK, v
+      )
     }.store(in: &cancellables)
     $fetCompressorMaxAttack.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_MAX_ATTACK : Param.HP_FET_COMPRESSOR_MAX_ATTACK,
-        v)
+        v
+      )
     }.store(in: &cancellables)
     $fetCompressorAutoRelease.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk
           ? Param.SPK_FET_COMPRESSOR_AUTO_RELEASE : Param.HP_FET_COMPRESSOR_AUTO_RELEASE,
-        on ? 100 : 0)
+        on ? 100 : 0
+      )
     }.store(in: &cancellables)
     $fetCompressorRelease.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_RELEASE : Param.HP_FET_COMPRESSOR_RELEASE, v)
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_RELEASE : Param.HP_FET_COMPRESSOR_RELEASE, v
+      )
     }.store(in: &cancellables)
     $fetCompressorMaxRelease.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk
-          ? Param.SPK_FET_COMPRESSOR_MAX_RELEASE : Param.HP_FET_COMPRESSOR_MAX_RELEASE, v)
+          ? Param.SPK_FET_COMPRESSOR_MAX_RELEASE : Param.HP_FET_COMPRESSOR_MAX_RELEASE, v
+      )
     }.store(in: &cancellables)
     $fetCompressorCrest.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_CREST : Param.HP_FET_COMPRESSOR_CREST, v)
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_CREST : Param.HP_FET_COMPRESSOR_CREST, v
+      )
     }.store(in: &cancellables)
     $fetCompressorAdapt.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_ADAPT : Param.HP_FET_COMPRESSOR_ADAPT, v)
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_ADAPT : Param.HP_FET_COMPRESSOR_ADAPT, v
+      )
     }.store(in: &cancellables)
     $fetCompressorNoClip.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_NO_CLIP : Param.HP_FET_COMPRESSOR_NO_CLIP,
-        on ? 100 : 0)
+        on ? 100 : 0
+      )
     }.store(in: &cancellables)
 
     $speakerCorrectionEnabled.dropFirst().sink { [weak self] on in
@@ -1273,12 +1337,14 @@ final class ViPERState: ObservableObject {
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       let effective = on && !self.convolutionKernelPath.isEmpty ? 1 : 0
       self.send(
-        self.isActiveSpk ? Param.SPK_CONVOLVER_ENABLE : Param.HP_CONVOLVER_ENABLE, effective)
+        self.isActiveSpk ? Param.SPK_CONVOLVER_ENABLE : Param.HP_CONVOLVER_ENABLE, effective
+      )
     }.store(in: &cancellables)
     $convolutionCrossChannel.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_CONVOLVER_CROSS_CHANNEL : Param.HP_CONVOLVER_CROSS_CHANNEL, v)
+        self.isActiveSpk ? Param.SPK_CONVOLVER_CROSS_CHANNEL : Param.HP_CONVOLVER_CROSS_CHANNEL, v
+      )
     }.store(in: &cancellables)
 
     $ddcEnabled.dropFirst().sink { [weak self] on in
@@ -1306,7 +1372,7 @@ final class ViPERState: ObservableObject {
     let param = isActiveSpk ? Param.SPK_EQ_BAND_COUNT : Param.HP_EQ_BAND_COUNT
     send(param, count)
     let bandParam = isActiveSpk ? Param.SPK_EQ_BAND_LEVEL : Param.HP_EQ_BAND_LEVEL
-    for i in 0..<count {
+    for i in 0 ..< count {
       send(bandParam, i, Int(restored[i] * 100))
     }
   }
@@ -1351,7 +1417,7 @@ final class ViPERState: ObservableObject {
     }
 
     guard let c44 = coeffs44100, let c48 = coeffs48000,
-      c44.count == c48.count, c44.count % 5 == 0
+          c44.count == c48.count, c44.count % 5 == 0
     else {
       logger.error("Failed to load DDC: \(url.lastPathComponent)")
       return
@@ -1370,22 +1436,26 @@ final class ViPERState: ObservableObject {
 
     var buffer = Data(count: wireSize)
     buffer.replaceSubrange(
-      0..<4, with: withUnsafeBytes(of: Int32(arrSize).littleEndian) { Data($0) })
+      0 ..< 4, with: withUnsafeBytes(of: Int32(arrSize).littleEndian) { Data($0) }
+    )
     var offset = 4
     for f in c44 {
       buffer.replaceSubrange(
-        offset..<offset + 4, with: withUnsafeBytes(of: f.bitPattern.littleEndian) { Data($0) })
+        offset ..< offset + 4, with: withUnsafeBytes(of: f.bitPattern.littleEndian) { Data($0) }
+      )
       offset += 4
     }
     for f in c48 {
       buffer.replaceSubrange(
-        offset..<offset + 4, with: withUnsafeBytes(of: f.bitPattern.littleEndian) { Data($0) })
+        offset ..< offset + 4, with: withUnsafeBytes(of: f.bitPattern.littleEndian) { Data($0) }
+      )
       offset += 4
     }
 
     bridge.setParameterWithData(
       Int32(isActiveSpk ? Param.SPK_DDC_COEFFICIENTS : Param.HP_DDC_COEFFICIENTS),
-      data: buffer as Data)
+      data: buffer as Data
+    )
     ddcFilePath = url.lastPathComponent
   }
 
@@ -1430,11 +1500,14 @@ final class ViPERState: ObservableObject {
 
       var chunkBuffer = Data(count: 8192)
       chunkBuffer.replaceSubrange(
-        0..<4, with: withUnsafeBytes(of: Int32(chunkIndex).littleEndian) { Data($0) })
+        0 ..< 4, with: withUnsafeBytes(of: Int32(chunkIndex).littleEndian) { Data($0) }
+      )
       chunkBuffer.replaceSubrange(
-        4..<8, with: withUnsafeBytes(of: Int32(floatsInChunk).littleEndian) { Data($0) })
+        4 ..< 8, with: withUnsafeBytes(of: Int32(floatsInChunk).littleEndian) { Data($0) }
+      )
       chunkBuffer.replaceSubrange(
-        8..<8 + chunkByteCount, with: floatBytes[offset * 4..<offset * 4 + chunkByteCount])
+        8 ..< 8 + chunkByteCount, with: floatBytes[offset * 4 ..< offset * 4 + chunkByteCount]
+      )
 
       bridge.setParameterWithData(Int32(setBufferParam), data: chunkBuffer as Data)
       offset += floatsInChunk
@@ -1444,7 +1517,8 @@ final class ViPERState: ObservableObject {
     let kernelId = Int32(Self.stableHash(url.lastPathComponent) & 0x7FFF_FFFF)
     send(
       commitParam, totalFloats, Int(Int32(bitPattern: UInt32(truncatingIfNeeded: crcValue))),
-      Int(kernelId))
+      Int(kernelId)
+    )
 
     convolutionKernelPath = url.lastPathComponent
   }
@@ -1480,13 +1554,13 @@ final class ViPERState: ObservableObject {
   private func restoreSettings() {
     let decoder = JSONDecoder()
     if let hpData = UserDefaults.standard.data(forKey: Self.hpKey),
-      let hp = try? decoder.decode(ModeState.self, from: hpData)
+       let hp = try? decoder.decode(ModeState.self, from: hpData)
     {
       headphoneState = hp
       logger.info("Restored headphone state from UserDefaults")
     }
     if let spkData = UserDefaults.standard.data(forKey: Self.spkKey),
-      let spk = try? decoder.decode(ModeState.self, from: spkData)
+       let spk = try? decoder.decode(ModeState.self, from: spkData)
     {
       speakerState = spk
       logger.info("Restored speaker state from UserDefaults")
@@ -1549,7 +1623,7 @@ final class ViPERState: ObservableObject {
   }
 
   func savePreset(name: String) {
-    logger.info("Saving preset: \(name) mode=\(self.isSpk ? "speaker" : "headphone")")
+    logger.info("Saving preset: \(name) mode=\(isSpk ? "speaker" : "headphone")")
     saveToMode(isSpk: isSpk)
     var current = isSpk ? speakerState : headphoneState
     current.mode = fxType.rawValue
@@ -1564,11 +1638,11 @@ final class ViPERState: ObservableObject {
   func loadPreset(name: String) {
     let url = ProfileFileManager.shared.fileURL(name: "\(name).json", type: .preset)
     guard let data = try? Data(contentsOf: url),
-      let preset = try? JSONDecoder().decode(ModeState.self, from: data)
+          let preset = try? JSONDecoder().decode(ModeState.self, from: data)
     else { return }
     let targetSpk = preset.mode == FXType.speaker.rawValue
     logger.info(
-      "Loading preset: \(name) targetMode=\(targetSpk ? "speaker" : "headphone") viewingSpk=\(self.isSpk) activeSpk=\(self.isActiveSpk)"
+      "Loading preset: \(name) targetMode=\(targetSpk ? "speaker" : "headphone") viewingSpk=\(isSpk) activeSpk=\(isActiveSpk)"
     )
     if targetSpk {
       speakerState = preset
@@ -1603,13 +1677,13 @@ final class ViPERState: ObservableObject {
   func loadEqPreset(name: String) {
     let url = ProfileFileManager.shared.fileURL(name: "\(name).json", type: .eqPreset)
     guard let data = try? Data(contentsOf: url),
-      let preset = try? JSONDecoder().decode(EqPreset.self, from: data)
+          let preset = try? JSONDecoder().decode(EqPreset.self, from: data)
     else { return }
     guard preset.bandCount == equalizerBandCount else { return }
     equalizerBands = preset.bands
     equalizerBandsMap[equalizerBandCount] = preset.bands
     let bandParam = isActiveSpk ? Param.SPK_EQ_BAND_LEVEL : Param.HP_EQ_BAND_LEVEL
-    for i in 0..<preset.bands.count {
+    for i in 0 ..< preset.bands.count {
       send(bandParam, i, Int(preset.bands[i] * 100))
     }
   }
@@ -1622,7 +1696,8 @@ final class ViPERState: ObservableObject {
   func saveDsPreset(name: String) {
     let preset = DynSysPreset(
       name: name, xLow: dsXLow, xHigh: dsXHigh, yLow: dsYLow, yHigh: dsYHigh,
-      sideGainLow: dsSideGainLow, sideGainHigh: dsSideGainHigh)
+      sideGainLow: dsSideGainLow, sideGainHigh: dsSideGainHigh
+    )
     let encoder = JSONEncoder()
     encoder.outputFormatting = .prettyPrinted
     guard let data = try? encoder.encode(preset) else { return }
@@ -1634,7 +1709,7 @@ final class ViPERState: ObservableObject {
   func loadDsPreset(name: String) {
     let url = ProfileFileManager.shared.fileURL(name: "\(name).json", type: .dynSysPreset)
     guard let data = try? Data(contentsOf: url),
-      let preset = try? JSONDecoder().decode(DynSysPreset.self, from: data)
+          let preset = try? JSONDecoder().decode(DynSysPreset.self, from: data)
     else { return }
     dsXLow = preset.xLow
     dsXHigh = preset.xHigh
@@ -1650,10 +1725,10 @@ final class ViPERState: ObservableObject {
   }
 
   func eqPresetsForCurrentBandCount() -> [String] {
-    return eqPresetFiles.filter { name in
+    eqPresetFiles.filter { name in
       let url = ProfileFileManager.shared.fileURL(name: "\(name).json", type: .eqPreset)
       guard let data = try? Data(contentsOf: url),
-        let preset = try? JSONDecoder().decode(EqPreset.self, from: data)
+            let preset = try? JSONDecoder().decode(EqPreset.self, from: data)
       else { return false }
       return preset.bandCount == equalizerBandCount
     }
@@ -1667,7 +1742,7 @@ final class ViPERState: ObservableObject {
 
   func importPreset(from url: URL) {
     guard let data = try? Data(contentsOf: url),
-      (try? JSONDecoder().decode(ModeState.self, from: data)) != nil
+          (try? JSONDecoder().decode(ModeState.self, from: data)) != nil
     else { return }
     _ = ProfileFileManager.shared.importFile(from: url, type: .preset)
     refreshFileLists()
@@ -1675,7 +1750,7 @@ final class ViPERState: ObservableObject {
   }
 
   private static func stableHash(_ string: String) -> Int {
-    var hash: UInt32 = 0x811c_9dc5
+    var hash: UInt32 = 0x811C_9DC5
     for byte in string.utf8 {
       hash ^= UInt32(byte)
       hash &*= 0x0100_0193
@@ -1687,7 +1762,7 @@ final class ViPERState: ObservableObject {
     var crc: UInt32 = 0xFFFF_FFFF
     for byte in data {
       crc ^= UInt32(byte)
-      for _ in 0..<8 {
+      for _ in 0 ..< 8 {
         crc = (crc >> 1) ^ (crc & 1 != 0 ? 0xEDB8_8320 : 0)
       }
     }
@@ -1703,8 +1778,8 @@ final class ViPERState: ObservableObject {
   private func decodeWavToFloat(_ data: Data) -> [Float]? {
     guard data.count >= 44 else { return nil }
 
-    let riff = String(data: data[0..<4], encoding: .ascii)
-    let wave = String(data: data[8..<12], encoding: .ascii)
+    let riff = String(data: data[0 ..< 4], encoding: .ascii)
+    let wave = String(data: data[8 ..< 12], encoding: .ascii)
     guard riff == "RIFF", wave == "WAVE" else { return nil }
 
     var audioFormat: UInt16 = 0
@@ -1713,7 +1788,7 @@ final class ViPERState: ObservableObject {
 
     var pos = 12
     while pos + 8 <= data.count {
-      let chunkId = String(data: data[pos..<pos + 4], encoding: .ascii) ?? ""
+      let chunkId = String(data: data[pos ..< pos + 4], encoding: .ascii) ?? ""
       let chunkSize: UInt32 = data.withUnsafeBytes {
         $0.load(fromByteOffset: pos + 4, as: UInt32.self)
       }
@@ -1733,7 +1808,7 @@ final class ViPERState: ObservableObject {
         bitsPerSample = UInt16(littleEndian: bitsPerSample)
       case "data":
         let end = min(contentStart + size, data.count)
-        dataBytes = data[contentStart..<end]
+        dataBytes = data[contentStart ..< end]
       default:
         break
       }
@@ -1746,12 +1821,12 @@ final class ViPERState: ObservableObject {
     if audioFormat == 3 && bitsPerSample == 32 {
       let count = pcmData.count / 4
       return pcmData.withUnsafeBytes { buf in
-        (0..<count).map { buf.load(fromByteOffset: $0 * 4, as: Float.self) }
+        (0 ..< count).map { buf.load(fromByteOffset: $0 * 4, as: Float.self) }
       }
     } else if audioFormat == 1 && bitsPerSample == 16 {
       let count = pcmData.count / 2
       return pcmData.withUnsafeBytes { buf in
-        (0..<count).map {
+        (0 ..< count).map {
           Float(Int16(littleEndian: buf.load(fromByteOffset: $0 * 2, as: Int16.self))) / 32768.0
         }
       }
@@ -1759,7 +1834,7 @@ final class ViPERState: ObservableObject {
       let count = pcmData.count / 3
       var result = [Float](repeating: 0, count: count)
       pcmData.withUnsafeBytes { buf in
-        for i in 0..<count {
+        for i in 0 ..< count {
           let b0 = Int32(buf.load(fromByteOffset: i * 3, as: UInt8.self))
           let b1 = Int32(buf.load(fromByteOffset: i * 3 + 1, as: UInt8.self))
           let b2 = Int32(buf.load(fromByteOffset: i * 3 + 2, as: UInt8.self))
