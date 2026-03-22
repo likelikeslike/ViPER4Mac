@@ -6,7 +6,6 @@ import ServiceManagement
 private let logger = AppLogger(category: "ViPERState")
 
 private enum Param {
-  static let SET_UPDATE_STATUS = 0x10001
   static let SET_RESET_STATUS = 0x10002
   static let FX_TYPE_SWITCH = 0x10003
 
