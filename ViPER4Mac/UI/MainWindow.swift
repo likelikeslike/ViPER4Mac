@@ -276,7 +276,8 @@ struct PopoverContentView: View {
       analogXSection
       if state.fxType == .speaker {
         toggleOnlyHeader(
-          Text("Speaker Optimization"), icon: "hifispeaker.fill", isOn: $state.speakerCorrectionEnabled
+          Text("Speaker Optimization"), icon: "hifispeaker.fill",
+          isOn: $state.speakerCorrectionEnabled
         )
       }
     }
@@ -315,15 +316,18 @@ struct PopoverContentView: View {
             Text("Subwoofer").tag(2)
           }
           .pickerStyle(.segmented)
-          paramSlider(
-            Text("Frequency"), intValue: $state.viperBassFrequency, range: 0 ... 135,
-            displayFn: { "\($0 + 15)Hz" }
-          )
+          if state.viperBassMode != 2 {
+            paramSlider(
+              Text("Frequency"), intValue: $state.viperBassFrequency, range: 0 ... 135,
+              displayFn: { "\($0 + 15)Hz" }
+            )
+          }
           steppedSlider(
             Text("Gain"), value: $state.viperBassGain, maxIndex: 19, steps: 18,
             label:
             ViPERState.bassGainDbLabels[safe: state.viperBassGain].map { "\($0)dB" } ?? "--"
           )
+          toggleRow(Text("Fade-in"), isOn: $state.viperBassAntiPop)
         }
         .padding(.leading, 4)
       }
@@ -343,15 +347,18 @@ struct PopoverContentView: View {
             Text("Subwoofer").tag(2)
           }
           .pickerStyle(.segmented)
-          paramSlider(
-            Text("Frequency"), intValue: $state.viperBassMonoFrequency, range: 0 ... 135,
-            displayFn: { "\($0 + 15)Hz" }
-          )
+          if state.viperBassMonoMode != 2 {
+            paramSlider(
+              Text("Frequency"), intValue: $state.viperBassMonoFrequency, range: 0 ... 135,
+              displayFn: { "\($0 + 15)Hz" }
+            )
+          }
           steppedSlider(
             Text("Gain"), value: $state.viperBassMonoGain, maxIndex: 19, steps: 18,
             label:
             ViPERState.bassGainDbLabels[safe: state.viperBassMonoGain].map { "\($0)dB" } ?? "--"
           )
+          toggleRow(Text("Fade-in"), isOn: $state.viperBassMonoAntiPop)
         }
         .padding(.leading, 4)
       }
@@ -360,7 +367,9 @@ struct PopoverContentView: View {
 
   private var claritySection: some View {
     VStack(spacing: 4) {
-      sectionHeader(Text("ViPER Clarity"), icon: "ear", id: "clarity", isOn: $state.viperClarityEnabled)
+      sectionHeader(
+        Text("ViPER Clarity"), icon: "ear", id: "clarity", isOn: $state.viperClarityEnabled
+      )
       if expandedSections.contains("clarity") {
         VStack(spacing: 4) {
           Picker("Mode", selection: $state.viperClarityMode) {
@@ -388,8 +397,12 @@ struct PopoverContentView: View {
       )
       if expandedSections.contains("surround") {
         VStack(spacing: 4) {
-          steppedSlider(Text("Widening"), value: $state.fieldSurroundWidening, maxIndex: 8, steps: 7)
-          steppedSlider(Text("Mid Image"), value: $state.fieldSurroundMidImage, maxIndex: 10, steps: 9)
+          steppedSlider(
+            Text("Widening"), value: $state.fieldSurroundWidening, maxIndex: 8, steps: 7
+          )
+          steppedSlider(
+            Text("Mid Image"), value: $state.fieldSurroundMidImage, maxIndex: 10, steps: 9
+          )
           steppedSlider(Text("Depth"), value: $state.fieldSurroundDepth, maxIndex: 10, steps: 9)
         }
         .padding(.leading, 4)
@@ -423,7 +436,9 @@ struct PopoverContentView: View {
       )
       if expandedSections.contains("reverb") {
         VStack(spacing: 4) {
-          steppedSlider(Text("Room Size"), value: $state.reverberationRoomSize, maxIndex: 10, steps: 9)
+          steppedSlider(
+            Text("Room Size"), value: $state.reverberationRoomSize, maxIndex: 10, steps: 9
+          )
           steppedSlider(Text("Width"), value: $state.reverberationRoomWidth, maxIndex: 10, steps: 9)
           steppedSlider(
             Text("Dampening"), value: $state.reverberationRoomDampening, maxIndex: 10, steps: 9
@@ -445,7 +460,8 @@ struct PopoverContentView: View {
   private var dynamicSystemSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("Dynamic System"), icon: "hifispeaker.fill", id: "dynsys", isOn: $state.dynamicSystemEnabled
+        Text("Dynamic System"), icon: "hifispeaker.fill", id: "dynsys",
+        isOn: $state.dynamicSystemEnabled
       )
       if expandedSections.contains("dynsys") {
         VStack(spacing: 4) {
@@ -571,7 +587,8 @@ struct PopoverContentView: View {
   private var cureSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("Auditory System Protection"), icon: "cross.case.fill", id: "cure", isOn: $state.cureEnabled
+        Text("Auditory System Protection"), icon: "cross.case.fill", id: "cure",
+        isOn: $state.cureEnabled
       )
       if expandedSections.contains("cure") {
         Picker("Preset", selection: $state.cureCrossfeedStrength) {
@@ -629,7 +646,9 @@ struct PopoverContentView: View {
 
   private var vheSection: some View {
     VStack(spacing: 4) {
-      sectionHeader(Text("Headphone Surround+"), icon: "headphones", id: "vhe", isOn: $state.vheEnabled)
+      sectionHeader(
+        Text("Headphone Surround+"), icon: "headphones", id: "vhe", isOn: $state.vheEnabled
+      )
       if expandedSections.contains("vhe") {
         steppedSlider(Text("Quality"), value: $state.vheQuality, maxIndex: 4, steps: 3)
           .padding(.leading, 4)
@@ -640,11 +659,14 @@ struct PopoverContentView: View {
   private var spectrumSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("Spectrum Extension"), icon: "water.waves", id: "vse", isOn: $state.spectrumExtensionEnabled
+        Text("Spectrum Extension"), icon: "water.waves", id: "vse",
+        isOn: $state.spectrumExtensionEnabled
       )
       if expandedSections.contains("vse") {
         VStack(spacing: 4) {
-          steppedSlider(Text("Strength"), value: $state.spectrumExtensionBark, maxIndex: 10, steps: 9)
+          steppedSlider(
+            Text("Strength"), value: $state.spectrumExtensionBark, maxIndex: 10, steps: 9
+          )
           paramSlider(
             Text("Exciter"), intValue: $state.spectrumExtensionBarkReconstruct, range: 0 ... 100,
             displayFn: { "\($0)%" }
@@ -681,7 +703,9 @@ struct PopoverContentView: View {
 
   private var ddcSection: some View {
     VStack(spacing: 4) {
-      sectionHeader(Text("ViPER-DDC"), icon: "slider.horizontal.3", id: "ddc", isOn: $state.ddcEnabled)
+      sectionHeader(
+        Text("ViPER-DDC"), icon: "slider.horizontal.3", id: "ddc", isOn: $state.ddcEnabled
+      )
       if expandedSections.contains("ddc") {
         VStack(spacing: 4) {
           HStack(spacing: 6) {
@@ -835,13 +859,17 @@ struct PopoverContentView: View {
 
       statusRow(
         Text("App Version"),
-        value: Text(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-          ?? "?")
+        value: Text(
+          Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+            ?? "?"
+        )
       )
       statusRow(
         Text("Driver"),
-        value: Text(state.driverInstalled
-          ? "v\(state.driverVersion)" : "Not Found"),
+        value: Text(
+          state.driverInstalled
+            ? "v\(state.driverVersion)" : "Not Found"
+        ),
         color: state.driverInstalled ? .green : .red
       )
       statusRow(
@@ -858,8 +886,10 @@ struct PopoverContentView: View {
       )
       statusRow(
         Text("Sample Rate"),
-        value: Text(state.currentSampleRate > 0
-          ? "\(state.currentSampleRate) Hz" : "N/A")
+        value: Text(
+          state.currentSampleRate > 0
+            ? "\(state.currentSampleRate) Hz" : "N/A"
+        )
       )
       statusRow(
         Text("Output Device"),

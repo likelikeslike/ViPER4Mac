@@ -39,10 +39,12 @@ private enum Param {
   static let HP_BASS_MODE = 0x10161
   static let HP_BASS_FREQUENCY = 0x10162
   static let HP_BASS_GAIN = 0x10163
+  static let HP_BASS_ANTI_POP = 0x10168
   static let HP_BASS_MONO_ENABLE = 0x10164
   static let HP_BASS_MONO_MODE = 0x10165
   static let HP_BASS_MONO_FREQUENCY = 0x10166
   static let HP_BASS_MONO_GAIN = 0x10167
+  static let HP_BASS_MONO_ANTI_POP = 0x10169
   static let HP_CLARITY_ENABLE = 0x10170
   static let HP_CLARITY_MODE = 0x10171
   static let HP_CLARITY_GAIN = 0x10172
@@ -113,10 +115,12 @@ private enum Param {
   static let SPK_BASS_MODE = 0x10361
   static let SPK_BASS_FREQUENCY = 0x10362
   static let SPK_BASS_GAIN = 0x10363
+  static let SPK_BASS_ANTI_POP = 0x10368
   static let SPK_BASS_MONO_ENABLE = 0x10364
   static let SPK_BASS_MONO_MODE = 0x10365
   static let SPK_BASS_MONO_FREQUENCY = 0x10366
   static let SPK_BASS_MONO_GAIN = 0x10367
+  static let SPK_BASS_MONO_ANTI_POP = 0x10369
   static let SPK_CLARITY_ENABLE = 0x10370
   static let SPK_CLARITY_MODE = 0x10371
   static let SPK_CLARITY_GAIN = 0x10372
@@ -281,10 +285,12 @@ final class ViPERState: ObservableObject {
     var viperBassMode: Int = 0
     var viperBassFrequency: Int = 55
     var viperBassGain: Int = 0
+    var viperBassAntiPop: Bool = true
     var viperBassMonoEnabled = false
     var viperBassMonoMode: Int = 0
     var viperBassMonoFrequency: Int = 55
     var viperBassMonoGain: Int = 0
+    var viperBassMonoAntiPop: Bool = true
     var viperClarityEnabled = false
     var viperClarityMode: Int = 0
     var viperClarityGain: Int = 1
@@ -403,11 +409,13 @@ final class ViPERState: ObservableObject {
   @Published var viperBassMode: Int = 0
   @Published var viperBassFrequency: Int = 55
   @Published var viperBassGain: Int = 0
+  @Published var viperBassAntiPop: Bool = true
 
   @Published var viperBassMonoEnabled = false
   @Published var viperBassMonoMode: Int = 0
   @Published var viperBassMonoFrequency: Int = 55
   @Published var viperBassMonoGain: Int = 0
+  @Published var viperBassMonoAntiPop: Bool = true
 
   @Published var viperClarityEnabled = false
   @Published var viperClarityMode: Int = 0
@@ -594,10 +602,12 @@ final class ViPERState: ObservableObject {
     s.viperBassMode = viperBassMode
     s.viperBassFrequency = viperBassFrequency
     s.viperBassGain = viperBassGain
+    s.viperBassAntiPop = viperBassAntiPop
     s.viperBassMonoEnabled = viperBassMonoEnabled
     s.viperBassMonoMode = viperBassMonoMode
     s.viperBassMonoFrequency = viperBassMonoFrequency
     s.viperBassMonoGain = viperBassMonoGain
+    s.viperBassMonoAntiPop = viperBassMonoAntiPop
     s.viperClarityEnabled = viperClarityEnabled
     s.viperClarityMode = viperClarityMode
     s.viperClarityGain = viperClarityGain
@@ -677,10 +687,12 @@ final class ViPERState: ObservableObject {
     viperBassMode = s.viperBassMode
     viperBassFrequency = s.viperBassFrequency
     viperBassGain = s.viperBassGain
+    viperBassAntiPop = s.viperBassAntiPop
     viperBassMonoEnabled = s.viperBassMonoEnabled
     viperBassMonoMode = s.viperBassMonoMode
     viperBassMonoFrequency = s.viperBassMonoFrequency
     viperBassMonoGain = s.viperBassMonoGain
+    viperBassMonoAntiPop = s.viperBassMonoAntiPop
     viperClarityEnabled = s.viperClarityEnabled
     viperClarityMode = s.viperClarityMode
     viperClarityGain = s.viperClarityGain
@@ -775,6 +787,7 @@ final class ViPERState: ObservableObject {
     send(spk ? Param.SPK_BASS_MODE : Param.HP_BASS_MODE, viperBassMode)
     send(spk ? Param.SPK_BASS_FREQUENCY : Param.HP_BASS_FREQUENCY, viperBassFrequency + 15)
     send(spk ? Param.SPK_BASS_GAIN : Param.HP_BASS_GAIN, viperBassGain * 50 + 50)
+    send(spk ? Param.SPK_BASS_ANTI_POP : Param.HP_BASS_ANTI_POP, viperBassAntiPop ? 1 : 0)
     send(spk ? Param.SPK_BASS_MONO_ENABLE : Param.HP_BASS_MONO_ENABLE, viperBassMonoEnabled ? 1 : 0)
     send(spk ? Param.SPK_BASS_MONO_MODE : Param.HP_BASS_MONO_MODE, viperBassMonoMode)
     send(
@@ -782,6 +795,9 @@ final class ViPERState: ObservableObject {
       viperBassMonoFrequency + 15
     )
     send(spk ? Param.SPK_BASS_MONO_GAIN : Param.HP_BASS_MONO_GAIN, viperBassMonoGain * 50 + 50)
+    send(
+      spk ? Param.SPK_BASS_MONO_ANTI_POP : Param.HP_BASS_MONO_ANTI_POP, viperBassMonoAntiPop ? 1 : 0
+    )
     send(spk ? Param.SPK_CLARITY_ENABLE : Param.HP_CLARITY_ENABLE, viperClarityEnabled ? 1 : 0)
     send(spk ? Param.SPK_CLARITY_MODE : Param.HP_CLARITY_MODE, viperClarityMode)
     send(spk ? Param.SPK_CLARITY_GAIN : Param.HP_CLARITY_GAIN, viperClarityGain * 50)
@@ -935,6 +951,11 @@ final class ViPERState: ObservableObject {
       self.send(self.isActiveSpk ? Param.SPK_BASS_GAIN : Param.HP_BASS_GAIN, v * 50 + 50)
     }.store(in: &cancellables)
 
+    $viperBassAntiPop.dropFirst().sink { [weak self] on in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(self.isActiveSpk ? Param.SPK_BASS_ANTI_POP : Param.HP_BASS_ANTI_POP, on ? 1 : 0)
+    }.store(in: &cancellables)
+
     $viperBassMonoEnabled.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
@@ -957,6 +978,13 @@ final class ViPERState: ObservableObject {
     $viperBassMonoGain.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(self.isActiveSpk ? Param.SPK_BASS_MONO_GAIN : Param.HP_BASS_MONO_GAIN, v * 50 + 50)
+    }.store(in: &cancellables)
+
+    $viperBassMonoAntiPop.dropFirst().sink { [weak self] on in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_BASS_MONO_ANTI_POP : Param.HP_BASS_MONO_ANTI_POP, on ? 1 : 0
+      )
     }.store(in: &cancellables)
 
     $viperClarityEnabled.dropFirst().sink { [weak self] on in
