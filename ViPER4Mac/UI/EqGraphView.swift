@@ -330,23 +330,40 @@ struct EqCurveGraph: View {
 
 private func buildSplinePath(points: [CGPoint]) -> Path {
   var path = Path()
-  guard !points.isEmpty else { return path }
+  let n = points.count
+  guard n > 0 else { return path }
   path.move(to: points[0])
+  if n == 1 { return path }
+  if n == 2 {
+    path.addLine(to: points[1])
+    return path
+  }
+
   let tension: CGFloat = 0.3
-  for i in 0 ..< (points.count - 1) {
+  let damping: CGFloat = 0.15
+
+  for i in 0 ..< (n - 1) {
     let prev = points[max(0, i - 1)]
     let curr = points[i]
     let next = points[i + 1]
-    let afterNext = points[min(points.count - 1, i + 2)]
-    let cp1 = CGPoint(
-      x: curr.x + (next.x - prev.x) * tension,
-      y: curr.y + (next.y - prev.y) * tension
-    )
-    let cp2 = CGPoint(
-      x: next.x - (afterNext.x - curr.x) * tension,
-      y: next.y - (afterNext.y - curr.y) * tension
-    )
-    path.addCurve(to: next, control1: cp1, control2: cp2)
+    let afterNext = points[min(n - 1, i + 2)]
+
+    var t1 = tension
+    let isLocalMax = curr.y <= prev.y && curr.y <= next.y
+    let isLocalMin = curr.y >= prev.y && curr.y >= next.y
+    if isLocalMax || isLocalMin { t1 = damping }
+
+    var t2 = tension
+    let isNextLocalMax = next.y <= curr.y && next.y <= afterNext.y
+    let isNextLocalMin = next.y >= curr.y && next.y >= afterNext.y
+    if isNextLocalMax || isNextLocalMin { t2 = damping }
+
+    let cp1x = curr.x + (next.x - prev.x) * t1
+    let cp1y = curr.y + (next.y - prev.y) * t1
+    let cp2x = next.x - (afterNext.x - curr.x) * t2
+    let cp2y = next.y - (afterNext.y - curr.y) * t2
+
+    path.addCurve(to: next, control1: CGPoint(x: cp1x, y: cp1y), control2: CGPoint(x: cp2x, y: cp2y))
   }
   return path
 }
