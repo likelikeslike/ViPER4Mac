@@ -27,20 +27,20 @@ system audio, applies ViPER effects in real-time, and routes the result to the o
 ## Requirements
 
 - macOS Sequoia or later with Apple Silicon
-- Tested on macos Sequoia 15.7.4
+- Tested on macOS Sequoia 15.7.4
 
 ## Installation
 
 ### Package Installer
 
-Download the `ViPER4Mac.pkg` installer from the [Releases]() page and run it. Follow the prompts to complete installation.
+Download the `ViPER4Mac.pkg` installer from the [Releases](https://github.com/likelikeslike/ViPER4Mac/releases) page and run it. Follow the prompts to complete installation.
 
 ### From source
 
 - Xcode with command line tools required
 
 ```bash
-git clone --recursive https://github.com/likelikeslike/ViPER4Mac.git
+git clone --recursive https://github.com/likelikeslike/ViPER4Mac.git && cd ViPER4Mac
 make install
 ```
 
