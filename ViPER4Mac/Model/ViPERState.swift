@@ -59,6 +59,7 @@ private enum Param {
   static let HP_FIELD_SURROUND_DEPTH = 0x101A3
   static let HP_DIFF_SURROUND_ENABLE = 0x101B0
   static let HP_DIFF_SURROUND_DELAY = 0x101B1
+  static let HP_DIFF_SURROUND_REVERSE = 0x101B2
   static let HP_CURE_ENABLE = 0x101C0
   static let HP_CURE_STRENGTH = 0x101C1
   static let HP_TUBE_SIMULATOR_ENABLE = 0x101D0
@@ -135,6 +136,7 @@ private enum Param {
   static let SPK_FIELD_SURROUND_DEPTH = 0x103A3
   static let SPK_DIFF_SURROUND_ENABLE = 0x103B0
   static let SPK_DIFF_SURROUND_DELAY = 0x103B1
+  static let SPK_DIFF_SURROUND_REVERSE = 0x103B2
   static let SPK_CURE_ENABLE = 0x103C0
   static let SPK_CURE_STRENGTH = 0x103C1
   static let SPK_TUBE_SIMULATOR_ENABLE = 0x103D0
@@ -261,6 +263,7 @@ final class ViPERState: ObservableObject {
     var fieldSurroundDepth: Int = 0
     var diffSurroundEnabled = false
     var diffSurroundDelay: Int = 4
+    var diffSurroundReverse: Bool = false
     var reverberationEnabled = false
     var reverberationRoomSize: Int = 0
     var reverberationRoomWidth: Int = 0
@@ -369,6 +372,7 @@ final class ViPERState: ObservableObject {
 
   @Published var diffSurroundEnabled = false
   @Published var diffSurroundDelay: Int = 4
+  @Published var diffSurroundReverse: Bool = false
 
   @Published var reverberationEnabled = false
   @Published var reverberationRoomSize: Int = 0
@@ -578,6 +582,7 @@ final class ViPERState: ObservableObject {
     s.fieldSurroundDepth = fieldSurroundDepth
     s.diffSurroundEnabled = diffSurroundEnabled
     s.diffSurroundDelay = diffSurroundDelay
+    s.diffSurroundReverse = diffSurroundReverse
     s.reverberationEnabled = reverberationEnabled
     s.reverberationRoomSize = reverberationRoomSize
     s.reverberationRoomWidth = reverberationRoomWidth
@@ -663,6 +668,7 @@ final class ViPERState: ObservableObject {
     fieldSurroundDepth = s.fieldSurroundDepth
     diffSurroundEnabled = s.diffSurroundEnabled
     diffSurroundDelay = s.diffSurroundDelay
+    diffSurroundReverse = s.diffSurroundReverse
     reverberationEnabled = s.reverberationEnabled
     reverberationRoomSize = s.reverberationRoomSize
     reverberationRoomWidth = s.reverberationRoomWidth
@@ -824,6 +830,10 @@ final class ViPERState: ObservableObject {
     send(
       spk ? Param.SPK_DIFF_SURROUND_DELAY : Param.HP_DIFF_SURROUND_DELAY,
       Self.diffSurroundDelayValues[safe: diffSurroundDelay] ?? 500
+    )
+    send(
+      spk ? Param.SPK_DIFF_SURROUND_REVERSE : Param.HP_DIFF_SURROUND_REVERSE,
+      diffSurroundReverse ? 1 : 0
     )
     send(
       spk ? Param.SPK_DYNAMIC_SYSTEM_ENABLE : Param.HP_DYNAMIC_SYSTEM_ENABLE,
@@ -1046,6 +1056,14 @@ final class ViPERState: ObservableObject {
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       let v = Self.diffSurroundDelayValues[safe: idx] ?? 500
       self.send(self.isActiveSpk ? Param.SPK_DIFF_SURROUND_DELAY : Param.HP_DIFF_SURROUND_DELAY, v)
+    }.store(in: &cancellables)
+
+    $diffSurroundReverse.dropFirst().sink { [weak self] on in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_DIFF_SURROUND_REVERSE : Param.HP_DIFF_SURROUND_REVERSE,
+        on ? 1 : 0
+      )
     }.store(in: &cancellables)
 
     $reverberationEnabled.dropFirst().sink { [weak self] on in

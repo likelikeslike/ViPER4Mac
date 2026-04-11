@@ -423,6 +423,7 @@ struct PopoverContentView: View {
             Text("Delay"), value: $state.diffSurroundDelay, maxIndex: 19, steps: 18,
             label: "\(delayVal / 100)ms"
           )
+          toggleRow(Text("Reverse"), isOn: $state.diffSurroundReverse)
         }
         .padding(.leading, 4)
       }
