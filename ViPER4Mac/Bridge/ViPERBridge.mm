@@ -59,6 +59,7 @@
 - (void)setSamplingRate:(uint32_t)rate {
   os_unfair_lock_lock(&_lock);
   _engine.SetSamplingRate(rate);
+  _engine.resetAllEffects();
   os_unfair_lock_unlock(&_lock);
 }
 
@@ -67,13 +68,6 @@
   uint32_t rate = _engine.GetSamplingRate();
   os_unfair_lock_unlock(&_lock);
   return rate;
-}
-
-- (uint64_t)getProcessTimeMs {
-  os_unfair_lock_lock(&_lock);
-  uint64_t t = _engine.GetProcessTimeMs();
-  os_unfair_lock_unlock(&_lock);
-  return t;
 }
 
 - (uint32_t)getConvolverKernelID {

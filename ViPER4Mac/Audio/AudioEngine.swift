@@ -877,10 +877,18 @@ final class AudioEngine {
       mElement: kAudioObjectPropertyElementMain
     )
     var rate = outputRate
-    AudioObjectSetPropertyData(
+    let status = AudioObjectSetPropertyData(
       inputDeviceID, &propAddr, 0, nil,
       UInt32(MemoryLayout<Float64>.size), &rate
     )
+    if status != noErr {
+      logger.error("matchSampleRates: SetNominalSampleRate failed: \(status)")
+    }
+
+    Thread.sleep(forTimeInterval: 0.05)
+
+    let actualRate = getSampleRate(for: inputDeviceID)
+    logger.info("matchSampleRates: output=\(outputRate) virtual=\(actualRate) status=\(status)")
   }
 }
 

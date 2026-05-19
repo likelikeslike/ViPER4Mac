@@ -28,6 +28,7 @@ static const char *kViPERDeviceName = "ViPER4Mac";
 static const UInt32 kViPERChannelCount = 2;
 static const UInt32 kViPERDefaultSampleRate = 48000;
 static const UInt32 kViPERRingBufferFrames = 16384;
+static const Float64 kSupportedRates[] = {44100, 48000, 88200, 96000};
 
 class ViPERIOHandler : public aspl::IORequestHandler {
 public:
@@ -182,6 +183,30 @@ public:
 
     UInt32 GetTransportType() const override { return kAudioDeviceTransportTypeBuiltIn; }
 
+    OSStatus SetNominalSampleRateImpl(Float64 rate) override {
+        FILE *f = openDriverLog();
+        if (f) {
+            fprintf(f, "SetNominalSampleRate: %.0f\n", rate);
+            fclose(f);
+        }
+
+        OSStatus status = aspl::Device::SetNominalSampleRateImpl(rate);
+        if (status != kAudioHardwareNoError) return status;
+
+        for (auto dir : {aspl::Direction::Output, aspl::Direction::Input}) {
+            UInt32 count = GetStreamCount(dir);
+            for (UInt32 i = 0; i < count; i++) {
+                auto stream = GetStreamByIndex(dir, i);
+                if (!stream) continue;
+                auto fmt = stream->GetPhysicalFormat();
+                fmt.mSampleRate = rate;
+                stream->SetPhysicalFormatAsync(fmt);
+            }
+        }
+
+        return kAudioHardwareNoError;
+    }
+
     OSStatus StartIOImpl(UInt32 clientID, UInt32 startCount) override {
         FILE *f = openDriverLog();
         if (f) {
@@ -264,12 +289,26 @@ extern "C" void *ViPER4Mac_Create(CFAllocatorRef allocator, CFUUIDRef typeUUID) 
     aspl::StreamParameters outputStreamParams;
     outputStreamParams.Direction = aspl::Direction::Output;
     outputStreamParams.Format = format;
-    device->AddStreamAsync(outputStreamParams);
+    auto outputStream = device->AddStreamAsync(outputStreamParams);
 
     aspl::StreamParameters inputStreamParams;
     inputStreamParams.Direction = aspl::Direction::Input;
     inputStreamParams.Format = format;
-    device->AddStreamAsync(inputStreamParams);
+    auto inputStream = device->AddStreamAsync(inputStreamParams);
+
+    std::vector<AudioValueRange> sampleRates;
+    std::vector<AudioStreamRangedDescription> streamFormats;
+    for (auto rate : kSupportedRates) {
+        sampleRates.push_back({rate, rate});
+        AudioStreamRangedDescription rd = {};
+        rd.mFormat = format;
+        rd.mFormat.mSampleRate = rate;
+        rd.mSampleRateRange = {rate, rate};
+        streamFormats.push_back(rd);
+    }
+    device->SetAvailableSampleRatesAsync(sampleRates);
+    if (outputStream) outputStream->SetAvailablePhysicalFormatsAsync(streamFormats);
+    if (inputStream) inputStream->SetAvailablePhysicalFormatsAsync(streamFormats);
 
     device->AddVolumeControlAsync(kAudioObjectPropertyScopeOutput);
     device->AddMuteControlAsync(kAudioObjectPropertyScopeOutput);
