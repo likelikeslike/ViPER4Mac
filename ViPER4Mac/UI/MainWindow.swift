@@ -22,6 +22,7 @@ struct PopoverContentView: View {
   @State private var showSaveDsPreset = false
   @State private var showDevices = false
   @State private var showDeviceInfoUID: String? = nil
+  @State private var dynEqBandToDelete: Int? = nil
 
   var body: some View {
     ScrollView {
@@ -516,15 +517,19 @@ struct PopoverContentView: View {
     VStack(spacing: 4) {
       agcSection
       compressorSection
+      mbcSection
       ddcSection
       spectrumSection
       eqSection
+      dynEqSection
       convolverSection
       surroundSection
+      stereoImagerSection
       diffSurroundSection
       vheSection
       reverbSection
       dynamicSystemSection
+      psychoacousticBassSection
       toggleOnlyHeader(
         Text("Tube Simulator (6N1J)"), icon: "music.note", isOn: $state.tubeSimulatorEnabled
       )
@@ -533,6 +538,7 @@ struct PopoverContentView: View {
       claritySection
       cureSection
       analogXSection
+      lufsTargetingSection
       if state.fxType == .speaker {
         toggleOnlyHeader(
           Text("Speaker Optimization"), icon: "hifispeaker.fill",
@@ -683,6 +689,16 @@ struct PopoverContentView: View {
             label: "\(delayVal / 100)ms"
           )
           toggleRow(Text("Reverse"), isOn: $state.diffSurroundReverse)
+          paramSlider(
+            Text("Wet/Dry"), intValue: $state.diffSurroundWetDryMix, range: 0 ... 100,
+            displayFn: { "\($0)%" }
+          )
+          paramSlider(
+            Text("LP Cutoff"),
+            intValue: Binding(get: { state.diffSurroundLpCutoff }, set: { state.diffSurroundLpCutoff = (($0 + 2) / 5) * 5 }),
+            range: 0 ... 20000,
+            displayFn: { $0 == 0 ? "Off" : "\($0) Hz" }
+          )
         }
         .padding(.leading, 4)
       }
@@ -800,20 +816,24 @@ struct PopoverContentView: View {
             displayFn: { "\($0)%" }
           )
           paramSlider(
-            Text("X Low Freq"), intValue: $state.dsXLow, range: 0 ... 2400,
-            displayFn: { "\($0) Hz" }
+            Text("X Low Freq"),
+            intValue: Binding(get: { state.dsXLow }, set: { state.dsXLow = (($0 + 2) / 5) * 5 }),
+            range: 0 ... 2400, displayFn: { "\($0) Hz" }
           )
           paramSlider(
-            Text("X High Freq"), intValue: $state.dsXHigh, range: 0 ... 12000,
-            displayFn: { "\($0) Hz" }
+            Text("X High Freq"),
+            intValue: Binding(get: { state.dsXHigh }, set: { state.dsXHigh = (($0 + 2) / 5) * 5 }),
+            range: 0 ... 12000, displayFn: { "\($0) Hz" }
           )
           paramSlider(
-            Text("Y Low Freq"), intValue: $state.dsYLow, range: 0 ... 200,
-            displayFn: { "\($0) Hz" }
+            Text("Y Low Freq"),
+            intValue: Binding(get: { state.dsYLow }, set: { state.dsYLow = (($0 + 2) / 5) * 5 }),
+            range: 0 ... 200, displayFn: { "\($0) Hz" }
           )
           paramSlider(
-            Text("Y High Freq"), intValue: $state.dsYHigh, range: 0 ... 300,
-            displayFn: { "\($0) Hz" }
+            Text("Y High Freq"),
+            intValue: Binding(get: { state.dsYHigh }, set: { state.dsYHigh = (($0 + 2) / 5) * 5 }),
+            range: 0 ... 300, displayFn: { "\($0) Hz" }
           )
           paramSlider(
             Text("Side Gain Lo"), intValue: $state.dsSideGainLow, range: 0 ... 100,
@@ -870,33 +890,54 @@ struct PopoverContentView: View {
       )
       if expandedSections.contains("comp") {
         VStack(spacing: 4) {
-          paramSlider(Text("Threshold"), intValue: $state.fetCompressorThreshold, range: 0 ... 200)
-          paramSlider(Text("Ratio"), intValue: $state.fetCompressorRatio, range: 0 ... 200)
+          paramSlider(
+            Text("Threshold"), intValue: $state.fetCompressorThreshold, range: -48 ... 0,
+            displayFn: { "\($0) dB" }
+          )
+          paramSlider(
+            Text("Ratio"), intValue: $state.fetCompressorRatio, range: 0 ... 200,
+            displayFn: { String(format: "%.1f", Double($0) / 100.0) }
+          )
           toggleRow(Text("Auto Knee"), isOn: $state.fetCompressorAutoKnee)
           paramSlider(
-            Text("Knee"), intValue: $state.fetCompressorKnee, range: 0 ... 200,
-            enabled: !state.fetCompressorAutoKnee
+            Text("Knee"), intValue: $state.fetCompressorKnee, range: 0 ... 12,
+            displayFn: { "\($0) dB" }, enabled: !state.fetCompressorAutoKnee
           )
-          paramSlider(Text("Knee Multi"), intValue: $state.fetCompressorKneeMulti, range: 0 ... 200)
+          paramSlider(
+            Text("Knee Multi"), intValue: $state.fetCompressorKneeMulti, range: 0 ... 400,
+            displayFn: { String(format: "%.1fx", Double($0) / 100.0) }
+          )
           toggleRow(Text("Auto Gain"), isOn: $state.fetCompressorAutoGain)
           paramSlider(
-            Text("Gain"), intValue: $state.fetCompressorGain, range: 0 ... 200,
-            enabled: !state.fetCompressorAutoGain
+            Text("Gain"), intValue: $state.fetCompressorGain, range: 0 ... 24,
+            displayFn: { "\($0) dB" }, enabled: !state.fetCompressorAutoGain
           )
           toggleRow(Text("Auto Attack"), isOn: $state.fetCompressorAutoAttack)
           paramSlider(
-            Text("Attack"), intValue: $state.fetCompressorAttack, range: 0 ... 200,
-            enabled: !state.fetCompressorAutoAttack
+            Text("Attack"), intValue: $state.fetCompressorAttack, range: 1 ... 100,
+            displayFn: { "\($0) ms" }, enabled: !state.fetCompressorAutoAttack
           )
-          paramSlider(Text("Max Attack"), intValue: $state.fetCompressorMaxAttack, range: 0 ... 200)
+          paramSlider(
+            Text("Max Attack"), intValue: $state.fetCompressorMaxAttack, range: 1 ... 100,
+            displayFn: { "\($0) ms" }
+          )
           toggleRow(Text("Auto Release"), isOn: $state.fetCompressorAutoRelease)
           paramSlider(
-            Text("Release"), intValue: $state.fetCompressorRelease, range: 0 ... 200,
-            enabled: !state.fetCompressorAutoRelease
+            Text("Release"), intValue: $state.fetCompressorRelease, range: 5 ... 500,
+            displayFn: { "\($0) ms" }, enabled: !state.fetCompressorAutoRelease
           )
-          paramSlider(Text("Max Release"), intValue: $state.fetCompressorMaxRelease, range: 0 ... 200)
-          paramSlider(Text("Crest"), intValue: $state.fetCompressorCrest, range: 0 ... 300)
-          paramSlider(Text("Adapt"), intValue: $state.fetCompressorAdapt, range: 0 ... 200)
+          paramSlider(
+            Text("Max Release"), intValue: $state.fetCompressorMaxRelease, range: 5 ... 500,
+            displayFn: { "\($0) ms" }
+          )
+          paramSlider(
+            Text("Crest"), intValue: $state.fetCompressorCrest, range: 5 ... 300,
+            displayFn: { "\($0) ms" }
+          )
+          paramSlider(
+            Text("Adapt"), intValue: $state.fetCompressorAdapt, range: 0 ... 200,
+            displayFn: { "\($0)%" }
+          )
           toggleRow(Text("No Clip"), isOn: $state.fetCompressorNoClip)
         }
         .padding(.leading, 4)
@@ -1086,6 +1127,436 @@ struct PopoverContentView: View {
     }
   }
 
+  // MARK: - Multiband Compressor
+
+  private static let mbcBandNames = ["Sub", "Low", "Mid", "Pres", "Air"]
+
+  private var mbcSection: some View {
+    VStack(spacing: 4) {
+      sectionHeader(
+        Text("Multiband Compressor"), icon: "waveform.badge.plus", id: "mbc",
+        isOn: $state.mbcEnabled
+      )
+      if expandedSections.contains("mbc") {
+        VStack(spacing: 4) {
+          Picker("Band", selection: $state.mbcSelectedBand) {
+            ForEach(0 ..< 5, id: \.self) { i in
+              Text(Self.mbcBandNames[i]).tag(i)
+            }
+          }
+          .pickerStyle(.segmented)
+
+          let b = state.mbcSelectedBand
+          let lowFreq = b == 0 ? 20 : (state.mbcCrossovers[safe: b - 1] ?? 20)
+          let highFreq = b < 4 ? (state.mbcCrossovers[safe: b] ?? 20000) : 20000
+          Text("\(lowFreq) - \(b < 4 ? "\(highFreq)" : "20000+") Hz")
+            .font(.caption2)
+            .foregroundStyle(.secondary)
+
+          toggleRow(
+            Text("Band Enable"),
+            isOn: Binding(
+              get: { state.mbcBandEnables[safe: b] ?? true },
+              set: { state.mbcBandEnables[b] = $0; state.dispatchMbcBand(b) }
+            )
+          )
+          paramSlider(
+            Text("Threshold"),
+            intValue: Binding(
+              get: { state.mbcThresholds[safe: b] ?? -18 },
+              set: { state.mbcThresholds[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: -48 ... 0, displayFn: { "\($0) dB" }
+          )
+          paramSlider(
+            Text("Ratio"),
+            intValue: Binding(
+              get: { state.mbcRatios[safe: b] ?? 50 },
+              set: { state.mbcRatios[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: 0 ... 200, displayFn: { String(format: "%.2f", Double($0) / 100.0) }
+          )
+          paramSlider(
+            Text("Knee"),
+            intValue: Binding(
+              get: { state.mbcKnees[safe: b] ?? 0 },
+              set: { state.mbcKnees[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: 0 ... 12, displayFn: { "\($0) dB" }
+          )
+          toggleRow(
+            Text("Auto Gain"),
+            isOn: Binding(
+              get: { state.mbcAutoGains[safe: b] ?? true },
+              set: { state.mbcAutoGains[b] = $0; state.dispatchMbcBand(b) }
+            )
+          )
+          paramSlider(
+            Text("Gain"),
+            intValue: Binding(
+              get: { state.mbcGains[safe: b] ?? 24 },
+              set: { state.mbcGains[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: 0 ... 24, displayFn: { "\($0) dB" },
+            enabled: !(state.mbcAutoGains[safe: b] ?? true)
+          )
+          toggleRow(
+            Text("Auto Attack"),
+            isOn: Binding(
+              get: { state.mbcAutoAttacks[safe: b] ?? true },
+              set: { state.mbcAutoAttacks[b] = $0; state.dispatchMbcBand(b) }
+            )
+          )
+          paramSlider(
+            Text("Attack"),
+            intValue: Binding(
+              get: { state.mbcAttacks[safe: b] ?? 1 },
+              set: { state.mbcAttacks[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: 1 ... 100, displayFn: { "\($0) ms" },
+            enabled: !(state.mbcAutoAttacks[safe: b] ?? true)
+          )
+          toggleRow(
+            Text("Auto Release"),
+            isOn: Binding(
+              get: { state.mbcAutoReleases[safe: b] ?? true },
+              set: { state.mbcAutoReleases[b] = $0; state.dispatchMbcBand(b) }
+            )
+          )
+          paramSlider(
+            Text("Release"),
+            intValue: Binding(
+              get: { state.mbcReleases[safe: b] ?? 100 },
+              set: { state.mbcReleases[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: 5 ... 500, displayFn: { "\($0) ms" },
+            enabled: !(state.mbcAutoReleases[safe: b] ?? true)
+          )
+          toggleRow(
+            Text("Auto Knee"),
+            isOn: Binding(
+              get: { state.mbcAutoKnees[safe: b] ?? true },
+              set: { state.mbcAutoKnees[b] = $0; state.dispatchMbcBand(b) }
+            )
+          )
+          paramSlider(
+            Text("Knee Multi"),
+            intValue: Binding(
+              get: { state.mbcKneeMultis[safe: b] ?? 0 },
+              set: { state.mbcKneeMultis[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: 0 ... 400, displayFn: { String(format: "%.2fx", Double($0) / 100.0) }
+          )
+          paramSlider(
+            Text("Max Attack"),
+            intValue: Binding(
+              get: { state.mbcMaxAttacks[safe: b] ?? 44 },
+              set: { state.mbcMaxAttacks[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: 1 ... 100, displayFn: { "\($0) ms" }
+          )
+          paramSlider(
+            Text("Max Release"),
+            intValue: Binding(
+              get: { state.mbcMaxReleases[safe: b] ?? 200 },
+              set: { state.mbcMaxReleases[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: 5 ... 500, displayFn: { "\($0) ms" }
+          )
+          paramSlider(
+            Text("Crest"),
+            intValue: Binding(
+              get: { state.mbcCrests[safe: b] ?? 100 },
+              set: { state.mbcCrests[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: 5 ... 300, displayFn: { "\($0) ms" }
+          )
+          paramSlider(
+            Text("Adapt"),
+            intValue: Binding(
+              get: { state.mbcAdapts[safe: b] ?? 50 },
+              set: { state.mbcAdapts[b] = $0; state.dispatchMbcBand(b) }
+            ),
+            range: 0 ... 200
+          )
+          toggleRow(
+            Text("No Clip"),
+            isOn: Binding(
+              get: { state.mbcNoClips[safe: b] ?? true },
+              set: { state.mbcNoClips[b] = $0; state.dispatchMbcBand(b) }
+            )
+          )
+
+          if b < 4 {
+            paramSlider(
+              Text("Crossover"),
+              intValue: Binding(
+                get: { state.mbcCrossovers[safe: b] ?? 500 },
+                set: { let v = (($0 + 2) / 5) * 5; state.mbcCrossovers[b] = v; state.dispatchMbcCrossover(b) }
+              ),
+              range: 20 ... 20000, displayFn: { "\($0) Hz" }
+            )
+          }
+        }
+        .padding(.leading, 4)
+      }
+    }
+  }
+
+  // MARK: - Dynamic EQ
+
+  private var dynEqSection: some View {
+    VStack(spacing: 4) {
+      sectionHeader(
+        Text("Dynamic EQ"), icon: "waveform.path.ecg", id: "dyneq",
+        isOn: $state.dynEqEnabled
+      )
+      if expandedSections.contains("dyneq") {
+        VStack(spacing: 4) {
+          ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 0) {
+              ForEach(0 ..< state.dynEqBandCount, id: \.self) { i in
+                let freq = state.dynEqFreqs[safe: i] ?? 1000
+                let label: String = {
+                  if freq >= 1000 {
+                    let k = Double(freq) / 1000.0
+                    return k == k.rounded(.down) ? "\(Int(k))kHz" : String(format: "%.1fkHz", k)
+                  }
+                  return "\(freq)Hz"
+                }()
+                Button(action: { state.dynEqSelectedBand = i }) {
+                  HStack(spacing: 2) {
+                    Text(label)
+                      .font(.caption)
+                      .lineLimit(1)
+                      .fixedSize()
+                    if state.dynEqBandCount > 1 {
+                      Image(systemName: "xmark")
+                        .font(.system(size: 7, weight: .bold))
+                        .foregroundStyle(.secondary)
+                        .onTapGesture {
+                          dynEqBandToDelete = i
+                        }
+                    }
+                  }
+                  .padding(.horizontal, 8)
+                  .padding(.vertical, 4)
+                  .background(
+                    state.dynEqSelectedBand == i
+                      ? Color.accentColor.opacity(0.2)
+                      : Color.clear
+                  )
+                  .cornerRadius(4)
+                }
+                .buttonStyle(.plain)
+              }
+              if state.dynEqBandCount < 8,
+                 (state.dynEqFreqs.last ?? 0) < 19990
+              {
+                Button(action: { state.addDynEqBand() }) {
+                  Image(systemName: "plus")
+                    .font(.caption)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                }
+                .buttonStyle(.plain)
+              }
+            }
+          }
+          .confirmationDialog(
+            "Delete this band?",
+            isPresented: Binding(
+              get: { dynEqBandToDelete != nil },
+              set: { if !$0 { dynEqBandToDelete = nil } }
+            ),
+            titleVisibility: .visible
+          ) {
+            Button("Delete", role: .destructive) {
+              if let idx = dynEqBandToDelete {
+                state.removeDynEqBand(at: idx)
+                dynEqBandToDelete = nil
+              }
+            }
+            Button("Cancel", role: .cancel) {
+              dynEqBandToDelete = nil
+            }
+          }
+
+          let b = min(state.dynEqSelectedBand, state.dynEqBandCount - 1)
+          let minFreq = b > 0 ? (state.dynEqFreqs[safe: b - 1] ?? 20) + 1 : 20
+          let maxFreq = b < state.dynEqBandCount - 1
+            ? (state.dynEqFreqs[safe: b + 1] ?? 20000) - 1 : 20000
+          paramSlider(
+            Text("Frequency"),
+            intValue: Binding(
+              get: { state.dynEqFreqs[safe: b] ?? 1000 },
+              set: { let v = (($0 + 2) / 5) * 5; state.dynEqFreqs[b] = v; state.dispatchDynEqBand(b) }
+            ),
+            range: minFreq ... maxFreq, displayFn: { "\($0) Hz" }
+          )
+          paramSlider(
+            Text("Q"),
+            intValue: Binding(
+              get: { state.dynEqQs[safe: b] ?? 150 },
+              set: { state.dynEqQs[b] = $0; state.dispatchDynEqBand(b) }
+            ),
+            range: 50 ... 800, displayFn: { String(format: "%.1f", Double($0) / 100.0) }
+          )
+          paramSlider(
+            Text("Gain"),
+            intValue: Binding(
+              get: { state.dynEqGains[safe: b] ?? 0 },
+              set: { state.dynEqGains[b] = $0; state.dispatchDynEqBand(b) }
+            ),
+            range: -120 ... 120, displayFn: { String(format: "%.1f dB", Double($0) / 10.0) }
+          )
+          paramSlider(
+            Text("Threshold"),
+            intValue: Binding(
+              get: { state.dynEqThresholds[safe: b] ?? -250 },
+              set: { state.dynEqThresholds[b] = $0; state.dispatchDynEqBand(b) }
+            ),
+            range: -1000 ... 0, displayFn: { String(format: "%.1f dB", Double($0) / 10.0) }
+          )
+          paramSlider(
+            Text("Attack"),
+            intValue: Binding(
+              get: { state.dynEqAttacks[safe: b] ?? 10 },
+              set: { state.dynEqAttacks[b] = $0; state.dispatchDynEqBand(b) }
+            ),
+            range: 1 ... 100, displayFn: { "\($0) ms" }
+          )
+          paramSlider(
+            Text("Release"),
+            intValue: Binding(
+              get: { state.dynEqReleases[safe: b] ?? 100 },
+              set: { state.dynEqReleases[b] = $0; state.dispatchDynEqBand(b) }
+            ),
+            range: 10 ... 500, displayFn: { "\($0) ms" }
+          )
+          Picker(
+            "Filter",
+            selection: Binding(
+              get: { state.dynEqFilterTypes[safe: b] ?? 0 },
+              set: { state.dynEqFilterTypes[b] = $0; state.dispatchDynEqBand(b) }
+            )
+          ) {
+            Text("Peak").tag(0)
+            Text("Low Shelf").tag(1)
+            Text("High Shelf").tag(2)
+          }
+          .pickerStyle(.segmented)
+        }
+        .padding(.leading, 4)
+      }
+    }
+  }
+
+  // MARK: - Stereo Imager
+
+  private var stereoImagerSection: some View {
+    VStack(spacing: 4) {
+      sectionHeader(
+        Text("Stereo Imager"), icon: "arrow.left.and.right", id: "stereoimg",
+        isOn: $state.stereoImgEnabled
+      )
+      if expandedSections.contains("stereoimg") {
+        VStack(spacing: 4) {
+          paramSlider(
+            Text("Low Width"), intValue: $state.stereoImgLowWidth, range: 0 ... 200,
+            displayFn: { "\($0)%" }
+          )
+          paramSlider(
+            Text("Mid Width"), intValue: $state.stereoImgMidWidth, range: 0 ... 200,
+            displayFn: { "\($0)%" }
+          )
+          paramSlider(
+            Text("High Width"), intValue: $state.stereoImgHighWidth, range: 0 ... 200,
+            displayFn: { "\($0)%" }
+          )
+          paramSlider(
+            Text("Low X-over"),
+            intValue: Binding(get: { state.stereoImgLowCrossover }, set: { state.stereoImgLowCrossover = (($0 + 2) / 5) * 5 }),
+            range: 80 ... 400,
+            displayFn: { "\($0) Hz" }
+          )
+          paramSlider(
+            Text("High X-over"),
+            intValue: Binding(get: { state.stereoImgHighCrossover }, set: { state.stereoImgHighCrossover = (($0 + 2) / 5) * 5 }),
+            range: 2000 ... 8000,
+            displayFn: { "\($0) Hz" }
+          )
+        }
+        .padding(.leading, 4)
+      }
+    }
+  }
+
+  // MARK: - LUFS Targeting
+
+  private var lufsTargetingSection: some View {
+    VStack(spacing: 4) {
+      sectionHeader(
+        Text("LUFS Targeting"), icon: "gauge.with.needle", id: "lufs",
+        isOn: $state.lufsEnabled
+      )
+      if expandedSections.contains("lufs") {
+        VStack(spacing: 4) {
+          paramSlider(
+            Text("Target"), intValue: $state.lufsTarget, range: 80 ... 240,
+            displayFn: { String(format: "%.1f LUFS", Double($0) / -10.0) }
+          )
+          paramSlider(
+            Text("Max Gain"), intValue: $state.lufsMaxGain, range: 0 ... 120,
+            displayFn: { String(format: "%.1f dB", Double($0) / 10.0) }
+          )
+          Picker("Speed", selection: $state.lufsSpeed) {
+            Text("Slow").tag(0)
+            Text("Medium").tag(1)
+            Text("Fast").tag(2)
+          }
+          .pickerStyle(.segmented)
+        }
+        .padding(.leading, 4)
+      }
+    }
+  }
+
+  // MARK: - Psychoacoustic Bass
+
+  private var psychoacousticBassSection: some View {
+    VStack(spacing: 4) {
+      sectionHeader(
+        Text("Psychoacoustic Bass"), icon: "speaker.wave.3", id: "psychobass",
+        isOn: $state.psychoBassEnabled
+      )
+      if expandedSections.contains("psychobass") {
+        VStack(spacing: 4) {
+          paramSlider(
+            Text("Cutoff"), intValue: $state.psychoBassCutoff, range: 60 ... 150,
+            displayFn: { "\($0) Hz" }
+          )
+          paramSlider(
+            Text("Intensity"), intValue: $state.psychoBassIntensity, range: 0 ... 100,
+            displayFn: { "\($0)%" }
+          )
+          Picker("Harmonic", selection: $state.psychoBassHarmonicOrder) {
+            Text("2nd").tag(2)
+            Text("3rd").tag(3)
+            Text("4th").tag(4)
+            Text("5th").tag(5)
+          }
+          .pickerStyle(.segmented)
+          paramSlider(
+            Text("Orig. Level"), intValue: $state.psychoBassOriginalLevel, range: 0 ... 100,
+            displayFn: { "\($0)%" }
+          )
+        }
+        .padding(.leading, 4)
+      }
+    }
+  }
+
   // MARK: - Footer
 
   private var footerSection: some View {
@@ -1214,7 +1685,9 @@ struct PopoverContentView: View {
       Text(displayLabel ?? "\(value.wrappedValue)")
         .font(.caption)
         .monospacedDigit()
-        .frame(width: 48, alignment: .trailing)
+        .lineLimit(1)
+        .fixedSize()
+        .frame(minWidth: 48, alignment: .trailing)
     }
   }
 
@@ -1239,7 +1712,9 @@ struct PopoverContentView: View {
       Text(display)
         .font(.caption)
         .monospacedDigit()
-        .frame(width: 48, alignment: .trailing)
+        .lineLimit(1)
+        .fixedSize()
+        .frame(minWidth: 48, alignment: .trailing)
     }
     .opacity(enabled ? 1.0 : 0.5)
   }

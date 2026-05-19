@@ -113,6 +113,16 @@
 		7F4FBC3B2F66E33B002A6C68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBC382F66E33B002A6C68 /* Assets.xcassets */; };
 		7F4FBC3C2F66E33B002A6C68 /* ViPER4MacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBC362F66E33B002A6C68 /* ViPER4MacApp.swift */; };
 		7F4FBC4F2F66EB84002A6C68 /* ViPERDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBC4E2F66EB84002A6C68 /* ViPERDriver.cpp */; };
+		7F9471482FBCBF7600477DDB /* MultibandCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F9471432FBCBF7600477DDB /* MultibandCompressor.cpp */; };
+		7F9471492FBCBF7600477DDB /* StereoImager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F9471472FBCBF7600477DDB /* StereoImager.cpp */; };
+		7F94714A2FBCBF7600477DDB /* LUFSTargeting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F9471412FBCBF7600477DDB /* LUFSTargeting.cpp */; };
+		7F94714B2FBCBF7600477DDB /* PsychoacousticBass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F9471452FBCBF7600477DDB /* PsychoacousticBass.cpp */; };
+		7F94714C2FBCBF7600477DDB /* DynamicEQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F94713F2FBCBF7600477DDB /* DynamicEQ.cpp */; };
+		7F94714D2FBCBF7600477DDB /* PsychoacousticBass.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F9471442FBCBF7600477DDB /* PsychoacousticBass.h */; };
+		7F94714E2FBCBF7600477DDB /* LUFSTargeting.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F9471402FBCBF7600477DDB /* LUFSTargeting.h */; };
+		7F94714F2FBCBF7600477DDB /* MultibandCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F9471422FBCBF7600477DDB /* MultibandCompressor.h */; };
+		7F9471502FBCBF7600477DDB /* StereoImager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F9471462FBCBF7600477DDB /* StereoImager.h */; };
+		7F9471512FBCBF7600477DDB /* DynamicEQ.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F94713E2FBCBF7600477DDB /* DynamicEQ.h */; };
 		7FD060122F66F22D00DA4E0E /* Device.g.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE582F66EFD1002A6C68 /* Device.g.cpp */; };
 		7FD060132F66F22D00DA4E0E /* Storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE642F66EFD1002A6C68 /* Storage.cpp */; };
 		7FD060142F66F22D00DA4E0E /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE522F66EFD1002A6C68 /* Client.cpp */; };
@@ -337,6 +347,16 @@
 		7F4FBE742F66EFD1002A6C68 /* VolumeCurve.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeCurve.cpp; sourceTree = "<group>"; };
 		7F4FBE752F66EFD1002A6C68 /* VolumeDecibelPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VolumeDecibelPoint.hpp; sourceTree = "<group>"; };
 		7F4FBE762F66EFD1002A6C68 /* VolumeRawPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VolumeRawPoint.hpp; sourceTree = "<group>"; };
+		7F94713E2FBCBF7600477DDB /* DynamicEQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicEQ.h; sourceTree = "<group>"; };
+		7F94713F2FBCBF7600477DDB /* DynamicEQ.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicEQ.cpp; sourceTree = "<group>"; };
+		7F9471402FBCBF7600477DDB /* LUFSTargeting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LUFSTargeting.h; sourceTree = "<group>"; };
+		7F9471412FBCBF7600477DDB /* LUFSTargeting.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LUFSTargeting.cpp; sourceTree = "<group>"; };
+		7F9471422FBCBF7600477DDB /* MultibandCompressor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultibandCompressor.h; sourceTree = "<group>"; };
+		7F9471432FBCBF7600477DDB /* MultibandCompressor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MultibandCompressor.cpp; sourceTree = "<group>"; };
+		7F9471442FBCBF7600477DDB /* PsychoacousticBass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PsychoacousticBass.h; sourceTree = "<group>"; };
+		7F9471452FBCBF7600477DDB /* PsychoacousticBass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PsychoacousticBass.cpp; sourceTree = "<group>"; };
+		7F9471462FBCBF7600477DDB /* StereoImager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StereoImager.h; sourceTree = "<group>"; };
+		7F9471472FBCBF7600477DDB /* StereoImager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StereoImager.cpp; sourceTree = "<group>"; };
 		7FD0600C2F66F11400DA4E0E /* TPCircularBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPCircularBuffer.h; sourceTree = "<group>"; };
 		7FD0600D2F66F11400DA4E0E /* TPCircularBuffer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = TPCircularBuffer.c; sourceTree = "<group>"; };
 		7FD060292F66F49800DA4E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -408,6 +428,16 @@
 		7F4FBB0F2F66D447002A6C68 /* effects */ = {
 			isa = PBXGroup;
 			children = (
+				7F94713E2FBCBF7600477DDB /* DynamicEQ.h */,
+				7F94713F2FBCBF7600477DDB /* DynamicEQ.cpp */,
+				7F9471402FBCBF7600477DDB /* LUFSTargeting.h */,
+				7F9471412FBCBF7600477DDB /* LUFSTargeting.cpp */,
+				7F9471422FBCBF7600477DDB /* MultibandCompressor.h */,
+				7F9471432FBCBF7600477DDB /* MultibandCompressor.cpp */,
+				7F9471442FBCBF7600477DDB /* PsychoacousticBass.h */,
+				7F9471452FBCBF7600477DDB /* PsychoacousticBass.cpp */,
+				7F9471462FBCBF7600477DDB /* StereoImager.h */,
+				7F9471472FBCBF7600477DDB /* StereoImager.cpp */,
 				7F4FBAE42F66D447002A6C68 /* AnalogX.h */,
 				7F4FBAE52F66D447002A6C68 /* AnalogX.cpp */,
 				7F4FBAE62F66D447002A6C68 /* ColorfulMusic.h */,
@@ -755,6 +785,11 @@
 				7F4FBB5D2F66D447002A6C68 /* DiffSurround.h in Headers */,
 				7F4FBB5E2F66D447002A6C68 /* AnalogX.h in Headers */,
 				7F4FBB5F2F66D447002A6C68 /* MinPhaseIIRCoeffs.h in Headers */,
+				7F94714D2FBCBF7600477DDB /* PsychoacousticBass.h in Headers */,
+				7F94714E2FBCBF7600477DDB /* LUFSTargeting.h in Headers */,
+				7F94714F2FBCBF7600477DDB /* MultibandCompressor.h in Headers */,
+				7F9471502FBCBF7600477DDB /* StereoImager.h in Headers */,
+				7F9471512FBCBF7600477DDB /* DynamicEQ.h in Headers */,
 				7F4FBB602F66D447002A6C68 /* ViPERBassMono.h in Headers */,
 				7F4FBB612F66D447002A6C68 /* PolesFilter.h in Headers */,
 				7F4FBB622F66D447002A6C68 /* PConvSingle.h in Headers */,
@@ -976,6 +1011,11 @@
 				7F4FBB9F2F66D447002A6C68 /* MinPhaseIIRCoeffs.cpp in Sources */,
 				7F4FBBA02F66D447002A6C68 /* PassFilter.cpp in Sources */,
 				7F4FBBA12F66D447002A6C68 /* IIR_1st.cpp in Sources */,
+				7F9471482FBCBF7600477DDB /* MultibandCompressor.cpp in Sources */,
+				7F9471492FBCBF7600477DDB /* StereoImager.cpp in Sources */,
+				7F94714A2FBCBF7600477DDB /* LUFSTargeting.cpp in Sources */,
+				7F94714B2FBCBF7600477DDB /* PsychoacousticBass.cpp in Sources */,
+				7F94714C2FBCBF7600477DDB /* DynamicEQ.cpp in Sources */,
 				7F4FBBA22F66D447002A6C68 /* SpeakerCorrection.cpp in Sources */,
 				7F4FBBA32F66D447002A6C68 /* Subwoofer.cpp in Sources */,
 				7F4FBBA42F66D447002A6C68 /* CRevModel.cpp in Sources */,

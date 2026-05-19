@@ -86,6 +86,58 @@ private enum Param {
   static let HP_FET_COMPRESSOR_ADAPT = 0x1020F
   static let HP_FET_COMPRESSOR_NO_CLIP = 0x10210
 
+  static let HP_MULTIBAND_COMP_ENABLE = 0x10230
+  static let HP_MULTIBAND_COMP_BAND_COUNT = 0x10231
+  static let HP_MULTIBAND_COMP_CROSSOVER_FREQ = 0x10232
+  static let HP_MULTIBAND_COMP_BAND_THRESHOLD = 0x10233
+  static let HP_MULTIBAND_COMP_BAND_RATIO = 0x10234
+  static let HP_MULTIBAND_COMP_BAND_KNEE = 0x10235
+  static let HP_MULTIBAND_COMP_BAND_AUTO_KNEE = 0x10236
+  static let HP_MULTIBAND_COMP_BAND_GAIN = 0x10237
+  static let HP_MULTIBAND_COMP_BAND_AUTO_GAIN = 0x10238
+  static let HP_MULTIBAND_COMP_BAND_ATTACK = 0x10239
+  static let HP_MULTIBAND_COMP_BAND_AUTO_ATTACK = 0x1023A
+  static let HP_MULTIBAND_COMP_BAND_RELEASE = 0x1023B
+  static let HP_MULTIBAND_COMP_BAND_AUTO_RELEASE = 0x1023C
+  static let HP_MULTIBAND_COMP_BAND_KNEE_MULTI = 0x1023D
+  static let HP_MULTIBAND_COMP_BAND_MAX_ATTACK = 0x1023E
+  static let HP_MULTIBAND_COMP_BAND_MAX_RELEASE = 0x1023F
+  static let HP_MULTIBAND_COMP_BAND_CREST = 0x10240
+  static let HP_MULTIBAND_COMP_BAND_ADAPT = 0x10241
+  static let HP_MULTIBAND_COMP_BAND_NO_CLIP = 0x10242
+  static let HP_MULTIBAND_COMP_BAND_ENABLE = 0x10243
+
+  static let HP_STEREO_IMAGER_ENABLE = 0x10250
+  static let HP_STEREO_IMAGER_LOW_WIDTH = 0x10251
+  static let HP_STEREO_IMAGER_MID_WIDTH = 0x10252
+  static let HP_STEREO_IMAGER_HIGH_WIDTH = 0x10253
+  static let HP_STEREO_IMAGER_LOW_CROSSOVER = 0x10254
+  static let HP_STEREO_IMAGER_HIGH_CROSSOVER = 0x10255
+
+  static let HP_DYNAMIC_EQ_ENABLE = 0x10260
+  static let HP_DYNAMIC_EQ_BAND_COUNT = 0x10261
+  static let HP_DYNAMIC_EQ_BAND_FREQ = 0x10262
+  static let HP_DYNAMIC_EQ_BAND_Q = 0x10263
+  static let HP_DYNAMIC_EQ_BAND_GAIN = 0x10264
+  static let HP_DYNAMIC_EQ_BAND_THRESHOLD = 0x10265
+  static let HP_DYNAMIC_EQ_BAND_ATTACK = 0x10266
+  static let HP_DYNAMIC_EQ_BAND_RELEASE = 0x10267
+  static let HP_DYNAMIC_EQ_BAND_FILTER_TYPE = 0x10268
+
+  static let HP_LUFS_ENABLE = 0x10270
+  static let HP_LUFS_TARGET = 0x10271
+  static let HP_LUFS_MAX_GAIN = 0x10272
+  static let HP_LUFS_SPEED = 0x10273
+
+  static let HP_PSYCHO_BASS_ENABLE = 0x10280
+  static let HP_PSYCHO_BASS_CUTOFF = 0x10281
+  static let HP_PSYCHO_BASS_INTENSITY = 0x10282
+  static let HP_PSYCHO_BASS_HARMONIC_ORDER = 0x10283
+  static let HP_PSYCHO_BASS_ORIGINAL_LEVEL = 0x10284
+
+  static let HP_DIFF_SURROUND_WET_DRY_MIX = 0x101B3
+  static let HP_DIFF_SURROUND_LP_CUTOFF = 0x101B4
+
   static let SPK_CONVOLVER_ENABLE = 0x10300
   static let SPK_CONVOLVER_SET_KERNEL = 0x10301
   static let SPK_CONVOLVER_PREPARE_BUFFER = 0x10302
@@ -163,6 +215,58 @@ private enum Param {
   static let SPK_FET_COMPRESSOR_ADAPT = 0x1040F
   static let SPK_FET_COMPRESSOR_NO_CLIP = 0x10410
   static let SPK_SPEAKER_CORRECTION_ENABLE = 0x10420
+
+  static let SPK_MULTIBAND_COMP_ENABLE = 0x10430
+  static let SPK_MULTIBAND_COMP_BAND_COUNT = 0x10431
+  static let SPK_MULTIBAND_COMP_CROSSOVER_FREQ = 0x10432
+  static let SPK_MULTIBAND_COMP_BAND_THRESHOLD = 0x10433
+  static let SPK_MULTIBAND_COMP_BAND_RATIO = 0x10434
+  static let SPK_MULTIBAND_COMP_BAND_KNEE = 0x10435
+  static let SPK_MULTIBAND_COMP_BAND_AUTO_KNEE = 0x10436
+  static let SPK_MULTIBAND_COMP_BAND_GAIN = 0x10437
+  static let SPK_MULTIBAND_COMP_BAND_AUTO_GAIN = 0x10438
+  static let SPK_MULTIBAND_COMP_BAND_ATTACK = 0x10439
+  static let SPK_MULTIBAND_COMP_BAND_AUTO_ATTACK = 0x1043A
+  static let SPK_MULTIBAND_COMP_BAND_RELEASE = 0x1043B
+  static let SPK_MULTIBAND_COMP_BAND_AUTO_RELEASE = 0x1043C
+  static let SPK_MULTIBAND_COMP_BAND_KNEE_MULTI = 0x1043D
+  static let SPK_MULTIBAND_COMP_BAND_MAX_ATTACK = 0x1043E
+  static let SPK_MULTIBAND_COMP_BAND_MAX_RELEASE = 0x1043F
+  static let SPK_MULTIBAND_COMP_BAND_CREST = 0x10440
+  static let SPK_MULTIBAND_COMP_BAND_ADAPT = 0x10441
+  static let SPK_MULTIBAND_COMP_BAND_NO_CLIP = 0x10442
+  static let SPK_MULTIBAND_COMP_BAND_ENABLE = 0x10443
+
+  static let SPK_STEREO_IMAGER_ENABLE = 0x10450
+  static let SPK_STEREO_IMAGER_LOW_WIDTH = 0x10451
+  static let SPK_STEREO_IMAGER_MID_WIDTH = 0x10452
+  static let SPK_STEREO_IMAGER_HIGH_WIDTH = 0x10453
+  static let SPK_STEREO_IMAGER_LOW_CROSSOVER = 0x10454
+  static let SPK_STEREO_IMAGER_HIGH_CROSSOVER = 0x10455
+
+  static let SPK_DYNAMIC_EQ_ENABLE = 0x10460
+  static let SPK_DYNAMIC_EQ_BAND_COUNT = 0x10461
+  static let SPK_DYNAMIC_EQ_BAND_FREQ = 0x10462
+  static let SPK_DYNAMIC_EQ_BAND_Q = 0x10463
+  static let SPK_DYNAMIC_EQ_BAND_GAIN = 0x10464
+  static let SPK_DYNAMIC_EQ_BAND_THRESHOLD = 0x10465
+  static let SPK_DYNAMIC_EQ_BAND_ATTACK = 0x10466
+  static let SPK_DYNAMIC_EQ_BAND_RELEASE = 0x10467
+  static let SPK_DYNAMIC_EQ_BAND_FILTER_TYPE = 0x10468
+
+  static let SPK_LUFS_ENABLE = 0x10470
+  static let SPK_LUFS_TARGET = 0x10471
+  static let SPK_LUFS_MAX_GAIN = 0x10472
+  static let SPK_LUFS_SPEED = 0x10473
+
+  static let SPK_PSYCHO_BASS_ENABLE = 0x10480
+  static let SPK_PSYCHO_BASS_CUTOFF = 0x10481
+  static let SPK_PSYCHO_BASS_INTENSITY = 0x10482
+  static let SPK_PSYCHO_BASS_HARMONIC_ORDER = 0x10483
+  static let SPK_PSYCHO_BASS_ORIGINAL_LEVEL = 0x10484
+
+  static let SPK_DIFF_SURROUND_WET_DRY_MIX = 0x103B3
+  static let SPK_DIFF_SURROUND_LP_CUTOFF = 0x103B4
 }
 
 struct EqPreset: Codable {
@@ -238,87 +342,224 @@ final class ViPERState: ObservableObject {
     ("pittvandewitt flavor #3", "140;5400;40;60;0;0"),
   ]
 
+  struct OutputState: Codable {
+    var volume: Int = 11
+    var pan: Int = 0
+    var limiter: Int = 5
+  }
+
+  struct AgcState: Codable {
+    var enabled = false
+    var strength: Int = 0
+    var maxGain: Int = 3
+    var outputThreshold: Int = 3
+  }
+
+  struct FetState: Codable {
+    var enabled = false
+    var threshold: Int = -18
+    var ratio: Int = 100
+    var autoKnee = true
+    var knee: Int = 0
+    var kneeMulti: Int = 0
+    var autoGain = true
+    var gain: Int = 0
+    var autoAttack = true
+    var attack: Int = 1
+    var maxAttack: Int = 44
+    var autoRelease = true
+    var release: Int = 100
+    var maxRelease: Int = 200
+    var crest: Int = 100
+    var adapt: Int = 50
+    var noClip = true
+  }
+
+  struct MbcState: Codable {
+    var enabled = false
+    var crossovers: [Int] = [120, 500, 4000, 8000]
+    var bandEnables: [Bool] = [true, true, true, true, true]
+    var thresholds: [Int] = [-18, -18, -18, -18, -18]
+    var ratios: [Int] = [50, 50, 50, 50, 50]
+    var gains: [Int] = [24, 24, 24, 24, 24]
+    var knees: [Int] = [0, 0, 0, 0, 0]
+    var attacks: [Int] = [1, 1, 1, 1, 1]
+    var releases: [Int] = [100, 100, 100, 100, 100]
+    var autoGains: [Bool] = [true, true, true, true, true]
+    var autoAttacks: [Bool] = [true, true, true, true, true]
+    var autoReleases: [Bool] = [true, true, true, true, true]
+    var autoKnees: [Bool] = [true, true, true, true, true]
+    var kneeMultis: [Int] = [0, 0, 0, 0, 0]
+    var maxAttacks: [Int] = [44, 44, 44, 44, 44]
+    var maxReleases: [Int] = [200, 200, 200, 200, 200]
+    var crests: [Int] = [100, 100, 100, 100, 100]
+    var adapts: [Int] = [50, 50, 50, 50, 50]
+    var noClips: [Bool] = [true, true, true, true, true]
+  }
+
+  struct DynEqState: Codable {
+    var enabled = false
+    var bandCount: Int = 3
+    var freqs: [Int] = [400, 1000, 5000]
+    var qs: [Int] = [150, 150, 200]
+    var gains: [Int] = [0, 0, 0]
+    var thresholds: [Int] = [-250, -250, -200]
+    var attacks: [Int] = [10, 10, 10]
+    var releases: [Int] = [100, 100, 100]
+    var filterTypes: [Int] = [0, 0, 0]
+  }
+
+  struct StereoImagerState: Codable {
+    var enabled = false
+    var lowWidth: Int = 100
+    var midWidth: Int = 100
+    var highWidth: Int = 100
+    var lowCrossover: Int = 200
+    var highCrossover: Int = 4000
+  }
+
+  struct LufsState: Codable {
+    var enabled = false
+    var target: Int = 140
+    var maxGain: Int = 60
+    var speed: Int = 1
+  }
+
+  struct PsychoBassState: Codable {
+    var enabled = false
+    var cutoff: Int = 80
+    var intensity: Int = 50
+    var harmonicOrder: Int = 3
+    var originalLevel: Int = 100
+  }
+
+  struct DdcState: Codable {
+    var enabled = false
+    var filePath: String = ""
+  }
+
+  struct VseState: Codable {
+    var enabled = false
+    var bark: Int = 9
+    var barkReconstruct: Int = 0
+  }
+
+  struct EqState: Codable {
+    var enabled = false
+    var bandCount: Int = 10
+    var bands: [Float] = Array(repeating: 0.0, count: 10)
+    var bandsMap: [Int: [Float]] = [10: Array(repeating: 0.0, count: 10)]
+  }
+
+  struct ConvolverState: Codable {
+    var enabled = false
+    var kernelPath: String = ""
+    var crossChannel: Int = 0
+  }
+
+  struct FieldSurroundState: Codable {
+    var enabled = false
+    var widening: Int = 0
+    var midImage: Int = 5
+    var depth: Int = 0
+  }
+
+  struct DiffSurroundState: Codable {
+    var enabled = false
+    var delay: Int = 4
+    var reverse: Bool = false
+    var wetDryMix: Int = 100
+    var lpCutoff: Int = 0
+  }
+
+  struct VheState: Codable {
+    var enabled = false
+    var quality: Int = 0
+  }
+
+  struct ReverbState: Codable {
+    var enabled = false
+    var roomSize: Int = 0
+    var roomWidth: Int = 0
+    var dampening: Int = 0
+    var wet: Int = 0
+    var dry: Int = 50
+  }
+
+  struct DynamicSystemState: Codable {
+    var enabled = false
+    var device: Int = 0
+    var strength: Int = 50
+    var xLow: Int = 100
+    var xHigh: Int = 5600
+    var yLow: Int = 40
+    var yHigh: Int = 80
+    var sideGainLow: Int = 50
+    var sideGainHigh: Int = 50
+  }
+
+  struct BassState: Codable {
+    var enabled = false
+    var mode: Int = 0
+    var frequency: Int = 55
+    var gain: Int = 0
+    var antiPop: Bool = true
+    var monoEnabled = false
+    var monoMode: Int = 0
+    var monoFrequency: Int = 55
+    var monoGain: Int = 0
+    var monoAntiPop: Bool = true
+  }
+
+  struct ClarityState: Codable {
+    var enabled = false
+    var mode: Int = 0
+    var gain: Int = 1
+  }
+
+  struct TubeState: Codable {
+    var enabled = false
+  }
+
+  struct CureState: Codable {
+    var enabled = false
+    var strength: Int = 0
+  }
+
+  struct AnalogXState: Codable {
+    var enabled = false
+    var mode: Int = 0
+  }
+
+  struct SpeakerCorrectionState: Codable {
+    var enabled = false
+  }
+
   struct ModeState: Codable {
     var mode: Int = 0
-    var outputVolume: Int = 11
-    var channelPan: Int = 0
-    var limiter: Int = 5
-    var convolutionEnabled = false
-    var convolutionCrossChannel: Int = 0
-    var convolutionKernelPath: String = ""
-    var vheEnabled = false
-    var vheQuality: Int = 0
-    var ddcEnabled = false
-    var ddcFilePath: String = ""
-    var spectrumExtensionEnabled = false
-    var spectrumExtensionBark: Int = 9
-    var spectrumExtensionBarkReconstruct: Int = 0
-    var equalizerEnabled = false
-    var equalizerBandCount: Int = 10
-    var equalizerBands: [Float] = Array(repeating: 0.0, count: 10)
-    var equalizerBandsMap: [Int: [Float]] = [10: Array(repeating: 0.0, count: 10)]
-    var fieldSurroundEnabled = false
-    var fieldSurroundWidening: Int = 0
-    var fieldSurroundMidImage: Int = 5
-    var fieldSurroundDepth: Int = 0
-    var diffSurroundEnabled = false
-    var diffSurroundDelay: Int = 4
-    var diffSurroundReverse: Bool = false
-    var reverberationEnabled = false
-    var reverberationRoomSize: Int = 0
-    var reverberationRoomWidth: Int = 0
-    var reverberationRoomDampening: Int = 0
-    var reverberationWetSignal: Int = 0
-    var reverberationDrySignal: Int = 50
-    var dynamicSystemEnabled = false
-    var dynamicSystemDevice: Int = 0
-    var dynamicSystemStrength: Int = 50
-    var dsXLow: Int = 100
-    var dsXHigh: Int = 5600
-    var dsYLow: Int = 40
-    var dsYHigh: Int = 80
-    var dsSideGainLow: Int = 50
-    var dsSideGainHigh: Int = 50
-    var tubeSimulatorEnabled = false
-    var analogXEnabled = false
-    var analogXMode: Int = 0
-    var cureEnabled = false
-    var cureCrossfeedStrength: Int = 0
-    var viperBassEnabled = false
-    var viperBassMode: Int = 0
-    var viperBassFrequency: Int = 55
-    var viperBassGain: Int = 0
-    var viperBassAntiPop: Bool = true
-    var viperBassMonoEnabled = false
-    var viperBassMonoMode: Int = 0
-    var viperBassMonoFrequency: Int = 55
-    var viperBassMonoGain: Int = 0
-    var viperBassMonoAntiPop: Bool = true
-    var viperClarityEnabled = false
-    var viperClarityMode: Int = 0
-    var viperClarityGain: Int = 1
-    var speakerCorrectionEnabled = false
-    var playbackGainEnabled = false
-    var playbackGainStrength: Int = 0
-    var playbackGainMaxGain: Int = 3
-    var playbackGainOutputThreshold: Int = 3
-    var fetCompressorEnabled = false
-    var fetCompressorThreshold: Int = 100
-    var fetCompressorRatio: Int = 100
-    var fetCompressorAutoKnee = true
-    var fetCompressorKnee: Int = 0
-    var fetCompressorKneeMulti: Int = 0
-    var fetCompressorAutoGain = true
-    var fetCompressorGain: Int = 0
-    var fetCompressorAutoAttack = true
-    var fetCompressorAttack: Int = 20
-    var fetCompressorMaxAttack: Int = 80
-    var fetCompressorAutoRelease = true
-    var fetCompressorRelease: Int = 50
-    var fetCompressorMaxRelease: Int = 100
-    var fetCompressorCrest: Int = 100
-    var fetCompressorAdapt: Int = 50
-    var fetCompressorNoClip = true
+    var output = OutputState()
+    var agc = AgcState()
+    var fet = FetState()
+    var mbc = MbcState()
+    var dynEq = DynEqState()
+    var stereoImg = StereoImagerState()
+    var lufs = LufsState()
+    var psychoBass = PsychoBassState()
+    var ddc = DdcState()
+    var vse = VseState()
+    var eq = EqState()
+    var convolver = ConvolverState()
+    var fieldSurround = FieldSurroundState()
+    var diffSurround = DiffSurroundState()
+    var vhe = VheState()
+    var reverb = ReverbState()
+    var dynamicSystem = DynamicSystemState()
+    var bass = BassState()
+    var clarity = ClarityState()
+    var tube = TubeState()
+    var cure = CureState()
+    var analogX = AnalogXState()
+    var speakerCorrection = SpeakerCorrectionState()
   }
 
   private var headphoneState = ModeState()
@@ -392,7 +633,7 @@ final class ViPERState: ObservableObject {
   @Published var dsSideGainHigh: Int = 50
 
   @Published var fetCompressorEnabled = false
-  @Published var fetCompressorThreshold: Int = 100
+  @Published var fetCompressorThreshold: Int = -18
   @Published var fetCompressorRatio: Int = 100
   @Published var fetCompressorAutoKnee = true
   @Published var fetCompressorKnee: Int = 0
@@ -400,14 +641,67 @@ final class ViPERState: ObservableObject {
   @Published var fetCompressorAutoGain = true
   @Published var fetCompressorGain: Int = 0
   @Published var fetCompressorAutoAttack = true
-  @Published var fetCompressorAttack: Int = 20
-  @Published var fetCompressorMaxAttack: Int = 80
+  @Published var fetCompressorAttack: Int = 1
+  @Published var fetCompressorMaxAttack: Int = 44
   @Published var fetCompressorAutoRelease = true
-  @Published var fetCompressorRelease: Int = 50
-  @Published var fetCompressorMaxRelease: Int = 100
+  @Published var fetCompressorRelease: Int = 100
+  @Published var fetCompressorMaxRelease: Int = 200
   @Published var fetCompressorCrest: Int = 100
   @Published var fetCompressorAdapt: Int = 50
   @Published var fetCompressorNoClip = true
+
+  @Published var diffSurroundWetDryMix: Int = 100
+  @Published var diffSurroundLpCutoff: Int = 0
+
+  @Published var stereoImgEnabled = false
+  @Published var stereoImgLowWidth: Int = 100
+  @Published var stereoImgMidWidth: Int = 100
+  @Published var stereoImgHighWidth: Int = 100
+  @Published var stereoImgLowCrossover: Int = 200
+  @Published var stereoImgHighCrossover: Int = 4000
+
+  @Published var lufsEnabled = false
+  @Published var lufsTarget: Int = 140
+  @Published var lufsMaxGain: Int = 60
+  @Published var lufsSpeed: Int = 1
+
+  @Published var psychoBassEnabled = false
+  @Published var psychoBassCutoff: Int = 80
+  @Published var psychoBassIntensity: Int = 50
+  @Published var psychoBassHarmonicOrder: Int = 3
+  @Published var psychoBassOriginalLevel: Int = 100
+
+  @Published var dynEqEnabled = false
+  @Published var dynEqBandCount: Int = 3
+  @Published var dynEqSelectedBand: Int = 0
+  @Published var dynEqFreqs: [Int] = [400, 1000, 5000]
+  @Published var dynEqQs: [Int] = [150, 150, 200]
+  @Published var dynEqGains: [Int] = [0, 0, 0]
+  @Published var dynEqThresholds: [Int] = [-250, -250, -200]
+  @Published var dynEqAttacks: [Int] = [10, 10, 10]
+  @Published var dynEqReleases: [Int] = [100, 100, 100]
+  @Published var dynEqFilterTypes: [Int] = [0, 0, 0]
+
+  @Published var mbcEnabled = false
+  @Published var mbcSelectedBand: Int = 0
+  @Published var mbcCrossovers: [Int] = [120, 500, 4000, 8000]
+  @Published var mbcThresholds: [Int] = [-18, -18, -18, -18, -18]
+  @Published var mbcRatios: [Int] = [50, 50, 50, 50, 50]
+  @Published var mbcGains: [Int] = [24, 24, 24, 24, 24]
+  @Published var mbcKnees: [Int] = [0, 0, 0, 0, 0]
+  @Published var mbcAttacks: [Int] = [1, 1, 1, 1, 1]
+  @Published var mbcReleases: [Int] = [100, 100, 100, 100, 100]
+  @Published var mbcAutoGains: [Bool] = [true, true, true, true, true]
+  @Published var mbcAutoAttacks: [Bool] = [true, true, true, true, true]
+  @Published var mbcAutoReleases: [Bool] = [true, true, true, true, true]
+  @Published var mbcAutoKnees: [Bool] = [true, true, true, true, true]
+  @Published var mbcKneeMultis: [Int] = [0, 0, 0, 0, 0]
+  @Published var mbcMaxAttacks: [Int] = [44, 44, 44, 44, 44]
+  @Published var mbcMaxReleases: [Int] = [200, 200, 200, 200, 200]
+  @Published var mbcCrests: [Int] = [100, 100, 100, 100, 100]
+  @Published var mbcAdapts: [Int] = [50, 50, 50, 50, 50]
+  @Published var mbcBandEnables: [Bool] = [true, true, true, true, true]
+  @Published var mbcNoClips: [Bool] = [true, true, true, true, true]
 
   @Published var viperBassEnabled = false
   @Published var viperBassMode: Int = 0
@@ -552,6 +846,30 @@ final class ViPERState: ObservableObject {
     }
   }
 
+  private static func fetThresholdToRaw(_ dB: Int) -> Int {
+    Int((Double(dB) / -60.0 * 100.0).rounded())
+  }
+
+  private static func fetKneeToRaw(_ dB: Int) -> Int {
+    Int((Double(dB) / 60.0 * 100.0).rounded())
+  }
+
+  private static func fetGainToRaw(_ dB: Int) -> Int {
+    Int((Double(dB) / 60.0 * 100.0).rounded())
+  }
+
+  private static func fetAttackMsToRaw(_ ms: Int) -> Int {
+    let sec = Double(ms) / 1000.0
+    let value = (log(sec) + 9.21034) / 7.600903 * 100.0
+    return min(max(Int(value.rounded()), 0), 200)
+  }
+
+  private static func fetReleaseMsToRaw(_ ms: Int) -> Int {
+    let sec = Double(ms) / 1000.0
+    let value = (log(sec) + 5.298317) / 5.991465 * 100.0
+    return min(max(Int(value.rounded()), 0), 200)
+  }
+
   private func send(_ param: Int, _ val1: Int, _ val2: Int = 0, _ val3: Int = 0, _ val4: Int = 0) {
     logger.debug("DSP param=\(param) v1=\(val1) v2=\(val2) v3=\(val3) v4=\(val4)")
     bridge.setParameter(
@@ -562,85 +880,130 @@ final class ViPERState: ObservableObject {
 
   private func saveToMode(isSpk spk: Bool) {
     var s = ModeState()
-    s.outputVolume = outputVolume
-    s.channelPan = channelPan
-    s.limiter = limiter
-    s.convolutionEnabled = convolutionEnabled
-    s.convolutionCrossChannel = convolutionCrossChannel
-    s.convolutionKernelPath = convolutionKernelPath
-    s.vheEnabled = vheEnabled
-    s.vheQuality = vheQuality
-    s.ddcEnabled = ddcEnabled
-    s.ddcFilePath = ddcFilePath
-    s.spectrumExtensionEnabled = spectrumExtensionEnabled
-    s.spectrumExtensionBark = spectrumExtensionBark
-    s.spectrumExtensionBarkReconstruct = spectrumExtensionBarkReconstruct
-    s.equalizerEnabled = equalizerEnabled
-    s.equalizerBandCount = equalizerBandCount
-    s.equalizerBands = equalizerBands
-    s.equalizerBandsMap = equalizerBandsMap
-    s.fieldSurroundEnabled = fieldSurroundEnabled
-    s.fieldSurroundWidening = fieldSurroundWidening
-    s.fieldSurroundMidImage = fieldSurroundMidImage
-    s.fieldSurroundDepth = fieldSurroundDepth
-    s.diffSurroundEnabled = diffSurroundEnabled
-    s.diffSurroundDelay = diffSurroundDelay
-    s.diffSurroundReverse = diffSurroundReverse
-    s.reverberationEnabled = reverberationEnabled
-    s.reverberationRoomSize = reverberationRoomSize
-    s.reverberationRoomWidth = reverberationRoomWidth
-    s.reverberationRoomDampening = reverberationRoomDampening
-    s.reverberationWetSignal = reverberationWetSignal
-    s.reverberationDrySignal = reverberationDrySignal
-    s.dynamicSystemEnabled = dynamicSystemEnabled
-    s.dynamicSystemDevice = dynamicSystemDevice
-    s.dynamicSystemStrength = dynamicSystemStrength
-    s.dsXLow = dsXLow
-    s.dsXHigh = dsXHigh
-    s.dsYLow = dsYLow
-    s.dsYHigh = dsYHigh
-    s.dsSideGainLow = dsSideGainLow
-    s.dsSideGainHigh = dsSideGainHigh
-    s.tubeSimulatorEnabled = tubeSimulatorEnabled
-    s.analogXEnabled = analogXEnabled
-    s.analogXMode = analogXMode
-    s.cureEnabled = cureEnabled
-    s.cureCrossfeedStrength = cureCrossfeedStrength
-    s.viperBassEnabled = viperBassEnabled
-    s.viperBassMode = viperBassMode
-    s.viperBassFrequency = viperBassFrequency
-    s.viperBassGain = viperBassGain
-    s.viperBassAntiPop = viperBassAntiPop
-    s.viperBassMonoEnabled = viperBassMonoEnabled
-    s.viperBassMonoMode = viperBassMonoMode
-    s.viperBassMonoFrequency = viperBassMonoFrequency
-    s.viperBassMonoGain = viperBassMonoGain
-    s.viperBassMonoAntiPop = viperBassMonoAntiPop
-    s.viperClarityEnabled = viperClarityEnabled
-    s.viperClarityMode = viperClarityMode
-    s.viperClarityGain = viperClarityGain
-    s.speakerCorrectionEnabled = speakerCorrectionEnabled
-    s.playbackGainEnabled = playbackGainEnabled
-    s.playbackGainStrength = playbackGainStrength
-    s.playbackGainMaxGain = playbackGainMaxGain
-    s.playbackGainOutputThreshold = playbackGainOutputThreshold
-    s.fetCompressorEnabled = fetCompressorEnabled
-    s.fetCompressorThreshold = fetCompressorThreshold
-    s.fetCompressorRatio = fetCompressorRatio
-    s.fetCompressorAutoKnee = fetCompressorAutoKnee
-    s.fetCompressorKnee = fetCompressorKnee
-    s.fetCompressorKneeMulti = fetCompressorKneeMulti
-    s.fetCompressorAutoGain = fetCompressorAutoGain
-    s.fetCompressorGain = fetCompressorGain
-    s.fetCompressorAutoAttack = fetCompressorAutoAttack
-    s.fetCompressorAttack = fetCompressorAttack
-    s.fetCompressorMaxAttack = fetCompressorMaxAttack
-    s.fetCompressorAutoRelease = fetCompressorAutoRelease
-    s.fetCompressorRelease = fetCompressorRelease
-    s.fetCompressorMaxRelease = fetCompressorMaxRelease
-    s.fetCompressorCrest = fetCompressorCrest
-    s.fetCompressorAdapt = fetCompressorAdapt
-    s.fetCompressorNoClip = fetCompressorNoClip
+    s.output.volume = outputVolume
+    s.output.pan = channelPan
+    s.output.limiter = limiter
+    s.convolver.enabled = convolutionEnabled
+    s.convolver.crossChannel = convolutionCrossChannel
+    s.convolver.kernelPath = convolutionKernelPath
+    s.vhe.enabled = vheEnabled
+    s.vhe.quality = vheQuality
+    s.ddc.enabled = ddcEnabled
+    s.ddc.filePath = ddcFilePath
+    s.vse.enabled = spectrumExtensionEnabled
+    s.vse.bark = spectrumExtensionBark
+    s.vse.barkReconstruct = spectrumExtensionBarkReconstruct
+    s.eq.enabled = equalizerEnabled
+    s.eq.bandCount = equalizerBandCount
+    s.eq.bands = equalizerBands
+    s.eq.bandsMap = equalizerBandsMap
+    s.fieldSurround.enabled = fieldSurroundEnabled
+    s.fieldSurround.widening = fieldSurroundWidening
+    s.fieldSurround.midImage = fieldSurroundMidImage
+    s.fieldSurround.depth = fieldSurroundDepth
+    s.diffSurround.enabled = diffSurroundEnabled
+    s.diffSurround.delay = diffSurroundDelay
+    s.diffSurround.reverse = diffSurroundReverse
+    s.diffSurround.wetDryMix = diffSurroundWetDryMix
+    s.diffSurround.lpCutoff = diffSurroundLpCutoff
+    s.reverb.enabled = reverberationEnabled
+    s.reverb.roomSize = reverberationRoomSize
+    s.reverb.roomWidth = reverberationRoomWidth
+    s.reverb.dampening = reverberationRoomDampening
+    s.reverb.wet = reverberationWetSignal
+    s.reverb.dry = reverberationDrySignal
+    s.dynamicSystem.enabled = dynamicSystemEnabled
+    s.dynamicSystem.device = dynamicSystemDevice
+    s.dynamicSystem.strength = dynamicSystemStrength
+    s.dynamicSystem.xLow = dsXLow
+    s.dynamicSystem.xHigh = dsXHigh
+    s.dynamicSystem.yLow = dsYLow
+    s.dynamicSystem.yHigh = dsYHigh
+    s.dynamicSystem.sideGainLow = dsSideGainLow
+    s.dynamicSystem.sideGainHigh = dsSideGainHigh
+    s.tube.enabled = tubeSimulatorEnabled
+    s.cure.enabled = cureEnabled
+    s.cure.strength = cureCrossfeedStrength
+    s.analogX.enabled = analogXEnabled
+    s.analogX.mode = analogXMode
+    s.speakerCorrection.enabled = speakerCorrectionEnabled
+    s.bass.enabled = viperBassEnabled
+    s.bass.mode = viperBassMode
+    s.bass.frequency = viperBassFrequency
+    s.bass.gain = viperBassGain
+    s.bass.antiPop = viperBassAntiPop
+    s.bass.monoEnabled = viperBassMonoEnabled
+    s.bass.monoMode = viperBassMonoMode
+    s.bass.monoFrequency = viperBassMonoFrequency
+    s.bass.monoGain = viperBassMonoGain
+    s.bass.monoAntiPop = viperBassMonoAntiPop
+    s.clarity.enabled = viperClarityEnabled
+    s.clarity.mode = viperClarityMode
+    s.clarity.gain = viperClarityGain
+    s.agc.enabled = playbackGainEnabled
+    s.agc.strength = playbackGainStrength
+    s.agc.maxGain = playbackGainMaxGain
+    s.agc.outputThreshold = playbackGainOutputThreshold
+    s.fet.enabled = fetCompressorEnabled
+    s.fet.threshold = fetCompressorThreshold
+    s.fet.ratio = fetCompressorRatio
+    s.fet.autoKnee = fetCompressorAutoKnee
+    s.fet.knee = fetCompressorKnee
+    s.fet.kneeMulti = fetCompressorKneeMulti
+    s.fet.autoGain = fetCompressorAutoGain
+    s.fet.gain = fetCompressorGain
+    s.fet.autoAttack = fetCompressorAutoAttack
+    s.fet.attack = fetCompressorAttack
+    s.fet.maxAttack = fetCompressorMaxAttack
+    s.fet.autoRelease = fetCompressorAutoRelease
+    s.fet.release = fetCompressorRelease
+    s.fet.maxRelease = fetCompressorMaxRelease
+    s.fet.crest = fetCompressorCrest
+    s.fet.adapt = fetCompressorAdapt
+    s.fet.noClip = fetCompressorNoClip
+    s.stereoImg.enabled = stereoImgEnabled
+    s.stereoImg.lowWidth = stereoImgLowWidth
+    s.stereoImg.midWidth = stereoImgMidWidth
+    s.stereoImg.highWidth = stereoImgHighWidth
+    s.stereoImg.lowCrossover = stereoImgLowCrossover
+    s.stereoImg.highCrossover = stereoImgHighCrossover
+    s.lufs.enabled = lufsEnabled
+    s.lufs.target = lufsTarget
+    s.lufs.maxGain = lufsMaxGain
+    s.lufs.speed = lufsSpeed
+    s.psychoBass.enabled = psychoBassEnabled
+    s.psychoBass.cutoff = psychoBassCutoff
+    s.psychoBass.intensity = psychoBassIntensity
+    s.psychoBass.harmonicOrder = psychoBassHarmonicOrder
+    s.psychoBass.originalLevel = psychoBassOriginalLevel
+    s.dynEq.enabled = dynEqEnabled
+    s.dynEq.bandCount = dynEqBandCount
+    s.dynEq.freqs = dynEqFreqs
+    s.dynEq.qs = dynEqQs
+    s.dynEq.gains = dynEqGains
+    s.dynEq.thresholds = dynEqThresholds
+    s.dynEq.attacks = dynEqAttacks
+    s.dynEq.releases = dynEqReleases
+    s.dynEq.filterTypes = dynEqFilterTypes
+    s.mbc.enabled = mbcEnabled
+    s.mbc.crossovers = mbcCrossovers
+    s.mbc.thresholds = mbcThresholds
+    s.mbc.ratios = mbcRatios
+    s.mbc.gains = mbcGains
+    s.mbc.knees = mbcKnees
+    s.mbc.attacks = mbcAttacks
+    s.mbc.releases = mbcReleases
+    s.mbc.autoGains = mbcAutoGains
+    s.mbc.autoAttacks = mbcAutoAttacks
+    s.mbc.autoReleases = mbcAutoReleases
+    s.mbc.autoKnees = mbcAutoKnees
+    s.mbc.kneeMultis = mbcKneeMultis
+    s.mbc.maxAttacks = mbcMaxAttacks
+    s.mbc.maxReleases = mbcMaxReleases
+    s.mbc.crests = mbcCrests
+    s.mbc.adapts = mbcAdapts
+    s.mbc.bandEnables = mbcBandEnables
+    s.mbc.noClips = mbcNoClips
     if spk { speakerState = s } else { headphoneState = s }
     logger.debug("Saved state to \(spk ? "speaker" : "headphone")")
   }
@@ -648,85 +1011,130 @@ final class ViPERState: ObservableObject {
   private func loadModeToActive(_ s: ModeState) {
     logger.debug("Loading state from mode=\(s.mode)")
     suppressDispatch = true
-    outputVolume = s.outputVolume
-    channelPan = s.channelPan
-    limiter = s.limiter
-    convolutionEnabled = s.convolutionEnabled
-    convolutionCrossChannel = s.convolutionCrossChannel
-    convolutionKernelPath = s.convolutionKernelPath
-    vheEnabled = s.vheEnabled
-    vheQuality = s.vheQuality
-    ddcEnabled = s.ddcEnabled
-    ddcFilePath = s.ddcFilePath
-    spectrumExtensionEnabled = s.spectrumExtensionEnabled
-    spectrumExtensionBark = s.spectrumExtensionBark
-    spectrumExtensionBarkReconstruct = s.spectrumExtensionBarkReconstruct
-    equalizerEnabled = s.equalizerEnabled
-    equalizerBandCount = s.equalizerBandCount
-    equalizerBands = s.equalizerBands
-    equalizerBandsMap = s.equalizerBandsMap
-    fieldSurroundEnabled = s.fieldSurroundEnabled
-    fieldSurroundWidening = s.fieldSurroundWidening
-    fieldSurroundMidImage = s.fieldSurroundMidImage
-    fieldSurroundDepth = s.fieldSurroundDepth
-    diffSurroundEnabled = s.diffSurroundEnabled
-    diffSurroundDelay = s.diffSurroundDelay
-    diffSurroundReverse = s.diffSurroundReverse
-    reverberationEnabled = s.reverberationEnabled
-    reverberationRoomSize = s.reverberationRoomSize
-    reverberationRoomWidth = s.reverberationRoomWidth
-    reverberationRoomDampening = s.reverberationRoomDampening
-    reverberationWetSignal = s.reverberationWetSignal
-    reverberationDrySignal = s.reverberationDrySignal
-    dynamicSystemEnabled = s.dynamicSystemEnabled
-    dynamicSystemDevice = s.dynamicSystemDevice
-    dynamicSystemStrength = s.dynamicSystemStrength
-    dsXLow = s.dsXLow
-    dsXHigh = s.dsXHigh
-    dsYLow = s.dsYLow
-    dsYHigh = s.dsYHigh
-    dsSideGainLow = s.dsSideGainLow
-    dsSideGainHigh = s.dsSideGainHigh
-    tubeSimulatorEnabled = s.tubeSimulatorEnabled
-    analogXEnabled = s.analogXEnabled
-    analogXMode = s.analogXMode
-    cureEnabled = s.cureEnabled
-    cureCrossfeedStrength = s.cureCrossfeedStrength
-    viperBassEnabled = s.viperBassEnabled
-    viperBassMode = s.viperBassMode
-    viperBassFrequency = s.viperBassFrequency
-    viperBassGain = s.viperBassGain
-    viperBassAntiPop = s.viperBassAntiPop
-    viperBassMonoEnabled = s.viperBassMonoEnabled
-    viperBassMonoMode = s.viperBassMonoMode
-    viperBassMonoFrequency = s.viperBassMonoFrequency
-    viperBassMonoGain = s.viperBassMonoGain
-    viperBassMonoAntiPop = s.viperBassMonoAntiPop
-    viperClarityEnabled = s.viperClarityEnabled
-    viperClarityMode = s.viperClarityMode
-    viperClarityGain = s.viperClarityGain
-    speakerCorrectionEnabled = s.speakerCorrectionEnabled
-    playbackGainEnabled = s.playbackGainEnabled
-    playbackGainStrength = s.playbackGainStrength
-    playbackGainMaxGain = s.playbackGainMaxGain
-    playbackGainOutputThreshold = s.playbackGainOutputThreshold
-    fetCompressorEnabled = s.fetCompressorEnabled
-    fetCompressorThreshold = s.fetCompressorThreshold
-    fetCompressorRatio = s.fetCompressorRatio
-    fetCompressorAutoKnee = s.fetCompressorAutoKnee
-    fetCompressorKnee = s.fetCompressorKnee
-    fetCompressorKneeMulti = s.fetCompressorKneeMulti
-    fetCompressorAutoGain = s.fetCompressorAutoGain
-    fetCompressorGain = s.fetCompressorGain
-    fetCompressorAutoAttack = s.fetCompressorAutoAttack
-    fetCompressorAttack = s.fetCompressorAttack
-    fetCompressorMaxAttack = s.fetCompressorMaxAttack
-    fetCompressorAutoRelease = s.fetCompressorAutoRelease
-    fetCompressorRelease = s.fetCompressorRelease
-    fetCompressorMaxRelease = s.fetCompressorMaxRelease
-    fetCompressorCrest = s.fetCompressorCrest
-    fetCompressorAdapt = s.fetCompressorAdapt
-    fetCompressorNoClip = s.fetCompressorNoClip
+    outputVolume = s.output.volume
+    channelPan = s.output.pan
+    limiter = s.output.limiter
+    convolutionEnabled = s.convolver.enabled
+    convolutionCrossChannel = s.convolver.crossChannel
+    convolutionKernelPath = s.convolver.kernelPath
+    vheEnabled = s.vhe.enabled
+    vheQuality = s.vhe.quality
+    ddcEnabled = s.ddc.enabled
+    ddcFilePath = s.ddc.filePath
+    spectrumExtensionEnabled = s.vse.enabled
+    spectrumExtensionBark = s.vse.bark
+    spectrumExtensionBarkReconstruct = s.vse.barkReconstruct
+    equalizerEnabled = s.eq.enabled
+    equalizerBandCount = s.eq.bandCount
+    equalizerBands = s.eq.bands
+    equalizerBandsMap = s.eq.bandsMap
+    fieldSurroundEnabled = s.fieldSurround.enabled
+    fieldSurroundWidening = s.fieldSurround.widening
+    fieldSurroundMidImage = s.fieldSurround.midImage
+    fieldSurroundDepth = s.fieldSurround.depth
+    diffSurroundEnabled = s.diffSurround.enabled
+    diffSurroundDelay = s.diffSurround.delay
+    diffSurroundReverse = s.diffSurround.reverse
+    diffSurroundWetDryMix = s.diffSurround.wetDryMix
+    diffSurroundLpCutoff = s.diffSurround.lpCutoff
+    reverberationEnabled = s.reverb.enabled
+    reverberationRoomSize = s.reverb.roomSize
+    reverberationRoomWidth = s.reverb.roomWidth
+    reverberationRoomDampening = s.reverb.dampening
+    reverberationWetSignal = s.reverb.wet
+    reverberationDrySignal = s.reverb.dry
+    dynamicSystemEnabled = s.dynamicSystem.enabled
+    dynamicSystemDevice = s.dynamicSystem.device
+    dynamicSystemStrength = s.dynamicSystem.strength
+    dsXLow = s.dynamicSystem.xLow
+    dsXHigh = s.dynamicSystem.xHigh
+    dsYLow = s.dynamicSystem.yLow
+    dsYHigh = s.dynamicSystem.yHigh
+    dsSideGainLow = s.dynamicSystem.sideGainLow
+    dsSideGainHigh = s.dynamicSystem.sideGainHigh
+    tubeSimulatorEnabled = s.tube.enabled
+    cureEnabled = s.cure.enabled
+    cureCrossfeedStrength = s.cure.strength
+    analogXEnabled = s.analogX.enabled
+    analogXMode = s.analogX.mode
+    speakerCorrectionEnabled = s.speakerCorrection.enabled
+    viperBassEnabled = s.bass.enabled
+    viperBassMode = s.bass.mode
+    viperBassFrequency = s.bass.frequency
+    viperBassGain = s.bass.gain
+    viperBassAntiPop = s.bass.antiPop
+    viperBassMonoEnabled = s.bass.monoEnabled
+    viperBassMonoMode = s.bass.monoMode
+    viperBassMonoFrequency = s.bass.monoFrequency
+    viperBassMonoGain = s.bass.monoGain
+    viperBassMonoAntiPop = s.bass.monoAntiPop
+    viperClarityEnabled = s.clarity.enabled
+    viperClarityMode = s.clarity.mode
+    viperClarityGain = s.clarity.gain
+    playbackGainEnabled = s.agc.enabled
+    playbackGainStrength = s.agc.strength
+    playbackGainMaxGain = s.agc.maxGain
+    playbackGainOutputThreshold = s.agc.outputThreshold
+    fetCompressorEnabled = s.fet.enabled
+    fetCompressorThreshold = s.fet.threshold
+    fetCompressorRatio = s.fet.ratio
+    fetCompressorAutoKnee = s.fet.autoKnee
+    fetCompressorKnee = s.fet.knee
+    fetCompressorKneeMulti = s.fet.kneeMulti
+    fetCompressorAutoGain = s.fet.autoGain
+    fetCompressorGain = s.fet.gain
+    fetCompressorAutoAttack = s.fet.autoAttack
+    fetCompressorAttack = s.fet.attack
+    fetCompressorMaxAttack = s.fet.maxAttack
+    fetCompressorAutoRelease = s.fet.autoRelease
+    fetCompressorRelease = s.fet.release
+    fetCompressorMaxRelease = s.fet.maxRelease
+    fetCompressorCrest = s.fet.crest
+    fetCompressorAdapt = s.fet.adapt
+    fetCompressorNoClip = s.fet.noClip
+    stereoImgEnabled = s.stereoImg.enabled
+    stereoImgLowWidth = s.stereoImg.lowWidth
+    stereoImgMidWidth = s.stereoImg.midWidth
+    stereoImgHighWidth = s.stereoImg.highWidth
+    stereoImgLowCrossover = s.stereoImg.lowCrossover
+    stereoImgHighCrossover = s.stereoImg.highCrossover
+    lufsEnabled = s.lufs.enabled
+    lufsTarget = s.lufs.target
+    lufsMaxGain = s.lufs.maxGain
+    lufsSpeed = s.lufs.speed
+    psychoBassEnabled = s.psychoBass.enabled
+    psychoBassCutoff = s.psychoBass.cutoff
+    psychoBassIntensity = s.psychoBass.intensity
+    psychoBassHarmonicOrder = s.psychoBass.harmonicOrder
+    psychoBassOriginalLevel = s.psychoBass.originalLevel
+    dynEqEnabled = s.dynEq.enabled
+    dynEqBandCount = s.dynEq.bandCount
+    dynEqFreqs = s.dynEq.freqs
+    dynEqQs = s.dynEq.qs
+    dynEqGains = s.dynEq.gains
+    dynEqThresholds = s.dynEq.thresholds
+    dynEqAttacks = s.dynEq.attacks
+    dynEqReleases = s.dynEq.releases
+    dynEqFilterTypes = s.dynEq.filterTypes
+    mbcEnabled = s.mbc.enabled
+    mbcCrossovers = s.mbc.crossovers
+    mbcThresholds = s.mbc.thresholds
+    mbcRatios = s.mbc.ratios
+    mbcGains = s.mbc.gains
+    mbcKnees = s.mbc.knees
+    mbcAttacks = s.mbc.attacks
+    mbcReleases = s.mbc.releases
+    mbcAutoGains = s.mbc.autoGains
+    mbcAutoAttacks = s.mbc.autoAttacks
+    mbcAutoReleases = s.mbc.autoReleases
+    mbcAutoKnees = s.mbc.autoKnees
+    mbcKneeMultis = s.mbc.kneeMultis
+    mbcMaxAttacks = s.mbc.maxAttacks
+    mbcMaxReleases = s.mbc.maxReleases
+    mbcCrests = s.mbc.crests
+    mbcAdapts = s.mbc.adapts
+    mbcBandEnables = s.mbc.bandEnables
+    mbcNoClips = s.mbc.noClips
     suppressDispatch = false
   }
 
@@ -775,20 +1183,20 @@ final class ViPERState: ObservableObject {
     send(agcVolParam, Self.limiterValues[safe: playbackGainOutputThreshold] ?? 100)
     send(agcMaxParam, Self.agcMaxGainValues[safe: playbackGainMaxGain] ?? 100)
     send(fetBase, fetCompressorEnabled ? 100 : 0)
-    send(fetBase + 1, fetCompressorThreshold)
+    send(fetBase + 1, Self.fetThresholdToRaw(fetCompressorThreshold))
     send(fetBase + 2, fetCompressorRatio)
-    send(fetBase + 3, fetCompressorKnee)
+    send(fetBase + 3, Self.fetKneeToRaw(fetCompressorKnee))
     send(fetBase + 4, fetCompressorAutoKnee ? 100 : 0)
-    send(fetBase + 5, fetCompressorGain)
+    send(fetBase + 5, Self.fetGainToRaw(fetCompressorGain))
     send(fetBase + 6, fetCompressorAutoGain ? 100 : 0)
-    send(fetBase + 7, fetCompressorAttack)
+    send(fetBase + 7, Self.fetAttackMsToRaw(fetCompressorAttack))
     send(fetBase + 8, fetCompressorAutoAttack ? 100 : 0)
-    send(fetBase + 9, fetCompressorRelease)
+    send(fetBase + 9, Self.fetReleaseMsToRaw(fetCompressorRelease))
     send(fetBase + 10, fetCompressorAutoRelease ? 100 : 0)
     send(fetBase + 11, fetCompressorKneeMulti)
-    send(fetBase + 12, fetCompressorMaxAttack)
-    send(fetBase + 13, fetCompressorMaxRelease)
-    send(fetBase + 14, fetCompressorCrest)
+    send(fetBase + 12, Self.fetAttackMsToRaw(fetCompressorMaxAttack))
+    send(fetBase + 13, Self.fetReleaseMsToRaw(fetCompressorMaxRelease))
+    send(fetBase + 14, Self.fetReleaseMsToRaw(fetCompressorCrest))
     send(fetBase + 15, fetCompressorAdapt)
     send(fetBase + 16, fetCompressorNoClip ? 100 : 0)
 
@@ -838,6 +1246,109 @@ final class ViPERState: ObservableObject {
       spk ? Param.SPK_DIFF_SURROUND_REVERSE : Param.HP_DIFF_SURROUND_REVERSE,
       diffSurroundReverse ? 1 : 0
     )
+    send(
+      spk ? Param.SPK_DIFF_SURROUND_WET_DRY_MIX : Param.HP_DIFF_SURROUND_WET_DRY_MIX,
+      diffSurroundWetDryMix
+    )
+    send(
+      spk ? Param.SPK_DIFF_SURROUND_LP_CUTOFF : Param.HP_DIFF_SURROUND_LP_CUTOFF,
+      diffSurroundLpCutoff
+    )
+
+    let siBase = spk ? Param.SPK_STEREO_IMAGER_ENABLE : Param.HP_STEREO_IMAGER_ENABLE
+    send(siBase, stereoImgEnabled ? 1 : 0)
+    send(spk ? Param.SPK_STEREO_IMAGER_LOW_WIDTH : Param.HP_STEREO_IMAGER_LOW_WIDTH, stereoImgLowWidth)
+    send(spk ? Param.SPK_STEREO_IMAGER_MID_WIDTH : Param.HP_STEREO_IMAGER_MID_WIDTH, stereoImgMidWidth)
+    send(spk ? Param.SPK_STEREO_IMAGER_HIGH_WIDTH : Param.HP_STEREO_IMAGER_HIGH_WIDTH, stereoImgHighWidth)
+    send(
+      spk ? Param.SPK_STEREO_IMAGER_LOW_CROSSOVER : Param.HP_STEREO_IMAGER_LOW_CROSSOVER,
+      stereoImgLowCrossover
+    )
+    send(
+      spk ? Param.SPK_STEREO_IMAGER_HIGH_CROSSOVER : Param.HP_STEREO_IMAGER_HIGH_CROSSOVER,
+      stereoImgHighCrossover
+    )
+
+    send(spk ? Param.SPK_LUFS_ENABLE : Param.HP_LUFS_ENABLE, lufsEnabled ? 1 : 0)
+    send(spk ? Param.SPK_LUFS_TARGET : Param.HP_LUFS_TARGET, lufsTarget)
+    send(spk ? Param.SPK_LUFS_MAX_GAIN : Param.HP_LUFS_MAX_GAIN, lufsMaxGain)
+    send(spk ? Param.SPK_LUFS_SPEED : Param.HP_LUFS_SPEED, lufsSpeed)
+
+    let pbBase = spk ? Param.SPK_PSYCHO_BASS_ENABLE : Param.HP_PSYCHO_BASS_ENABLE
+    send(pbBase, psychoBassEnabled ? 1 : 0)
+    send(spk ? Param.SPK_PSYCHO_BASS_CUTOFF : Param.HP_PSYCHO_BASS_CUTOFF, psychoBassCutoff)
+    send(spk ? Param.SPK_PSYCHO_BASS_INTENSITY : Param.HP_PSYCHO_BASS_INTENSITY, psychoBassIntensity)
+    send(
+      spk ? Param.SPK_PSYCHO_BASS_HARMONIC_ORDER : Param.HP_PSYCHO_BASS_HARMONIC_ORDER,
+      psychoBassHarmonicOrder
+    )
+    send(
+      spk ? Param.SPK_PSYCHO_BASS_ORIGINAL_LEVEL : Param.HP_PSYCHO_BASS_ORIGINAL_LEVEL,
+      psychoBassOriginalLevel
+    )
+
+    let deqFreqParam = spk ? Param.SPK_DYNAMIC_EQ_BAND_FREQ : Param.HP_DYNAMIC_EQ_BAND_FREQ
+    let deqQParam = spk ? Param.SPK_DYNAMIC_EQ_BAND_Q : Param.HP_DYNAMIC_EQ_BAND_Q
+    let deqGainParam = spk ? Param.SPK_DYNAMIC_EQ_BAND_GAIN : Param.HP_DYNAMIC_EQ_BAND_GAIN
+    let deqThreshParam = spk ? Param.SPK_DYNAMIC_EQ_BAND_THRESHOLD : Param.HP_DYNAMIC_EQ_BAND_THRESHOLD
+    let deqAtkParam = spk ? Param.SPK_DYNAMIC_EQ_BAND_ATTACK : Param.HP_DYNAMIC_EQ_BAND_ATTACK
+    let deqRelParam = spk ? Param.SPK_DYNAMIC_EQ_BAND_RELEASE : Param.HP_DYNAMIC_EQ_BAND_RELEASE
+    let deqFtParam = spk ? Param.SPK_DYNAMIC_EQ_BAND_FILTER_TYPE : Param.HP_DYNAMIC_EQ_BAND_FILTER_TYPE
+    send(spk ? Param.SPK_DYNAMIC_EQ_ENABLE : Param.HP_DYNAMIC_EQ_ENABLE, dynEqEnabled ? 1 : 0)
+    for i in 0 ..< dynEqBandCount {
+      send(deqFreqParam, i, dynEqFreqs[safe: i] ?? 1000)
+      send(deqQParam, i, dynEqQs[safe: i] ?? 150)
+      send(deqGainParam, i, dynEqGains[safe: i] ?? 0)
+      send(deqThreshParam, i, dynEqThresholds[safe: i] ?? -250)
+      send(deqAtkParam, i, dynEqAttacks[safe: i] ?? 10)
+      send(deqRelParam, i, dynEqReleases[safe: i] ?? 100)
+      send(deqFtParam, i, dynEqFilterTypes[safe: i] ?? 0)
+    }
+    send(spk ? Param.SPK_DYNAMIC_EQ_BAND_COUNT : Param.HP_DYNAMIC_EQ_BAND_COUNT, dynEqBandCount)
+
+    let mbcThreshParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_THRESHOLD : Param.HP_MULTIBAND_COMP_BAND_THRESHOLD
+    let mbcRatioParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_RATIO : Param.HP_MULTIBAND_COMP_BAND_RATIO
+    let mbcAtkParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_ATTACK : Param.HP_MULTIBAND_COMP_BAND_ATTACK
+    let mbcRelParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_RELEASE : Param.HP_MULTIBAND_COMP_BAND_RELEASE
+    let mbcGainParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_GAIN : Param.HP_MULTIBAND_COMP_BAND_GAIN
+    let mbcKneeParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_KNEE : Param.HP_MULTIBAND_COMP_BAND_KNEE
+    let mbcAgParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_AUTO_GAIN : Param.HP_MULTIBAND_COMP_BAND_AUTO_GAIN
+    let mbcAaParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_AUTO_ATTACK : Param.HP_MULTIBAND_COMP_BAND_AUTO_ATTACK
+    let mbcArParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_AUTO_RELEASE : Param.HP_MULTIBAND_COMP_BAND_AUTO_RELEASE
+    let mbcBeParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_ENABLE : Param.HP_MULTIBAND_COMP_BAND_ENABLE
+    let mbcAkParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_AUTO_KNEE : Param.HP_MULTIBAND_COMP_BAND_AUTO_KNEE
+    let mbcKmParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_KNEE_MULTI : Param.HP_MULTIBAND_COMP_BAND_KNEE_MULTI
+    let mbcMaParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_MAX_ATTACK : Param.HP_MULTIBAND_COMP_BAND_MAX_ATTACK
+    let mbcMrParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_MAX_RELEASE : Param.HP_MULTIBAND_COMP_BAND_MAX_RELEASE
+    let mbcCrParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_CREST : Param.HP_MULTIBAND_COMP_BAND_CREST
+    let mbcAdParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_ADAPT : Param.HP_MULTIBAND_COMP_BAND_ADAPT
+    let mbcNcParam = spk ? Param.SPK_MULTIBAND_COMP_BAND_NO_CLIP : Param.HP_MULTIBAND_COMP_BAND_NO_CLIP
+    let mbcCfParam = spk ? Param.SPK_MULTIBAND_COMP_CROSSOVER_FREQ : Param.HP_MULTIBAND_COMP_CROSSOVER_FREQ
+    send(spk ? Param.SPK_MULTIBAND_COMP_ENABLE : Param.HP_MULTIBAND_COMP_ENABLE, mbcEnabled ? 1 : 0)
+    for i in 0 ..< 4 {
+      send(mbcCfParam, i, mbcCrossovers[safe: i] ?? 500)
+    }
+    for i in 0 ..< 5 {
+      send(mbcThreshParam, i, Self.fetThresholdToRaw(mbcThresholds[safe: i] ?? -18))
+      send(mbcRatioParam, i, mbcRatios[safe: i] ?? 50)
+      send(mbcGainParam, i, Self.fetGainToRaw(mbcGains[safe: i] ?? 24))
+      send(mbcKneeParam, i, Self.fetKneeToRaw(mbcKnees[safe: i] ?? 0))
+      send(mbcAtkParam, i, Self.fetAttackMsToRaw(mbcAttacks[safe: i] ?? 1))
+      send(mbcRelParam, i, Self.fetReleaseMsToRaw(mbcReleases[safe: i] ?? 100))
+      send(mbcAgParam, i, (mbcAutoGains[safe: i] ?? true) ? 100 : 0)
+      send(mbcAaParam, i, (mbcAutoAttacks[safe: i] ?? true) ? 100 : 0)
+      send(mbcArParam, i, (mbcAutoReleases[safe: i] ?? true) ? 100 : 0)
+      send(mbcAkParam, i, (mbcAutoKnees[safe: i] ?? true) ? 100 : 0)
+      send(mbcKmParam, i, mbcKneeMultis[safe: i] ?? 0)
+      send(mbcMaParam, i, Self.fetAttackMsToRaw(mbcMaxAttacks[safe: i] ?? 44))
+      send(mbcMrParam, i, Self.fetReleaseMsToRaw(mbcMaxReleases[safe: i] ?? 200))
+      send(mbcCrParam, i, Self.fetReleaseMsToRaw(mbcCrests[safe: i] ?? 100))
+      send(mbcAdParam, i, mbcAdapts[safe: i] ?? 50)
+      send(mbcNcParam, i, (mbcNoClips[safe: i] ?? true) ? 100 : 0)
+      send(mbcBeParam, i, (mbcBandEnables[safe: i] ?? true) ? 100 : 0)
+    }
+    send(spk ? Param.SPK_MULTIBAND_COMP_BAND_COUNT : Param.HP_MULTIBAND_COMP_BAND_COUNT, 5)
+
     send(
       spk ? Param.SPK_DYNAMIC_SYSTEM_ENABLE : Param.HP_DYNAMIC_SYSTEM_ENABLE,
       dynamicSystemEnabled ? 1 : 0
@@ -1433,7 +1944,8 @@ final class ViPERState: ObservableObject {
     $fetCompressorThreshold.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_THRESHOLD : Param.HP_FET_COMPRESSOR_THRESHOLD, v
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_THRESHOLD : Param.HP_FET_COMPRESSOR_THRESHOLD,
+        Self.fetThresholdToRaw(v)
       )
     }.store(in: &cancellables)
     $fetCompressorRatio.dropFirst().sink { [weak self] v in
@@ -1451,7 +1963,10 @@ final class ViPERState: ObservableObject {
     }.store(in: &cancellables)
     $fetCompressorKnee.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      self.send(self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_KNEE : Param.HP_FET_COMPRESSOR_KNEE, v)
+      self.send(
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_KNEE : Param.HP_FET_COMPRESSOR_KNEE,
+        Self.fetKneeToRaw(v)
+      )
     }.store(in: &cancellables)
     $fetCompressorKneeMulti.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
@@ -1469,7 +1984,10 @@ final class ViPERState: ObservableObject {
     }.store(in: &cancellables)
     $fetCompressorGain.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      self.send(self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_GAIN : Param.HP_FET_COMPRESSOR_GAIN, v)
+      self.send(
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_GAIN : Param.HP_FET_COMPRESSOR_GAIN,
+        Self.fetGainToRaw(v)
+      )
     }.store(in: &cancellables)
     $fetCompressorAutoAttack.dropFirst().sink { [weak self] on in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
@@ -1481,14 +1999,15 @@ final class ViPERState: ObservableObject {
     $fetCompressorAttack.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_ATTACK : Param.HP_FET_COMPRESSOR_ATTACK, v
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_ATTACK : Param.HP_FET_COMPRESSOR_ATTACK,
+        Self.fetAttackMsToRaw(v)
       )
     }.store(in: &cancellables)
     $fetCompressorMaxAttack.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_MAX_ATTACK : Param.HP_FET_COMPRESSOR_MAX_ATTACK,
-        v
+        Self.fetAttackMsToRaw(v)
       )
     }.store(in: &cancellables)
     $fetCompressorAutoRelease.dropFirst().sink { [weak self] on in
@@ -1502,20 +2021,23 @@ final class ViPERState: ObservableObject {
     $fetCompressorRelease.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_RELEASE : Param.HP_FET_COMPRESSOR_RELEASE, v
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_RELEASE : Param.HP_FET_COMPRESSOR_RELEASE,
+        Self.fetReleaseMsToRaw(v)
       )
     }.store(in: &cancellables)
     $fetCompressorMaxRelease.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk
-          ? Param.SPK_FET_COMPRESSOR_MAX_RELEASE : Param.HP_FET_COMPRESSOR_MAX_RELEASE, v
+          ? Param.SPK_FET_COMPRESSOR_MAX_RELEASE : Param.HP_FET_COMPRESSOR_MAX_RELEASE,
+        Self.fetReleaseMsToRaw(v)
       )
     }.store(in: &cancellables)
     $fetCompressorCrest.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_CREST : Param.HP_FET_COMPRESSOR_CREST, v
+        self.isActiveSpk ? Param.SPK_FET_COMPRESSOR_CREST : Param.HP_FET_COMPRESSOR_CREST,
+        Self.fetReleaseMsToRaw(v)
       )
     }.store(in: &cancellables)
     $fetCompressorAdapt.dropFirst().sink { [weak self] v in
@@ -1576,6 +2098,123 @@ final class ViPERState: ObservableObject {
       let effective = on && !self.ddcFilePath.isEmpty ? 1 : 0
       self.send(self.isActiveSpk ? Param.SPK_DDC_ENABLE : Param.HP_DDC_ENABLE, effective)
     }.store(in: &cancellables)
+
+    $diffSurroundWetDryMix.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_DIFF_SURROUND_WET_DRY_MIX : Param.HP_DIFF_SURROUND_WET_DRY_MIX,
+        v
+      )
+    }.store(in: &cancellables)
+    $diffSurroundLpCutoff.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_DIFF_SURROUND_LP_CUTOFF : Param.HP_DIFF_SURROUND_LP_CUTOFF, v
+      )
+    }.store(in: &cancellables)
+
+    $stereoImgEnabled.dropFirst().sink { [weak self] on in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_STEREO_IMAGER_ENABLE : Param.HP_STEREO_IMAGER_ENABLE,
+        on ? 1 : 0
+      )
+    }.store(in: &cancellables)
+    $stereoImgLowWidth.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_STEREO_IMAGER_LOW_WIDTH : Param.HP_STEREO_IMAGER_LOW_WIDTH, v
+      )
+    }.store(in: &cancellables)
+    $stereoImgMidWidth.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_STEREO_IMAGER_MID_WIDTH : Param.HP_STEREO_IMAGER_MID_WIDTH, v
+      )
+    }.store(in: &cancellables)
+    $stereoImgHighWidth.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_STEREO_IMAGER_HIGH_WIDTH : Param.HP_STEREO_IMAGER_HIGH_WIDTH, v
+      )
+    }.store(in: &cancellables)
+    $stereoImgLowCrossover.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk
+          ? Param.SPK_STEREO_IMAGER_LOW_CROSSOVER : Param.HP_STEREO_IMAGER_LOW_CROSSOVER, v
+      )
+    }.store(in: &cancellables)
+    $stereoImgHighCrossover.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk
+          ? Param.SPK_STEREO_IMAGER_HIGH_CROSSOVER : Param.HP_STEREO_IMAGER_HIGH_CROSSOVER, v
+      )
+    }.store(in: &cancellables)
+
+    $lufsEnabled.dropFirst().sink { [weak self] on in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(self.isActiveSpk ? Param.SPK_LUFS_ENABLE : Param.HP_LUFS_ENABLE, on ? 1 : 0)
+    }.store(in: &cancellables)
+    $lufsTarget.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(self.isActiveSpk ? Param.SPK_LUFS_TARGET : Param.HP_LUFS_TARGET, v)
+    }.store(in: &cancellables)
+    $lufsMaxGain.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(self.isActiveSpk ? Param.SPK_LUFS_MAX_GAIN : Param.HP_LUFS_MAX_GAIN, v)
+    }.store(in: &cancellables)
+    $lufsSpeed.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(self.isActiveSpk ? Param.SPK_LUFS_SPEED : Param.HP_LUFS_SPEED, v)
+    }.store(in: &cancellables)
+
+    $psychoBassEnabled.dropFirst().sink { [weak self] on in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_PSYCHO_BASS_ENABLE : Param.HP_PSYCHO_BASS_ENABLE, on ? 1 : 0
+      )
+    }.store(in: &cancellables)
+    $psychoBassCutoff.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(self.isActiveSpk ? Param.SPK_PSYCHO_BASS_CUTOFF : Param.HP_PSYCHO_BASS_CUTOFF, v)
+    }.store(in: &cancellables)
+    $psychoBassIntensity.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_PSYCHO_BASS_INTENSITY : Param.HP_PSYCHO_BASS_INTENSITY, v
+      )
+    }.store(in: &cancellables)
+    $psychoBassHarmonicOrder.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk
+          ? Param.SPK_PSYCHO_BASS_HARMONIC_ORDER : Param.HP_PSYCHO_BASS_HARMONIC_ORDER, v
+      )
+    }.store(in: &cancellables)
+    $psychoBassOriginalLevel.dropFirst().sink { [weak self] v in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk
+          ? Param.SPK_PSYCHO_BASS_ORIGINAL_LEVEL : Param.HP_PSYCHO_BASS_ORIGINAL_LEVEL, v
+      )
+    }.store(in: &cancellables)
+
+    $dynEqEnabled.dropFirst().sink { [weak self] on in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_DYNAMIC_EQ_ENABLE : Param.HP_DYNAMIC_EQ_ENABLE, on ? 1 : 0
+      )
+    }.store(in: &cancellables)
+
+    $mbcEnabled.dropFirst().sink { [weak self] on in
+      guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
+      self.send(
+        self.isActiveSpk ? Param.SPK_MULTIBAND_COMP_ENABLE : Param.HP_MULTIBAND_COMP_ENABLE,
+        on ? 1 : 0
+      )
+    }.store(in: &cancellables)
   }
 
   func sendEQBand(index: Int, level: Float) {
@@ -1612,6 +2251,178 @@ final class ViPERState: ObservableObject {
     dsYHigh = parts[3]
     dsSideGainLow = parts[4]
     dsSideGainHigh = parts[5]
+  }
+
+  func dispatchDynEqBand(_ band: Int) {
+    guard !suppressDispatch, fxType == activeDeviceType, band < dynEqBandCount else { return }
+    let spk = isActiveSpk
+    send(spk ? Param.SPK_DYNAMIC_EQ_BAND_FREQ : Param.HP_DYNAMIC_EQ_BAND_FREQ, band, dynEqFreqs[safe: band] ?? 1000)
+    send(spk ? Param.SPK_DYNAMIC_EQ_BAND_Q : Param.HP_DYNAMIC_EQ_BAND_Q, band, dynEqQs[safe: band] ?? 150)
+    send(spk ? Param.SPK_DYNAMIC_EQ_BAND_GAIN : Param.HP_DYNAMIC_EQ_BAND_GAIN, band, dynEqGains[safe: band] ?? 0)
+    send(
+      spk ? Param.SPK_DYNAMIC_EQ_BAND_THRESHOLD : Param.HP_DYNAMIC_EQ_BAND_THRESHOLD,
+      band, dynEqThresholds[safe: band] ?? -250
+    )
+    send(spk ? Param.SPK_DYNAMIC_EQ_BAND_ATTACK : Param.HP_DYNAMIC_EQ_BAND_ATTACK, band, dynEqAttacks[safe: band] ?? 10)
+    send(spk ? Param.SPK_DYNAMIC_EQ_BAND_RELEASE : Param.HP_DYNAMIC_EQ_BAND_RELEASE, band, dynEqReleases[safe: band] ?? 100)
+    send(
+      spk ? Param.SPK_DYNAMIC_EQ_BAND_FILTER_TYPE : Param.HP_DYNAMIC_EQ_BAND_FILTER_TYPE,
+      band, dynEqFilterTypes[safe: band] ?? 0
+    )
+  }
+
+  func setDynEqBandCount(_ count: Int) {
+    let clamped = min(max(count, 1), 8)
+    let old = dynEqBandCount
+    if clamped > old {
+      let defaults: [(Int, Int, Int, Int, Int, Int, Int)] = [
+        (60, 100, 0, -300, 10, 100, 0), (150, 100, 0, -300, 10, 100, 0),
+        (400, 150, 0, -250, 10, 100, 0), (1000, 150, 0, -250, 10, 100, 0),
+        (2500, 150, 0, -200, 10, 100, 0), (5000, 200, 0, -200, 10, 100, 0),
+        (8000, 200, 0, -200, 10, 100, 0), (12000, 200, 0, -200, 10, 100, 0),
+      ]
+      for i in old ..< clamped {
+        let d = defaults[safe: i] ?? (1000, 150, 0, -250, 10, 100, 0)
+        dynEqFreqs.append(d.0)
+        dynEqQs.append(d.1)
+        dynEqGains.append(d.2)
+        dynEqThresholds.append(d.3)
+        dynEqAttacks.append(d.4)
+        dynEqReleases.append(d.5)
+        dynEqFilterTypes.append(d.6)
+      }
+    } else if clamped < old {
+      dynEqFreqs = Array(dynEqFreqs.prefix(clamped))
+      dynEqQs = Array(dynEqQs.prefix(clamped))
+      dynEqGains = Array(dynEqGains.prefix(clamped))
+      dynEqThresholds = Array(dynEqThresholds.prefix(clamped))
+      dynEqAttacks = Array(dynEqAttacks.prefix(clamped))
+      dynEqReleases = Array(dynEqReleases.prefix(clamped))
+      dynEqFilterTypes = Array(dynEqFilterTypes.prefix(clamped))
+    }
+    dynEqBandCount = clamped
+    if dynEqSelectedBand >= clamped { dynEqSelectedBand = clamped - 1 }
+    guard !suppressDispatch, fxType == activeDeviceType else { return }
+    let spk = isActiveSpk
+    for i in 0 ..< clamped {
+      dispatchDynEqBand(i)
+    }
+    send(spk ? Param.SPK_DYNAMIC_EQ_BAND_COUNT : Param.HP_DYNAMIC_EQ_BAND_COUNT, clamped)
+  }
+
+  func addDynEqBand() {
+    guard dynEqBandCount < 8 else { return }
+    let lastFreq = dynEqFreqs.last ?? 0
+    guard lastFreq < 19990 else { return }
+    setDynEqBandCount(dynEqBandCount + 1)
+    let newIdx = dynEqBandCount - 1
+    if dynEqFreqs[safe: newIdx] ?? 0 <= lastFreq {
+      let suggested = min(20000, lastFreq + max(100, (20000 - lastFreq) / 2))
+      dynEqFreqs[newIdx] = (suggested / 5) * 5
+      dispatchDynEqBand(newIdx)
+    }
+    dynEqSelectedBand = newIdx
+  }
+
+  func removeDynEqBand(at index: Int) {
+    guard dynEqBandCount > 1, index < dynEqBandCount else { return }
+    dynEqFreqs.remove(at: index)
+    dynEqQs.remove(at: index)
+    dynEqGains.remove(at: index)
+    dynEqThresholds.remove(at: index)
+    dynEqAttacks.remove(at: index)
+    dynEqReleases.remove(at: index)
+    dynEqFilterTypes.remove(at: index)
+    dynEqBandCount -= 1
+    if dynEqSelectedBand >= dynEqBandCount { dynEqSelectedBand = dynEqBandCount - 1 }
+    guard !suppressDispatch, fxType == activeDeviceType else { return }
+    let spk = isActiveSpk
+    for i in 0 ..< dynEqBandCount {
+      dispatchDynEqBand(i)
+    }
+    send(spk ? Param.SPK_DYNAMIC_EQ_BAND_COUNT : Param.HP_DYNAMIC_EQ_BAND_COUNT, dynEqBandCount)
+  }
+
+  func dispatchMbcCrossover(_ band: Int) {
+    guard !suppressDispatch, fxType == activeDeviceType, band < 4 else { return }
+    let spk = isActiveSpk
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_CROSSOVER_FREQ : Param.HP_MULTIBAND_COMP_CROSSOVER_FREQ,
+      band, mbcCrossovers[safe: band] ?? 500
+    )
+  }
+
+  func dispatchMbcBand(_ band: Int) {
+    guard !suppressDispatch, fxType == activeDeviceType, band < 5 else { return }
+    let spk = isActiveSpk
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_THRESHOLD : Param.HP_MULTIBAND_COMP_BAND_THRESHOLD,
+      band, Self.fetThresholdToRaw(mbcThresholds[safe: band] ?? -18)
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_RATIO : Param.HP_MULTIBAND_COMP_BAND_RATIO,
+      band, mbcRatios[safe: band] ?? 50
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_GAIN : Param.HP_MULTIBAND_COMP_BAND_GAIN,
+      band, Self.fetGainToRaw(mbcGains[safe: band] ?? 24)
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_KNEE : Param.HP_MULTIBAND_COMP_BAND_KNEE,
+      band, Self.fetKneeToRaw(mbcKnees[safe: band] ?? 0)
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_ATTACK : Param.HP_MULTIBAND_COMP_BAND_ATTACK,
+      band, Self.fetAttackMsToRaw(mbcAttacks[safe: band] ?? 1)
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_RELEASE : Param.HP_MULTIBAND_COMP_BAND_RELEASE,
+      band, Self.fetReleaseMsToRaw(mbcReleases[safe: band] ?? 100)
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_AUTO_GAIN : Param.HP_MULTIBAND_COMP_BAND_AUTO_GAIN,
+      band, (mbcAutoGains[safe: band] ?? true) ? 100 : 0
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_AUTO_ATTACK : Param.HP_MULTIBAND_COMP_BAND_AUTO_ATTACK,
+      band, (mbcAutoAttacks[safe: band] ?? true) ? 100 : 0
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_AUTO_RELEASE : Param.HP_MULTIBAND_COMP_BAND_AUTO_RELEASE,
+      band, (mbcAutoReleases[safe: band] ?? true) ? 100 : 0
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_AUTO_KNEE : Param.HP_MULTIBAND_COMP_BAND_AUTO_KNEE,
+      band, (mbcAutoKnees[safe: band] ?? true) ? 100 : 0
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_KNEE_MULTI : Param.HP_MULTIBAND_COMP_BAND_KNEE_MULTI,
+      band, mbcKneeMultis[safe: band] ?? 0
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_MAX_ATTACK : Param.HP_MULTIBAND_COMP_BAND_MAX_ATTACK,
+      band, Self.fetAttackMsToRaw(mbcMaxAttacks[safe: band] ?? 44)
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_MAX_RELEASE : Param.HP_MULTIBAND_COMP_BAND_MAX_RELEASE,
+      band, Self.fetReleaseMsToRaw(mbcMaxReleases[safe: band] ?? 200)
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_CREST : Param.HP_MULTIBAND_COMP_BAND_CREST,
+      band, Self.fetReleaseMsToRaw(mbcCrests[safe: band] ?? 100)
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_ADAPT : Param.HP_MULTIBAND_COMP_BAND_ADAPT,
+      band, mbcAdapts[safe: band] ?? 50
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_NO_CLIP : Param.HP_MULTIBAND_COMP_BAND_NO_CLIP,
+      band, (mbcNoClips[safe: band] ?? true) ? 100 : 0
+    )
+    send(
+      spk ? Param.SPK_MULTIBAND_COMP_BAND_ENABLE : Param.HP_MULTIBAND_COMP_BAND_ENABLE,
+      band, (mbcBandEnables[safe: band] ?? true) ? 100 : 0
+    )
   }
 
   func loadDDCFile(at url: URL) {
