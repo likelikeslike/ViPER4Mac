@@ -441,6 +441,9 @@ final class ViPERState: ObservableObject {
   @Published var eqPresetFiles: [String] = []
   @Published var dsPresetFiles: [String] = []
 
+  @Published var currentDeviceUID: String = ""
+  @Published var currentDeviceName: String = ""
+
   @Published var driverInstalled = false
   @Published var isProcessing = false
   @Published var currentSampleRate: UInt32 = 0
@@ -901,6 +904,182 @@ final class ViPERState: ObservableObject {
     let source = isActiveSpk ? speakerState : headphoneState
     loadModeToActive(source)
     dispatchFullModeState()
+  }
+
+  func handleDeviceChanged(_ device: AudioOutputDetector.DeviceInfo) {
+    let fxType: FXType = device.type == .headphone ? .headphone : .speaker
+
+    if device.uid != currentDeviceUID && !device.uid.isEmpty {
+      saveCurrentDeviceSettings()
+      currentDeviceUID = device.uid
+      currentDeviceName = device.name
+
+      if fxType != activeDeviceType {
+        saveToMode(isSpk: isSpk)
+        activeDeviceType = fxType
+        self.fxType = fxType
+      }
+
+      loadDeviceSettings(device.uid, isHeadphone: device.type == .headphone)
+    } else if fxType != activeDeviceType {
+      handleDeviceTypeChange(device.type)
+    }
+  }
+
+  func saveCurrentDeviceSettings() {
+    guard !currentDeviceUID.isEmpty else { return }
+    let url = ProfileFileManager.shared.fileURL(
+      name: "\(safeFileName(currentDeviceUID)).json", type: .deviceProfile
+    )
+
+    var existingIsHp: Bool? = nil
+    if let existingData = try? Data(contentsOf: url),
+       let existingDict = try? JSONSerialization.jsonObject(with: existingData) as? [String: Any]
+    {
+      existingIsHp = existingDict["isHeadphone"] as? Bool
+    }
+    let isHp = existingIsHp ?? (activeDeviceType == .headphone)
+
+    saveToMode(isSpk: !isHp)
+    let source = isHp ? headphoneState : speakerState
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    guard let data = try? encoder.encode(source) else { return }
+    var wrapper: [String: Any] = [
+      "deviceUID": currentDeviceUID,
+      "deviceName": currentDeviceName,
+      "isHeadphone": isHp,
+      "lastConnected": Int(Date().timeIntervalSince1970 * 1000),
+    ]
+    if let settings = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+      wrapper["settings"] = settings
+    }
+    if let jsonData = try? JSONSerialization.data(withJSONObject: wrapper, options: .prettyPrinted) {
+      try? jsonData.write(to: url)
+    }
+  }
+
+  private func safeFileName(_ uid: String) -> String {
+    uid.replacingOccurrences(of: ":", with: "_")
+  }
+
+  func loadDeviceSettings(_ uid: String, isHeadphone: Bool) {
+    let url = ProfileFileManager.shared.fileURL(
+      name: "\(safeFileName(uid)).json", type: .deviceProfile
+    )
+    guard FileManager.default.fileExists(atPath: url.path),
+          let data = try? Data(contentsOf: url),
+          var wrapper = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+          let settings = wrapper["settings"] as? [String: Any],
+          let settingsData = try? JSONSerialization.data(withJSONObject: settings)
+    else {
+      ensureDeviceEntry(uid, isHeadphone: isHeadphone)
+      return
+    }
+
+    if (wrapper["isHeadphone"] as? Bool) != isHeadphone {
+      wrapper["isHeadphone"] = isHeadphone
+      if let fixed = try? JSONSerialization.data(withJSONObject: wrapper, options: .prettyPrinted) {
+        try? fixed.write(to: url)
+      }
+    }
+
+    guard let modeState = try? JSONDecoder().decode(ModeState.self, from: settingsData) else {
+      return
+    }
+    if isHeadphone {
+      headphoneState = modeState
+    } else {
+      speakerState = modeState
+    }
+    loadModeToActive(modeState)
+    dispatchFullModeState()
+    saveSettings()
+  }
+
+  func ensureDeviceEntry(_ uid: String, isHeadphone _: Bool) {
+    let url = ProfileFileManager.shared.fileURL(
+      name: "\(safeFileName(uid)).json", type: .deviceProfile
+    )
+    guard !FileManager.default.fileExists(atPath: url.path) else { return }
+    saveCurrentDeviceSettings()
+  }
+
+  var deviceProfileList: [[String: Any]] {
+    let dir = ProfileFileManager.shared.directoryPath(for: .deviceProfile)
+    guard let files = try? FileManager.default.contentsOfDirectory(atPath: dir) else { return [] }
+    var result: [[String: Any]] = []
+    for file in files where file.hasSuffix(".json") {
+      let path = "\(dir)/\(file)"
+      guard let data = try? Data(contentsOf: URL(fileURLWithPath: path)),
+            let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+      else { continue }
+      result.append(dict)
+    }
+    result.sort { ($0["lastConnected"] as? Int ?? 0) > ($1["lastConnected"] as? Int ?? 0) }
+    return result
+  }
+
+  func renameDevice(_ uid: String, newName: String) {
+    let url = ProfileFileManager.shared.fileURL(
+      name: "\(safeFileName(uid)).json", type: .deviceProfile
+    )
+    guard let data = try? Data(contentsOf: url),
+          var dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+    else { return }
+    dict["deviceName"] = newName
+    if let newData = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) {
+      try? newData.write(to: url)
+    }
+    if uid == currentDeviceUID {
+      currentDeviceName = newName
+    }
+  }
+
+  func deleteDeviceProfile(_ uid: String) {
+    let fileName = "\(safeFileName(uid)).json"
+    ProfileFileManager.shared.deleteFile(name: fileName, type: .deviceProfile)
+  }
+
+  func loadDevicePreset(_ uid: String) {
+    let url = ProfileFileManager.shared.fileURL(
+      name: "\(safeFileName(uid)).json", type: .deviceProfile
+    )
+    guard let data = try? Data(contentsOf: url),
+          let wrapper = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+          let isHp = wrapper["isHeadphone"] as? Bool,
+          let settings = wrapper["settings"] as? [String: Any],
+          let settingsData = try? JSONSerialization.data(withJSONObject: settings),
+          let modeState = try? JSONDecoder().decode(ModeState.self, from: settingsData)
+    else { return }
+    if isHp {
+      headphoneState = modeState
+      if activeDeviceType == .headphone { loadModeToActive(modeState); dispatchFullModeState() }
+    } else {
+      speakerState = modeState
+      if activeDeviceType == .speaker { loadModeToActive(modeState); dispatchFullModeState() }
+    }
+    saveSettings()
+  }
+
+  func saveDevicePreset(_ uid: String) {
+    let url = ProfileFileManager.shared.fileURL(
+      name: "\(safeFileName(uid)).json", type: .deviceProfile
+    )
+    guard let data = try? Data(contentsOf: url),
+          var dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+    else { return }
+    let isHp = dict["isHeadphone"] as? Bool ?? true
+    saveToMode(isSpk: !isHp)
+    let source = isHp ? headphoneState : speakerState
+    if let encoded = try? JSONEncoder().encode(source),
+       let settings = try? JSONSerialization.jsonObject(with: encoded)
+    {
+      dict["settings"] = settings
+      if let newData = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) {
+        try? newData.write(to: url)
+      }
+    }
   }
 
   private func setupBindings() {
@@ -1594,6 +1773,7 @@ final class ViPERState: ObservableObject {
     }
     UserDefaults.standard.set(isEnabled, forKey: Self.enabledKey)
     logger.info("Settings saved to UserDefaults")
+    saveCurrentDeviceSettings()
   }
 
   private func restoreSettings() {
@@ -1701,6 +1881,18 @@ final class ViPERState: ObservableObject {
     if (targetSpk && isActiveSpk) || (!targetSpk && !isActiveSpk) {
       dispatchFullModeState()
     }
+  }
+
+  func presetIsHeadphone(_ name: String) -> Bool {
+    let url = ProfileFileManager.shared.fileURL(name: "\(name).json", type: .preset)
+    guard let data = try? Data(contentsOf: url),
+          let state = try? JSONDecoder().decode(ModeState.self, from: data) else { return true }
+    return state.mode == FXType.headphone.rawValue
+  }
+
+  func renamePreset(oldName: String, newName: String) {
+    ProfileFileManager.shared.renameFile("\(oldName).json", to: "\(newName).json", type: .preset)
+    refreshFileLists()
   }
 
   func deletePreset(name: String) {

@@ -53,6 +53,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     detector.onOutputTypeChanged = { newType in
       ViPERState.shared.handleDeviceTypeChange(newType)
     }
+    detector.onDeviceChanged = { deviceInfo in
+      ViPERState.shared.handleDeviceChanged(deviceInfo)
+    }
+    let initial = detector.activeDevice
+    if !initial.uid.isEmpty {
+      ViPERState.shared.currentDeviceUID = initial.uid
+      ViPERState.shared.currentDeviceName = initial.name
+    }
     detector.start()
   }
 

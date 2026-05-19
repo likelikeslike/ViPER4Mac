@@ -16,7 +16,7 @@ final class ProfileFileManager {
 
   private func ensureDirectories() {
     let fm = FileManager.default
-    for sub in ["DDC", "Kernel", "Preset", "EQPreset", "DynSysPreset"] {
+    for sub in ["DDC", "Kernel", "Preset", "EQPreset", "DynSysPreset", "DeviceProfile"] {
       let dir = appSupportDir.appendingPathComponent(sub, isDirectory: true)
       if !fm.fileExists(atPath: dir.path) {
         try? fm.createDirectory(at: dir, withIntermediateDirectories: true)
@@ -32,6 +32,8 @@ final class ProfileFileManager {
     case .eqPreset: return appSupportDir.appendingPathComponent("EQPreset", isDirectory: true)
     case .dynSysPreset:
       return appSupportDir.appendingPathComponent("DynSysPreset", isDirectory: true)
+    case .deviceProfile:
+      return appSupportDir.appendingPathComponent("DeviceProfile", isDirectory: true)
     }
   }
 
@@ -41,6 +43,7 @@ final class ProfileFileManager {
     case preset
     case eqPreset
     case dynSysPreset
+    case deviceProfile
 
     var description: String {
       switch self {
@@ -49,6 +52,7 @@ final class ProfileFileManager {
       case .preset: return "Preset"
       case .eqPreset: return "EQPreset"
       case .dynSysPreset: return "DynSysPreset"
+      case .deviceProfile: return "DeviceProfile"
       }
     }
   }
@@ -80,6 +84,7 @@ final class ProfileFileManager {
     case .preset: ext = ["json"]
     case .eqPreset: ext = ["json"]
     case .dynSysPreset: ext = ["json"]
+    case .deviceProfile: ext = ["json"]
     }
     return
       contents
@@ -91,9 +96,20 @@ final class ProfileFileManager {
     directory(for: type).appendingPathComponent(name)
   }
 
+  func renameFile(_ oldName: String, to newName: String, type: FileType) {
+    let oldURL = fileURL(name: oldName, type: type)
+    let newURL = fileURL(name: newName, type: type)
+    try? FileManager.default.moveItem(at: oldURL, to: newURL)
+    logger.info("Renamed \(type): \(oldName) -> \(newName)")
+  }
+
   func deleteFile(name: String, type: FileType) {
     let url = fileURL(name: name, type: type)
     try? FileManager.default.removeItem(at: url)
     logger.info("Deleted \(type): \(name)")
+  }
+
+  func directoryPath(for type: FileType) -> String {
+    directory(for: type).path
   }
 }

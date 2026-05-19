@@ -20,17 +20,21 @@ struct PopoverContentView: View {
   @State private var showDriverStatus = false
   @State private var dsPresetName: String = ""
   @State private var showSaveDsPreset = false
+  @State private var showDevices = false
+  @State private var showDeviceInfoUID: String? = nil
 
   var body: some View {
     ScrollView {
       VStack(spacing: 10) {
         headerSection
         Divider()
-        presetSection
-        Divider()
         outputSection
         Divider()
         effectSections
+        Divider()
+        devicesSection
+        Divider()
+        presetSection
         Divider()
         footerSection
       }
@@ -137,6 +141,7 @@ struct PopoverContentView: View {
       }
       .pickerStyle(.segmented)
       .tint(.viperPurple)
+
       if !state.availableOutputDevices.isEmpty {
         HStack(spacing: 6) {
           Image(systemName: "hifispeaker.2")
@@ -157,74 +162,328 @@ struct PopoverContentView: View {
 
   // MARK: - Presets
 
+  @State private var showPresets = false
+  @State private var renamingPreset: String? = nil
+  @State private var presetRenameText: String = ""
+
   private var presetSection: some View {
     VStack(spacing: 4) {
-      if showSavePreset {
-        HStack(spacing: 6) {
-          TextField("Preset name", text: $presetName)
-            .textFieldStyle(.roundedBorder)
-            .font(.caption)
-          Button("Save") {
-            let trimmed = presetName.trimmingCharacters(in: .whitespaces)
-            guard !trimmed.isEmpty else { return }
-            state.savePreset(name: trimmed)
-            presetName = ""
-            showSavePreset = false
-          }
-          .controlSize(.small)
-          .disabled(presetName.trimmingCharacters(in: .whitespaces).isEmpty)
-          Button("Cancel") {
-            presetName = ""
-            showSavePreset = false
-          }
-          .controlSize(.small)
-        }
-      } else {
-        HStack(spacing: 6) {
-          Text("Preset")
-            .font(.caption)
-            .foregroundStyle(.secondary)
-            .frame(width: 45, alignment: .leading)
-          Menu {
-            ForEach(state.presetFiles, id: \.self) { name in
-              Button(name) {
-                state.loadPreset(name: name)
-              }
-            }
-            if !state.presetFiles.isEmpty {
-              Divider()
-              Menu("Delete") {
-                ForEach(state.presetFiles, id: \.self) { name in
-                  Button(name, role: .destructive) {
-                    state.deletePreset(name: name)
-                  }
-                }
-              }
-            }
-          } label: {
-            Text(state.presetFiles.isEmpty ? "No presets" : "Load...")
+      HStack(spacing: 6) {
+        Image(systemName: "chevron.right")
+          .font(.caption2)
+          .rotationEffect(.degrees(showPresets ? 90 : 0))
+          .animation(.easeInOut(duration: 0.2), value: showPresets)
+          .foregroundStyle(.secondary)
+        Image(systemName: "doc.text.fill")
+          .font(.caption)
+          .foregroundStyle(Color.viperPurpleLight)
+        Text("Presets")
+          .font(.subheadline)
+          .fontWeight(.medium)
+          .foregroundStyle(Color.viperPurpleLight)
+        Spacer()
+      }
+      .contentShape(Rectangle())
+      .onTapGesture { withAnimation { showPresets.toggle() } }
+
+      if showPresets {
+        VStack(spacing: 4) {
+          HStack(spacing: 6) {
+            TextField("Preset name", text: $presetName)
+              .textFieldStyle(.roundedBorder)
               .font(.caption)
-              .frame(maxWidth: .infinity, alignment: .leading)
+            Button("Save") {
+              let trimmed = presetName.trimmingCharacters(in: .whitespaces)
+              guard !trimmed.isEmpty else { return }
+              state.savePreset(name: trimmed)
+              presetName = ""
+            }
+            .controlSize(.small)
+            .disabled(presetName.trimmingCharacters(in: .whitespaces).isEmpty)
+            Button("Import") {
+              let panel = NSOpenPanel()
+              panel.allowedContentTypes = [.json]
+              panel.allowsMultipleSelection = false
+              panel.canChooseDirectories = false
+              if panel.runModal() == .OK, let url = panel.url {
+                state.importPreset(from: url)
+              }
+            }
+            .controlSize(.small)
           }
-          .menuStyle(.borderlessButton)
-          .frame(maxWidth: .infinity)
-          Button("Save") {
-            showSavePreset = true
-          }
-          .controlSize(.small)
-          Button("Import") {
-            let panel = NSOpenPanel()
-            panel.allowedContentTypes = [.json]
-            panel.allowsMultipleSelection = false
-            panel.canChooseDirectories = false
-            if panel.runModal() == .OK, let url = panel.url {
-              state.importPreset(from: url)
+
+          ForEach(state.presetFiles, id: \.self) { name in
+            HStack(spacing: 6) {
+              Image(systemName: state.presetIsHeadphone(name) ? "headphones" : "speaker.fill")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+              Text(name)
+                .font(.caption)
+                .lineLimit(1)
+              Spacer()
+              Button {
+                presetRenameText = name
+                renamingPreset = name
+              } label: {
+                Image(systemName: "pencil")
+                  .font(.caption2)
+              }
+              .buttonStyle(.borderless)
+              .help("Rename")
+              Button { state.loadPreset(name: name) } label: {
+                Image(systemName: "arrow.down.circle")
+                  .font(.caption2)
+              }
+              .buttonStyle(.borderless)
+              .help("Load")
+              Button { state.deletePreset(name: name) } label: {
+                Image(systemName: "trash")
+                  .font(.caption2)
+                  .foregroundStyle(.red)
+              }
+              .buttonStyle(.borderless)
+              .help("Delete")
             }
           }
-          .controlSize(.small)
+
+          if state.presetFiles.isEmpty {
+            Text("No presets")
+              .font(.caption)
+              .foregroundStyle(.secondary)
+          }
         }
+        .padding(.leading, 4)
       }
     }
+    .sheet(item: Binding(
+      get: { renamingPreset.map { RenameItem(id: $0) } },
+      set: { renamingPreset = $0?.id }
+    )) { item in
+      VStack(spacing: 12) {
+        Text("Rename Preset")
+          .font(.headline)
+        TextField("Preset name", text: $presetRenameText)
+          .textFieldStyle(.roundedBorder)
+        HStack {
+          Button("Cancel") { renamingPreset = nil }
+          Spacer()
+          Button("Rename") {
+            let trimmed = presetRenameText.trimmingCharacters(in: .whitespaces)
+            if !trimmed.isEmpty && trimmed != item.id {
+              state.renamePreset(oldName: item.id, newName: trimmed)
+            }
+            renamingPreset = nil
+          }
+          .keyboardShortcut(.defaultAction)
+          .disabled(presetRenameText.trimmingCharacters(in: .whitespaces).isEmpty)
+        }
+      }
+      .padding(20)
+      .frame(width: 280)
+    }
+  }
+
+  // MARK: - Devices
+
+  @State private var renamingDeviceUID: String? = nil
+  @State private var deviceRenameText: String = ""
+
+  private var devicesSection: some View {
+    VStack(spacing: 4) {
+      HStack(spacing: 6) {
+        Image(systemName: "chevron.right")
+          .font(.caption2)
+          .rotationEffect(.degrees(showDevices ? 90 : 0))
+          .animation(.easeInOut(duration: 0.2), value: showDevices)
+          .foregroundStyle(.secondary)
+        Image(systemName: "speaker.wave.2.fill")
+          .font(.caption)
+          .foregroundStyle(Color.viperPurpleLight)
+        Text("Devices")
+          .font(.subheadline)
+          .fontWeight(.medium)
+          .foregroundStyle(Color.viperPurpleLight)
+        Spacer()
+      }
+      .contentShape(Rectangle())
+      .onTapGesture { withAnimation { showDevices.toggle() } }
+
+      if showDevices {
+        VStack(spacing: 4) {
+          ForEach(
+            Array(state.deviceProfileList.enumerated()), id: \.offset
+          ) { _, profile in
+            let uid = profile["deviceUID"] as? String ?? ""
+            let name = profile["deviceName"] as? String ?? "Unknown"
+            let isHp = profile["isHeadphone"] as? Bool ?? true
+            let lastMs = profile["lastConnected"] as? Int ?? 0
+            let isActive = uid == state.currentDeviceUID
+            let isBuiltIn = uid == "speaker" || uid.contains("BuiltIn")
+
+            HStack(spacing: 6) {
+              if isActive {
+                Circle()
+                  .fill(Color.green)
+                  .frame(width: 6, height: 6)
+              } else {
+                Color.clear.frame(width: 6, height: 6)
+              }
+              Image(systemName: isHp ? "headphones" : "speaker.fill")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+              Text(name)
+                .font(.caption)
+                .fontWeight(isActive ? .medium : .regular)
+                .lineLimit(1)
+              Spacer()
+              if !isActive {
+                Text(Self.timeAgo(ms: lastMs))
+                  .font(.caption2)
+                  .foregroundStyle(.secondary)
+              }
+              Button {
+                showDeviceInfoUID = showDeviceInfoUID == uid ? nil : uid
+              } label: {
+                Image(systemName: "info.circle")
+                  .font(.caption2)
+                  .foregroundStyle(.secondary)
+              }
+              .buttonStyle(.borderless)
+              .popover(
+                isPresented: Binding(
+                  get: { showDeviceInfoUID == uid },
+                  set: { if !$0 { showDeviceInfoUID = nil } }
+                ),
+                arrowEdge: .bottom
+              ) {
+                deviceInfoPopover(
+                  uid: uid, name: name, isHp: isHp,
+                  lastMs: lastMs, isActive: isActive, isBuiltIn: isBuiltIn
+                )
+              }
+            }
+          }
+        }
+        .padding(.leading, 4)
+      }
+    }
+    .sheet(item: Binding(
+      get: { renamingDeviceUID.map { RenameItem(id: $0) } },
+      set: { renamingDeviceUID = $0?.id }
+    )) { item in
+      VStack(spacing: 12) {
+        Text("Rename Device")
+          .font(.headline)
+        TextField("Device name", text: $deviceRenameText)
+          .textFieldStyle(.roundedBorder)
+        HStack {
+          Button("Cancel") { renamingDeviceUID = nil }
+          Spacer()
+          Button("Rename") {
+            let trimmed = deviceRenameText.trimmingCharacters(in: .whitespaces)
+            if !trimmed.isEmpty {
+              state.renameDevice(item.id, newName: trimmed)
+            }
+            renamingDeviceUID = nil
+          }
+          .keyboardShortcut(.defaultAction)
+          .disabled(deviceRenameText.trimmingCharacters(in: .whitespaces).isEmpty)
+        }
+      }
+      .padding(20)
+      .frame(width: 280)
+    }
+  }
+
+  private func deviceInfoPopover(
+    uid: String, name: String, isHp: Bool,
+    lastMs: Int, isActive: Bool, isBuiltIn: Bool
+  ) -> some View {
+    VStack(alignment: .leading, spacing: 8) {
+      HStack {
+        Text(name)
+          .font(.subheadline)
+          .fontWeight(.semibold)
+          .foregroundStyle(Color.viperAccent)
+        Button {
+          showDeviceInfoUID = nil
+          deviceRenameText = name
+          renamingDeviceUID = uid
+        } label: {
+          Image(systemName: "pencil")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+        }
+        .buttonStyle(.borderless)
+      }
+
+      statusRow(Text("UID"), value: Text(uid))
+      statusRow(Text("Mode"), value: Text(isHp ? "Headphone" : "Speaker"))
+      statusRow(
+        Text("Last Connected"),
+        value: Text(isActive ? "Active" : Self.formatDate(ms: lastMs)),
+        color: isActive ? .green : nil
+      )
+
+      Divider()
+
+      HStack(spacing: 12) {
+        Button {
+          state.loadDevicePreset(uid)
+          showDeviceInfoUID = nil
+        } label: {
+          Label("Load", systemImage: "arrow.down.circle")
+            .font(.caption)
+            .foregroundStyle(Color.viperAccent.opacity(0.85))
+        }
+        .buttonStyle(.borderless)
+
+        Button {
+          state.saveDevicePreset(uid)
+          showDeviceInfoUID = nil
+        } label: {
+          Label("Update", systemImage: "arrow.clockwise")
+            .font(.caption)
+            .foregroundStyle(Color.viperAccent.opacity(0.85))
+        }
+        .buttonStyle(.borderless)
+
+        Button {
+          state.deleteDeviceProfile(uid)
+          showDeviceInfoUID = nil
+        } label: {
+          Label("Delete", systemImage: "trash")
+            .font(.caption)
+            .foregroundStyle(isActive || isBuiltIn ? .gray : .red)
+        }
+        .buttonStyle(.borderless)
+        .disabled(isActive || isBuiltIn)
+      }
+    }
+    .padding(12)
+    .frame(width: 280)
+  }
+
+  private static func formatDate(ms: Int) -> String {
+    guard ms > 0 else { return "N/A" }
+    let date = Date(timeIntervalSince1970: Double(ms) / 1000.0)
+    let fmt = DateFormatter()
+    fmt.dateFormat = "yyyy-MM-dd HH:mm"
+    return fmt.string(from: date)
+  }
+
+  private struct RenameItem: Identifiable { let id: String }
+
+  private static func timeAgo(ms: Int) -> String {
+    guard ms > 0 else { return "" }
+    let seconds = Int(Date().timeIntervalSince1970) - ms / 1000
+    if seconds < 60 { return "just now" }
+    let minutes = seconds / 60
+    if minutes < 60 { return "\(minutes)m ago" }
+    let hours = minutes / 60
+    if hours < 24 { return "\(hours)h ago" }
+    let days = hours / 24
+    return "\(days)d ago"
   }
 
   // MARK: - Output

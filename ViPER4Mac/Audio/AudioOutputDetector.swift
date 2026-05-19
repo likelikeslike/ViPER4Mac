@@ -11,13 +11,32 @@ final class AudioOutputDetector {
     case speaker = 1
   }
 
+  struct DeviceInfo {
+    let uid: String
+    let name: String
+    let type: OutputType
+
+    static let defaultSpeaker = DeviceInfo(uid: "speaker", name: "Speaker", type: .speaker)
+  }
+
   private(set) var currentOutputType: OutputType = .speaker
   var onOutputTypeChanged: ((OutputType) -> Void)?
+
+  var activeDevice: DeviceInfo = .defaultSpeaker
+  var onDeviceChanged: ((DeviceInfo) -> Void)?
 
   private var listenerInstalled = false
 
   private init() {
-    currentOutputType = detectOutputType()
+    let realDevice = resolveRealDeviceID()
+    if realDevice != kAudioObjectUnknown {
+      currentOutputType = classifyDevice(realDevice)
+      let uid = getDeviceUID(realDevice)
+      let name = getDeviceName(realDevice)
+      activeDevice = DeviceInfo(uid: uid, name: name, type: currentOutputType)
+    } else {
+      currentOutputType = .speaker
+    }
   }
 
   func start() {
@@ -65,39 +84,52 @@ final class AudioOutputDetector {
   }
 
   func checkAndNotify() {
-    let newType = detectOutputType()
+    let realDeviceID = resolveRealDeviceID()
+    guard realDeviceID != kAudioObjectUnknown else { return }
+
+    let newType = classifyDevice(realDeviceID)
+    let deviceUID = getDeviceUID(realDeviceID)
+    let deviceName = getDeviceName(realDeviceID)
+    let newDevice = DeviceInfo(uid: deviceUID, name: deviceName, type: newType)
+
     if newType != currentOutputType {
       logger.info("Output type changed: \(currentOutputType.rawValue) -> \(newType.rawValue)")
       currentOutputType = newType
       onOutputTypeChanged?(newType)
     }
+
+    if newDevice.uid != activeDevice.uid {
+      logger.info("Device changed: \(activeDevice.name) -> \(newDevice.name)")
+      activeDevice = newDevice
+      onDeviceChanged?(newDevice)
+    }
   }
 
-  private func detectOutputType() -> OutputType {
+  private func resolveRealDeviceID() -> AudioDeviceID {
     let deviceID = getDefaultOutputDevice()
-    guard deviceID != kAudioObjectUnknown else { return .speaker }
+    guard deviceID != kAudioObjectUnknown else { return kAudioObjectUnknown }
 
     let uid = getDeviceUID(deviceID)
     if uid == "ViPER4Mac_VirtualDevice" {
-      return detectFromRealOutput()
+      let engineOutput = AudioEngine.shared.outputDeviceID
+      if engineOutput != kAudioObjectUnknown {
+        return engineOutput
+      }
+      let devices = getAllDeviceIDs()
+      for device in devices {
+        if getDeviceUID(device) == "ViPER4Mac_VirtualDevice" { continue }
+        if !hasOutputStreams(device) { continue }
+        return device
+      }
+      return kAudioObjectUnknown
     }
-
-    return classifyDevice(deviceID)
+    return deviceID
   }
 
-  private func detectFromRealOutput() -> OutputType {
-    let engineOutput = AudioEngine.shared.outputDeviceID
-    if engineOutput != kAudioObjectUnknown {
-      return classifyDevice(engineOutput)
-    }
-    let devices = getAllDeviceIDs()
-    let viperUID = "ViPER4Mac_VirtualDevice"
-    for device in devices {
-      if getDeviceUID(device) == viperUID { continue }
-      if !hasOutputStreams(device) { continue }
-      return classifyDevice(device)
-    }
-    return .speaker
+  private func detectOutputType() -> OutputType {
+    let realDevice = resolveRealDeviceID()
+    guard realDevice != kAudioObjectUnknown else { return .speaker }
+    return classifyDevice(realDevice)
   }
 
   private func classifyDevice(_ deviceID: AudioDeviceID) -> OutputType {
@@ -182,6 +214,20 @@ final class AudioOutputDetector {
       return ""
     }
     return uid as String
+  }
+
+  private func getDeviceName(_ deviceID: AudioDeviceID) -> String {
+    var addr = AudioObjectPropertyAddress(
+      mSelector: kAudioObjectPropertyName,
+      mScope: kAudioObjectPropertyScopeGlobal,
+      mElement: kAudioObjectPropertyElementMain
+    )
+    var name: CFString = "" as CFString
+    var size = UInt32(MemoryLayout<CFString>.size)
+    guard AudioObjectGetPropertyData(deviceID, &addr, 0, nil, &size, &name) == noErr else {
+      return "Unknown"
+    }
+    return name as String
   }
 
   private func getAllDeviceIDs() -> [AudioDeviceID] {
