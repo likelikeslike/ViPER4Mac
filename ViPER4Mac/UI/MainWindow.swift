@@ -491,22 +491,25 @@ struct PopoverContentView: View {
 
   private var outputSection: some View {
     VStack(spacing: 6) {
-      let volValues = ViPERState.outputVolumeValues
-      let volPct = volValues[safe: state.outputVolume] ?? 100
-      let volDb = volPct > 0 ? 20.0 * log10(Double(volPct) / 100.0) : -99.9
-      steppedSlider(
-        Text("Output Gain"), value: $state.outputVolume, maxIndex: volValues.count - 1,
-        steps: volValues.count - 2, label: String(format: "%.1fdB", volDb)
+      paramSlider(
+        Text("Output Gain"), intValue: $state.outputVolume, range: 1 ... 200,
+        displayFn: { v in
+          let db = v > 0 ? 20.0 * log10(Double(v) / 100.0) : -99.9
+          return String(format: "%.1fdB", db)
+        }
       )
 
-      paramSlider(Text("Output Pan"), intValue: $state.channelPan, range: -100 ... 100)
+      paramSlider(
+        Text("Output Pan"), intValue: $state.channelPan, range: -100 ... 100,
+        displayFn: { v in "\(50 - v / 2):\(50 + v / 2)" }
+      )
 
-      let limValues = ViPERState.limiterValues
-      let limPct = limValues[safe: state.limiter] ?? 100
-      let limDb = limPct > 0 ? 20.0 * log10(Double(limPct) / 100.0) : -99.9
-      steppedSlider(
-        Text("Threshold Limit"), value: $state.limiter, maxIndex: limValues.count - 1,
-        steps: limValues.count - 2, label: String(format: "%.1fdB", limDb)
+      paramSlider(
+        Text("Threshold Limit"), intValue: $state.limiter, range: 30 ... 100,
+        displayFn: { v in
+          let db = v > 0 ? 20.0 * log10(Double(v) / 100.0) : -99.9
+          return String(format: "%.1fdB", db)
+        }
       )
     }
   }
@@ -587,10 +590,9 @@ struct PopoverContentView: View {
               displayFn: { "\($0 + 15)Hz" }
             )
           }
-          steppedSlider(
-            Text("Gain"), value: $state.viperBassGain, maxIndex: 19, steps: 18,
-            label:
-            ViPERState.bassGainDbLabels[safe: state.viperBassGain].map { "\($0)dB" } ?? "--"
+          paramSlider(
+            Text("Gain"), intValue: $state.viperBassGain, range: 50 ... 1000,
+            displayFn: { String(format: "%.1fx", Double($0) / 100.0) }
           )
           toggleRow(Text("Fade-in"), isOn: $state.viperBassAntiPop)
         }
@@ -618,10 +620,9 @@ struct PopoverContentView: View {
               displayFn: { "\($0 + 15)Hz" }
             )
           }
-          steppedSlider(
-            Text("Gain"), value: $state.viperBassMonoGain, maxIndex: 19, steps: 18,
-            label:
-            ViPERState.bassGainDbLabels[safe: state.viperBassMonoGain].map { "\($0)dB" } ?? "--"
+          paramSlider(
+            Text("Gain"), intValue: $state.viperBassMonoGain, range: 50 ... 1000,
+            displayFn: { String(format: "%.1fx", Double($0) / 100.0) }
           )
           toggleRow(Text("Fade-in"), isOn: $state.viperBassMonoAntiPop)
         }
@@ -643,10 +644,9 @@ struct PopoverContentView: View {
             Text("XHiFi").tag(2)
           }
           .pickerStyle(.segmented)
-          steppedSlider(
-            Text("Gain"), value: $state.viperClarityGain, maxIndex: 9, steps: 8,
-            label:
-            ViPERState.clarityGainDbLabels[safe: state.viperClarityGain].map { "\($0)dB" } ?? "--"
+          paramSlider(
+            Text("Gain"), intValue: $state.viperClarityGain, range: 0 ... 450,
+            displayFn: { String(format: "%.1fx", Double($0) / 100.0) }
           )
         }
         .padding(.leading, 4)
@@ -662,8 +662,9 @@ struct PopoverContentView: View {
       )
       if expandedSections.contains("surround") {
         VStack(spacing: 4) {
-          steppedSlider(
-            Text("Widening"), value: $state.fieldSurroundWidening, maxIndex: 8, steps: 7
+          paramSlider(
+            Text("Widening"), intValue: $state.fieldSurroundWidening, range: 0 ... 8,
+            displayFn: { "\($0)" }
           )
           steppedSlider(
             Text("Mid Image"), value: $state.fieldSurroundMidImage, maxIndex: 10, steps: 9
@@ -683,10 +684,9 @@ struct PopoverContentView: View {
       )
       if expandedSections.contains("diffsurr") {
         VStack(spacing: 4) {
-          let delayVal = ViPERState.diffSurroundDelayValues[safe: state.diffSurroundDelay] ?? 500
-          steppedSlider(
-            Text("Delay"), value: $state.diffSurroundDelay, maxIndex: 19, steps: 18,
-            label: "\(delayVal / 100)ms"
+          paramSlider(
+            Text("Delay"), intValue: $state.diffSurroundDelay, range: 1 ... 20,
+            displayFn: { "\($0) ms" }
           )
           toggleRow(Text("Reverse"), isOn: $state.diffSurroundReverse)
           paramSlider(
@@ -965,8 +965,9 @@ struct PopoverContentView: View {
       )
       if expandedSections.contains("vse") {
         VStack(spacing: 4) {
-          steppedSlider(
-            Text("Strength"), value: $state.spectrumExtensionBark, maxIndex: 10, steps: 9
+          paramSlider(
+            Text("Strength"), intValue: $state.spectrumExtensionBark, range: 2200 ... 8200,
+            displayFn: { "\($0) Hz" }
           )
           paramSlider(
             Text("Exciter"), intValue: $state.spectrumExtensionBarkReconstruct, range: 0 ... 100,
@@ -986,15 +987,20 @@ struct PopoverContentView: View {
       )
       if expandedSections.contains("agc") {
         VStack(spacing: 4) {
-          steppedSlider(Text("Strength"), value: $state.playbackGainStrength, maxIndex: 2, steps: 1)
-          steppedSlider(Text("Max Gain"), value: $state.playbackGainMaxGain, maxIndex: 10, steps: 9)
-          let threshValues = ViPERState.limiterValues
-          let threshPct = threshValues[safe: state.playbackGainOutputThreshold] ?? 100
-          let threshDb = threshPct > 0 ? 20.0 * log10(Double(threshPct) / 100.0) : -99.9
-          steppedSlider(
-            Text("Threshold"), value: $state.playbackGainOutputThreshold,
-            maxIndex: threshValues.count - 1, steps: threshValues.count - 2,
-            label: String(format: "%.1fdB", threshDb)
+          paramSlider(
+            Text("Strength"), intValue: $state.playbackGainStrength, range: 50 ... 300,
+            displayFn: { String(format: "%.1fx", Double($0) / 100.0) }
+          )
+          paramSlider(
+            Text("Max Gain"), intValue: $state.playbackGainMaxGain, range: 100 ... 1000,
+            displayFn: { String(format: "%.1fx", Double($0) / 100.0) }
+          )
+          paramSlider(
+            Text("Threshold"), intValue: $state.playbackGainOutputThreshold, range: 30 ... 100,
+            displayFn: { v in
+              let db = v > 0 ? 20.0 * log10(Double(v) / 100.0) : -99.9
+              return String(format: "%.1fdB", db)
+            }
           )
         }
         .padding(.leading, 4)
@@ -1174,7 +1180,7 @@ struct PopoverContentView: View {
               get: { state.mbcRatios[safe: b] ?? 50 },
               set: { state.mbcRatios[b] = $0; state.dispatchMbcBand(b) }
             ),
-            range: 0 ... 200, displayFn: { String(format: "%.2f", Double($0) / 100.0) }
+            range: 0 ... 200, displayFn: { String(format: "%.1f", Double($0) / 100.0) }
           )
           paramSlider(
             Text("Knee"),
@@ -1245,7 +1251,7 @@ struct PopoverContentView: View {
               get: { state.mbcKneeMultis[safe: b] ?? 0 },
               set: { state.mbcKneeMultis[b] = $0; state.dispatchMbcBand(b) }
             ),
-            range: 0 ... 400, displayFn: { String(format: "%.2fx", Double($0) / 100.0) }
+            range: 0 ... 400, displayFn: { String(format: "%.1fx", Double($0) / 100.0) }
           )
           paramSlider(
             Text("Max Attack"),
@@ -1350,9 +1356,7 @@ struct PopoverContentView: View {
                 }
                 .buttonStyle(.plain)
               }
-              if state.dynEqBandCount < 8,
-                 (state.dynEqFreqs.last ?? 0) < 19990
-              {
+              if state.dynEqBandCount < 8 {
                 Button(action: { state.addDynEqBand() }) {
                   Image(systemName: "plus")
                     .font(.caption)
@@ -1383,9 +1387,9 @@ struct PopoverContentView: View {
           }
 
           let b = min(state.dynEqSelectedBand, state.dynEqBandCount - 1)
-          let minFreq = b > 0 ? (state.dynEqFreqs[safe: b - 1] ?? 20) + 1 : 20
+          let minFreq = b > 0 ? (state.dynEqFreqs[safe: b - 1] ?? 20) + 5 : 20
           let maxFreq = b < state.dynEqBandCount - 1
-            ? (state.dynEqFreqs[safe: b + 1] ?? 20000) - 1 : 20000
+            ? (state.dynEqFreqs[safe: b + 1] ?? 20000) - 5 : 20000
           paramSlider(
             Text("Frequency"),
             intValue: Binding(
@@ -1416,7 +1420,7 @@ struct PopoverContentView: View {
               get: { state.dynEqThresholds[safe: b] ?? -250 },
               set: { state.dynEqThresholds[b] = $0; state.dispatchDynEqBand(b) }
             ),
-            range: -1000 ... 0, displayFn: { String(format: "%.1f dB", Double($0) / 10.0) }
+            range: -800 ... 0, displayFn: { "\($0 / 10) dB" }
           )
           paramSlider(
             Text("Attack"),

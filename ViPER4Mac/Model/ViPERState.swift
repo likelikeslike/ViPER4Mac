@@ -2,6 +2,7 @@ import Combine
 import CoreAudio
 import Foundation
 import ServiceManagement
+import SwiftUI
 
 private let logger = AppLogger(category: "ViPERState")
 
@@ -60,6 +61,8 @@ private enum Param {
   static let HP_DIFF_SURROUND_ENABLE = 0x101B0
   static let HP_DIFF_SURROUND_DELAY = 0x101B1
   static let HP_DIFF_SURROUND_REVERSE = 0x101B2
+  static let HP_DIFF_SURROUND_WET_DRY_MIX = 0x101B3
+  static let HP_DIFF_SURROUND_LP_CUTOFF = 0x101B4
   static let HP_CURE_ENABLE = 0x101C0
   static let HP_CURE_STRENGTH = 0x101C1
   static let HP_TUBE_SIMULATOR_ENABLE = 0x101D0
@@ -135,9 +138,6 @@ private enum Param {
   static let HP_PSYCHO_BASS_HARMONIC_ORDER = 0x10283
   static let HP_PSYCHO_BASS_ORIGINAL_LEVEL = 0x10284
 
-  static let HP_DIFF_SURROUND_WET_DRY_MIX = 0x101B3
-  static let HP_DIFF_SURROUND_LP_CUTOFF = 0x101B4
-
   static let SPK_CONVOLVER_ENABLE = 0x10300
   static let SPK_CONVOLVER_SET_KERNEL = 0x10301
   static let SPK_CONVOLVER_PREPARE_BUFFER = 0x10302
@@ -189,6 +189,8 @@ private enum Param {
   static let SPK_DIFF_SURROUND_ENABLE = 0x103B0
   static let SPK_DIFF_SURROUND_DELAY = 0x103B1
   static let SPK_DIFF_SURROUND_REVERSE = 0x103B2
+  static let SPK_DIFF_SURROUND_WET_DRY_MIX = 0x103B3
+  static let SPK_DIFF_SURROUND_LP_CUTOFF = 0x103B4
   static let SPK_CURE_ENABLE = 0x103C0
   static let SPK_CURE_STRENGTH = 0x103C1
   static let SPK_TUBE_SIMULATOR_ENABLE = 0x103D0
@@ -264,9 +266,6 @@ private enum Param {
   static let SPK_PSYCHO_BASS_INTENSITY = 0x10482
   static let SPK_PSYCHO_BASS_HARMONIC_ORDER = 0x10483
   static let SPK_PSYCHO_BASS_ORIGINAL_LEVEL = 0x10484
-
-  static let SPK_DIFF_SURROUND_WET_DRY_MIX = 0x103B3
-  static let SPK_DIFF_SURROUND_LP_CUTOFF = 0x103B4
 }
 
 struct EqPreset: Codable {
@@ -292,67 +291,35 @@ final class ViPERState: ObservableObject {
     AudioEngine.shared.viperBridge
   }
 
-  static let outputVolumeValues = [
-    1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
-    110, 120, 130, 140, 150, 160, 170, 180, 190, 200,
-  ]
-  static let limiterValues = [30, 50, 70, 80, 90, 100]
-  static let agcRatioValues = [50, 100, 300]
-  static let agcMaxGainValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 3000]
-  static let vseBarkValues = [2200, 2800, 3400, 4000, 4600, 5200, 5800, 6400, 7000, 7600, 8200]
-  static let diffSurroundDelayValues = (1 ... 20).map { $0 * 100 }
-  static let fieldSurroundWideningValues = [0, 100, 200, 300, 400, 500, 600, 700, 800]
-  static let bassGainDbLabels = [
-    "3.5", "6.0", "8.0", "9.5", "10.9", "12.0",
-    "13.1", "14.0", "14.8", "15.6", "16.1", "17.0",
-    "17.5", "18.1", "18.6", "19.1", "19.5", "20.0", "20.4", "20.8",
-  ]
-  static let subwooferGainDbLabels = [
-    "1.9", "8.0", "11.5", "14.0", "15.9", "17.5",
-    "18.8", "20.0", "21.0", "21.9", "22.8", "23.5",
-    "24.2", "24.9", "25.5", "26.0", "26.5", "27.0", "27.5", "28.0",
-  ]
-  static let clarityGainDbLabels = [
-    "0.0", "3.5", "6.0", "8.0", "10.0", "11.0",
-    "12.0", "13.0", "14.0", "14.8",
-  ]
-  static let dynamicSystemDevices: [(name: String, coeffs: String)] = [
-    ("Extreme Headphone (v2)", "140;6200;40;60;10;80"),
-    ("High-End Headphone (v2)", "180;5800;55;80;10;70"),
-    ("Common Headphone (v2)", "300;5600;60;105;10;50"),
-    ("Low-End Headphone (v2)", "600;5400;60;105;10;20"),
-    ("Common Earphone (v2)", "100;5600;40;80;50;50"),
-    ("Extreme Headphone (v1)", "1200;6200;40;80;0;20"),
-    ("High-End Headphone (v1)", "1000;6200;40;80;0;10"),
-    ("Common Headphone (v1)", "800;6200;40;80;10;0"),
-    ("Common Earphone (v1)", "400;6200;40;80;10;0"),
-    ("Apple Earphone", "1200;6200;50;90;15;10"),
-    ("Monster Earphone", "1000;6200;50;90;30;10"),
-    ("Motorola Earphone", "1100;6200;60;100;20;0"),
-    ("Philips Earphone", "1200;6200;50;100;10;50"),
-    ("SHP2000", "1200;6200;60;100;0;30"),
-    ("SHP9000", "1200;6200;40;80;0;30"),
-    ("Unknown Type I", "1000;6200;60;100;0;0"),
-    ("Unknown Type II", "1000;6200;60;120;0;0"),
-    ("Unknown Type III", "1000;6200;80;140;0;0"),
-    ("Unknown Type IV", "800;6200;80;140;0;0"),
-    ("Unknown Type V", "0;0;0;0;0;0"),
-    ("pittvandewitt flavor #1", "180;5400;40;60;50;0"),
-    ("pittvandewitt flavor #2", "1200;6000;40;60;0;80"),
-    ("pittvandewitt flavor #3", "140;5400;40;60;0;0"),
+  struct BuiltinDsPreset {
+    let key: String
+    let name: LocalizedStringKey
+    let coeffs: String
+  }
+
+  static let dynamicSystemDevices: [BuiltinDsPreset] = [
+    BuiltinDsPreset(key: "ds_device_extreme_headphone_v2", name: "Extreme Headphone (v2)", coeffs: "140;6200;40;60;10;80"),
+    BuiltinDsPreset(key: "ds_device_high_end_headphone_v2", name: "High-End Headphone (v2)", coeffs: "180;5800;55;80;10;70"),
+    BuiltinDsPreset(key: "ds_device_common_headphone_v2", name: "Common Headphone (v2)", coeffs: "300;5600;60;105;10;50"),
+    BuiltinDsPreset(key: "ds_device_low_end_headphone_v2", name: "Low-End Headphone (v2)", coeffs: "600;5400;60;105;10;20"),
+    BuiltinDsPreset(key: "ds_device_common_earphone_v2", name: "Common Earphone (v2)", coeffs: "100;5600;40;80;50;50"),
+    BuiltinDsPreset(key: "ds_device_extreme_headphone_v1", name: "Extreme Headphone (v1)", coeffs: "1200;6200;40;80;0;20"),
+    BuiltinDsPreset(key: "ds_device_high_end_headphone_v1", name: "High-End Headphone (v1)", coeffs: "1000;6200;40;80;0;10"),
+    BuiltinDsPreset(key: "ds_device_common_headphone_v1", name: "Common Headphone (v1)", coeffs: "800;6200;40;80;10;0"),
+    BuiltinDsPreset(key: "ds_device_common_earphone_v1", name: "Common Earphone (v1)", coeffs: "400;6200;40;80;10;0"),
   ]
 
   struct OutputState: Codable {
-    var volume: Int = 11
+    var volume: Int = 100
     var pan: Int = 0
-    var limiter: Int = 5
+    var limiter: Int = 100
   }
 
   struct AgcState: Codable {
     var enabled = false
-    var strength: Int = 0
-    var maxGain: Int = 3
-    var outputThreshold: Int = 3
+    var strength: Int = 50
+    var maxGain: Int = 100
+    var outputThreshold: Int = 100
   }
 
   struct FetState: Codable {
@@ -440,7 +407,7 @@ final class ViPERState: ObservableObject {
 
   struct VseState: Codable {
     var enabled = false
-    var bark: Int = 9
+    var bark: Int = 7600
     var barkReconstruct: Int = 0
   }
 
@@ -466,7 +433,7 @@ final class ViPERState: ObservableObject {
 
   struct DiffSurroundState: Codable {
     var enabled = false
-    var delay: Int = 4
+    var delay: Int = 5
     var reverse: Bool = false
     var wetDryMix: Int = 100
     var lpCutoff: Int = 0
@@ -502,19 +469,19 @@ final class ViPERState: ObservableObject {
     var enabled = false
     var mode: Int = 0
     var frequency: Int = 55
-    var gain: Int = 0
+    var gain: Int = 50
     var antiPop: Bool = true
     var monoEnabled = false
     var monoMode: Int = 0
     var monoFrequency: Int = 55
-    var monoGain: Int = 0
+    var monoGain: Int = 50
     var monoAntiPop: Bool = true
   }
 
   struct ClarityState: Codable {
     var enabled = false
     var mode: Int = 0
-    var gain: Int = 1
+    var gain: Int = 50
   }
 
   struct TubeState: Codable {
@@ -583,9 +550,9 @@ final class ViPERState: ObservableObject {
 
   @Published var fxType: FXType = .headphone
 
-  @Published var outputVolume: Int = 11
+  @Published var outputVolume: Int = 100
   @Published var channelPan: Int = 0
-  @Published var limiter: Int = 5
+  @Published var limiter: Int = 100
 
   @Published var convolutionEnabled = false
   @Published var convolutionCrossChannel: Int = 0
@@ -598,7 +565,7 @@ final class ViPERState: ObservableObject {
   @Published var ddcFilePath: String = ""
 
   @Published var spectrumExtensionEnabled = false
-  @Published var spectrumExtensionBark: Int = 9
+  @Published var spectrumExtensionBark: Int = 7600
   @Published var spectrumExtensionBarkReconstruct: Int = 0
 
   @Published var equalizerEnabled = false
@@ -612,8 +579,10 @@ final class ViPERState: ObservableObject {
   @Published var fieldSurroundDepth: Int = 0
 
   @Published var diffSurroundEnabled = false
-  @Published var diffSurroundDelay: Int = 4
+  @Published var diffSurroundDelay: Int = 5
   @Published var diffSurroundReverse: Bool = false
+  @Published var diffSurroundWetDryMix: Int = 100
+  @Published var diffSurroundLpCutoff: Int = 0
 
   @Published var reverberationEnabled = false
   @Published var reverberationRoomSize: Int = 0
@@ -649,9 +618,6 @@ final class ViPERState: ObservableObject {
   @Published var fetCompressorCrest: Int = 100
   @Published var fetCompressorAdapt: Int = 50
   @Published var fetCompressorNoClip = true
-
-  @Published var diffSurroundWetDryMix: Int = 100
-  @Published var diffSurroundLpCutoff: Int = 0
 
   @Published var stereoImgEnabled = false
   @Published var stereoImgLowWidth: Int = 100
@@ -706,18 +672,18 @@ final class ViPERState: ObservableObject {
   @Published var viperBassEnabled = false
   @Published var viperBassMode: Int = 0
   @Published var viperBassFrequency: Int = 55
-  @Published var viperBassGain: Int = 0
+  @Published var viperBassGain: Int = 50
   @Published var viperBassAntiPop: Bool = true
 
   @Published var viperBassMonoEnabled = false
   @Published var viperBassMonoMode: Int = 0
   @Published var viperBassMonoFrequency: Int = 55
-  @Published var viperBassMonoGain: Int = 0
+  @Published var viperBassMonoGain: Int = 50
   @Published var viperBassMonoAntiPop: Bool = true
 
   @Published var viperClarityEnabled = false
   @Published var viperClarityMode: Int = 0
-  @Published var viperClarityGain: Int = 1
+  @Published var viperClarityGain: Int = 50
 
   @Published var cureEnabled = false
   @Published var cureCrossfeedStrength: Int = 0
@@ -757,9 +723,9 @@ final class ViPERState: ObservableObject {
   }
 
   @Published var playbackGainEnabled = false
-  @Published var playbackGainStrength: Int = 0
-  @Published var playbackGainMaxGain: Int = 3
-  @Published var playbackGainOutputThreshold: Int = 3
+  @Published var playbackGainStrength: Int = 50
+  @Published var playbackGainMaxGain: Int = 100
+  @Published var playbackGainOutputThreshold: Int = 100
 
   enum FXType: Int {
     case headphone = 0
@@ -868,6 +834,42 @@ final class ViPERState: ObservableObject {
     let sec = Double(ms) / 1000.0
     let value = (log(sec) + 5.298317) / 5.991465 * 100.0
     return min(max(Int(value.rounded()), 0), 200)
+  }
+
+  static func bassFrequencyToRaw(_ value: Int) -> Int {
+    value + 15
+  }
+
+  static func bassGainToRaw(_ value: Int) -> Int {
+    value
+  }
+
+  static func clarityGainToRaw(_ value: Int) -> Int {
+    value
+  }
+
+  static func fieldSurroundWideningToRaw(_ value: Int) -> Int {
+    value * 100
+  }
+
+  static func fieldSurroundMidImageToRaw(_ value: Int) -> Int {
+    value * 10 + 100
+  }
+
+  static func fieldSurroundDepthToRaw(_ value: Int) -> Int {
+    value * 75 + 200
+  }
+
+  static func dynamicSystemStrengthToRaw(_ value: Int) -> Int {
+    value * 20 + 100
+  }
+
+  static func diffSurroundDelayToRaw(_ ms: Int) -> Int {
+    ms * 100
+  }
+
+  static func vseExciterToRaw(_ value: Int) -> Int {
+    Int(Double(value) * 5.6)
   }
 
   private func send(_ param: Int, _ val1: Int, _ val2: Int = 0, _ val3: Int = 0, _ val4: Int = 0) {
@@ -1162,9 +1164,9 @@ final class ViPERState: ObservableObject {
     let agcMaxParam = spk ? Param.SPK_AGC_MAX_SCALER : Param.HP_AGC_MAX_SCALER
     let fetBase = spk ? Param.SPK_FET_COMPRESSOR_ENABLE : Param.HP_FET_COMPRESSOR_ENABLE
 
-    send(volParam, Self.outputVolumeValues[safe: outputVolume] ?? 100)
+    send(volParam, outputVolume)
     send(spk ? Param.SPK_CHANNEL_PAN : Param.HP_CHANNEL_PAN, channelPan)
-    send(limParam, Self.limiterValues[safe: limiter] ?? 100)
+    send(limParam, limiter)
     send(convEnParam, convolutionEnabled && !convolutionKernelPath.isEmpty ? 1 : 0)
     send(convCcParam, convolutionCrossChannel)
     send(eqEnParam, equalizerEnabled ? 1 : 0)
@@ -1179,9 +1181,9 @@ final class ViPERState: ObservableObject {
     send(revWetParam, reverberationWetSignal)
     send(revDryParam, reverberationDrySignal)
     send(agcEnParam, playbackGainEnabled ? 1 : 0)
-    send(agcRatioParam, Self.agcRatioValues[safe: playbackGainStrength] ?? 50)
-    send(agcVolParam, Self.limiterValues[safe: playbackGainOutputThreshold] ?? 100)
-    send(agcMaxParam, Self.agcMaxGainValues[safe: playbackGainMaxGain] ?? 100)
+    send(agcRatioParam, playbackGainStrength)
+    send(agcVolParam, playbackGainOutputThreshold)
+    send(agcMaxParam, playbackGainMaxGain)
     send(fetBase, fetCompressorEnabled ? 100 : 0)
     send(fetBase + 1, Self.fetThresholdToRaw(fetCompressorThreshold))
     send(fetBase + 2, fetCompressorRatio)
@@ -1202,37 +1204,37 @@ final class ViPERState: ObservableObject {
 
     send(spk ? Param.SPK_BASS_ENABLE : Param.HP_BASS_ENABLE, viperBassEnabled ? 1 : 0)
     send(spk ? Param.SPK_BASS_MODE : Param.HP_BASS_MODE, viperBassMode)
-    send(spk ? Param.SPK_BASS_FREQUENCY : Param.HP_BASS_FREQUENCY, viperBassFrequency + 15)
-    send(spk ? Param.SPK_BASS_GAIN : Param.HP_BASS_GAIN, viperBassGain * 50 + 50)
+    send(spk ? Param.SPK_BASS_FREQUENCY : Param.HP_BASS_FREQUENCY, Self.bassFrequencyToRaw(viperBassFrequency))
+    send(spk ? Param.SPK_BASS_GAIN : Param.HP_BASS_GAIN, viperBassGain)
     send(spk ? Param.SPK_BASS_ANTI_POP : Param.HP_BASS_ANTI_POP, viperBassAntiPop ? 1 : 0)
     send(spk ? Param.SPK_BASS_MONO_ENABLE : Param.HP_BASS_MONO_ENABLE, viperBassMonoEnabled ? 1 : 0)
     send(spk ? Param.SPK_BASS_MONO_MODE : Param.HP_BASS_MONO_MODE, viperBassMonoMode)
     send(
       spk ? Param.SPK_BASS_MONO_FREQUENCY : Param.HP_BASS_MONO_FREQUENCY,
-      viperBassMonoFrequency + 15
+      Self.bassFrequencyToRaw(viperBassMonoFrequency)
     )
-    send(spk ? Param.SPK_BASS_MONO_GAIN : Param.HP_BASS_MONO_GAIN, viperBassMonoGain * 50 + 50)
+    send(spk ? Param.SPK_BASS_MONO_GAIN : Param.HP_BASS_MONO_GAIN, viperBassMonoGain)
     send(
       spk ? Param.SPK_BASS_MONO_ANTI_POP : Param.HP_BASS_MONO_ANTI_POP, viperBassMonoAntiPop ? 1 : 0
     )
     send(spk ? Param.SPK_CLARITY_ENABLE : Param.HP_CLARITY_ENABLE, viperClarityEnabled ? 1 : 0)
     send(spk ? Param.SPK_CLARITY_MODE : Param.HP_CLARITY_MODE, viperClarityMode)
-    send(spk ? Param.SPK_CLARITY_GAIN : Param.HP_CLARITY_GAIN, viperClarityGain * 50)
+    send(spk ? Param.SPK_CLARITY_GAIN : Param.HP_CLARITY_GAIN, viperClarityGain)
     send(
       spk ? Param.SPK_FIELD_SURROUND_ENABLE : Param.HP_FIELD_SURROUND_ENABLE,
       fieldSurroundEnabled ? 1 : 0
     )
     send(
       spk ? Param.SPK_FIELD_SURROUND_WIDENING : Param.HP_FIELD_SURROUND_WIDENING,
-      Self.fieldSurroundWideningValues[safe: fieldSurroundWidening] ?? 0
+      Self.fieldSurroundWideningToRaw(fieldSurroundWidening)
     )
     send(
       spk ? Param.SPK_FIELD_SURROUND_MID_IMAGE : Param.HP_FIELD_SURROUND_MID_IMAGE,
-      fieldSurroundMidImage * 10 + 100
+      Self.fieldSurroundMidImageToRaw(fieldSurroundMidImage)
     )
     send(
       spk ? Param.SPK_FIELD_SURROUND_DEPTH : Param.HP_FIELD_SURROUND_DEPTH,
-      fieldSurroundDepth * 75 + 200
+      Self.fieldSurroundDepthToRaw(fieldSurroundDepth)
     )
     send(
       spk ? Param.SPK_DIFF_SURROUND_ENABLE : Param.HP_DIFF_SURROUND_ENABLE,
@@ -1240,7 +1242,7 @@ final class ViPERState: ObservableObject {
     )
     send(
       spk ? Param.SPK_DIFF_SURROUND_DELAY : Param.HP_DIFF_SURROUND_DELAY,
-      Self.diffSurroundDelayValues[safe: diffSurroundDelay] ?? 500
+      Self.diffSurroundDelayToRaw(diffSurroundDelay)
     )
     send(
       spk ? Param.SPK_DIFF_SURROUND_REVERSE : Param.HP_DIFF_SURROUND_REVERSE,
@@ -1367,7 +1369,7 @@ final class ViPERState: ObservableObject {
     )
     send(
       spk ? Param.SPK_DYNAMIC_SYSTEM_STRENGTH : Param.HP_DYNAMIC_SYSTEM_STRENGTH,
-      dynamicSystemStrength * 20 + 100
+      Self.dynamicSystemStrengthToRaw(dynamicSystemStrength)
     )
     send(
       spk ? Param.SPK_TUBE_SIMULATOR_ENABLE : Param.HP_TUBE_SIMULATOR_ENABLE,
@@ -1390,13 +1392,13 @@ final class ViPERState: ObservableObject {
     )
     send(
       spk ? Param.SPK_SPECTRUM_EXTENSION_BARK : Param.HP_SPECTRUM_EXTENSION_BARK,
-      Self.vseBarkValues[safe: spectrumExtensionBark] ?? 7600
+      spectrumExtensionBark
     )
     send(
       spk
         ? Param.SPK_SPECTRUM_EXTENSION_BARK_RECONSTRUCT
         : Param.HP_SPECTRUM_EXTENSION_BARK_RECONSTRUCT,
-      Int(Double(spectrumExtensionBarkReconstruct) * 5.6)
+      Self.vseExciterToRaw(spectrumExtensionBarkReconstruct)
     )
     send(
       spk ? Param.SPK_DDC_ENABLE : Param.HP_DDC_ENABLE, ddcEnabled && !ddcFilePath.isEmpty ? 1 : 0
@@ -1609,9 +1611,8 @@ final class ViPERState: ObservableObject {
       self.reloadActiveFiles()
     }.store(in: &cancellables)
 
-    $outputVolume.dropFirst().sink { [weak self] idx in
+    $outputVolume.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      let v = Self.outputVolumeValues[safe: idx] ?? 100
       self.send(self.isActiveSpk ? Param.SPK_OUTPUT_VOLUME : Param.HP_OUTPUT_VOLUME, v)
     }.store(in: &cancellables)
 
@@ -1620,9 +1621,8 @@ final class ViPERState: ObservableObject {
       self.send(self.isActiveSpk ? Param.SPK_CHANNEL_PAN : Param.HP_CHANNEL_PAN, v)
     }.store(in: &cancellables)
 
-    $limiter.dropFirst().sink { [weak self] idx in
+    $limiter.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      let v = Self.limiterValues[safe: idx] ?? 100
       self.send(self.isActiveSpk ? Param.SPK_LIMITER : Param.HP_LIMITER, v)
     }.store(in: &cancellables)
 
@@ -1643,12 +1643,12 @@ final class ViPERState: ObservableObject {
 
     $viperBassFrequency.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      self.send(self.isActiveSpk ? Param.SPK_BASS_FREQUENCY : Param.HP_BASS_FREQUENCY, v + 15)
+      self.send(self.isActiveSpk ? Param.SPK_BASS_FREQUENCY : Param.HP_BASS_FREQUENCY, Self.bassFrequencyToRaw(v))
     }.store(in: &cancellables)
 
     $viperBassGain.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      self.send(self.isActiveSpk ? Param.SPK_BASS_GAIN : Param.HP_BASS_GAIN, v * 50 + 50)
+      self.send(self.isActiveSpk ? Param.SPK_BASS_GAIN : Param.HP_BASS_GAIN, v)
     }.store(in: &cancellables)
 
     $viperBassAntiPop.dropFirst().sink { [weak self] on in
@@ -1671,13 +1671,13 @@ final class ViPERState: ObservableObject {
     $viperBassMonoFrequency.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
-        self.isActiveSpk ? Param.SPK_BASS_MONO_FREQUENCY : Param.HP_BASS_MONO_FREQUENCY, v + 15
+        self.isActiveSpk ? Param.SPK_BASS_MONO_FREQUENCY : Param.HP_BASS_MONO_FREQUENCY, Self.bassFrequencyToRaw(v)
       )
     }.store(in: &cancellables)
 
     $viperBassMonoGain.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      self.send(self.isActiveSpk ? Param.SPK_BASS_MONO_GAIN : Param.HP_BASS_MONO_GAIN, v * 50 + 50)
+      self.send(self.isActiveSpk ? Param.SPK_BASS_MONO_GAIN : Param.HP_BASS_MONO_GAIN, v)
     }.store(in: &cancellables)
 
     $viperBassMonoAntiPop.dropFirst().sink { [weak self] on in
@@ -1699,7 +1699,7 @@ final class ViPERState: ObservableObject {
 
     $viperClarityGain.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      self.send(self.isActiveSpk ? Param.SPK_CLARITY_GAIN : Param.HP_CLARITY_GAIN, v * 50)
+      self.send(self.isActiveSpk ? Param.SPK_CLARITY_GAIN : Param.HP_CLARITY_GAIN, v)
     }.store(in: &cancellables)
 
     $fieldSurroundEnabled.dropFirst().sink { [weak self] on in
@@ -1710,11 +1710,11 @@ final class ViPERState: ObservableObject {
       )
     }.store(in: &cancellables)
 
-    $fieldSurroundWidening.dropFirst().sink { [weak self] idx in
+    $fieldSurroundWidening.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      let v = Self.fieldSurroundWideningValues[safe: idx] ?? 0
       self.send(
-        self.isActiveSpk ? Param.SPK_FIELD_SURROUND_WIDENING : Param.HP_FIELD_SURROUND_WIDENING, v
+        self.isActiveSpk ? Param.SPK_FIELD_SURROUND_WIDENING : Param.HP_FIELD_SURROUND_WIDENING,
+        Self.fieldSurroundWideningToRaw(v)
       )
     }.store(in: &cancellables)
 
@@ -1722,7 +1722,7 @@ final class ViPERState: ObservableObject {
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FIELD_SURROUND_MID_IMAGE : Param.HP_FIELD_SURROUND_MID_IMAGE,
-        v * 10 + 100
+        Self.fieldSurroundMidImageToRaw(v)
       )
     }.store(in: &cancellables)
 
@@ -1730,7 +1730,7 @@ final class ViPERState: ObservableObject {
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_FIELD_SURROUND_DEPTH : Param.HP_FIELD_SURROUND_DEPTH,
-        v * 75 + 200
+        Self.fieldSurroundDepthToRaw(v)
       )
     }.store(in: &cancellables)
 
@@ -1742,10 +1742,12 @@ final class ViPERState: ObservableObject {
       )
     }.store(in: &cancellables)
 
-    $diffSurroundDelay.dropFirst().sink { [weak self] idx in
+    $diffSurroundDelay.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      let v = Self.diffSurroundDelayValues[safe: idx] ?? 500
-      self.send(self.isActiveSpk ? Param.SPK_DIFF_SURROUND_DELAY : Param.HP_DIFF_SURROUND_DELAY, v)
+      self.send(
+        self.isActiveSpk ? Param.SPK_DIFF_SURROUND_DELAY : Param.HP_DIFF_SURROUND_DELAY,
+        Self.diffSurroundDelayToRaw(v)
+      )
     }.store(in: &cancellables)
 
     $diffSurroundReverse.dropFirst().sink { [weak self] on in
@@ -1809,7 +1811,7 @@ final class ViPERState: ObservableObject {
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(
         self.isActiveSpk ? Param.SPK_DYNAMIC_SYSTEM_STRENGTH : Param.HP_DYNAMIC_SYSTEM_STRENGTH,
-        v * 20 + 100
+        Self.dynamicSystemStrengthToRaw(v)
       )
     }.store(in: &cancellables)
 
@@ -1917,9 +1919,8 @@ final class ViPERState: ObservableObject {
       )
     }.store(in: &cancellables)
 
-    $spectrumExtensionBark.dropFirst().sink { [weak self] idx in
+    $spectrumExtensionBark.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      let v = Self.vseBarkValues[safe: idx] ?? 7600
       self.send(
         self.isActiveSpk ? Param.SPK_SPECTRUM_EXTENSION_BARK : Param.HP_SPECTRUM_EXTENSION_BARK, v
       )
@@ -1930,7 +1931,7 @@ final class ViPERState: ObservableObject {
       self.send(
         self.isActiveSpk
           ? Param.SPK_SPECTRUM_EXTENSION_BARK_RECONSTRUCT
-          : Param.HP_SPECTRUM_EXTENSION_BARK_RECONSTRUCT, Int(Double(v) * 5.6)
+          : Param.HP_SPECTRUM_EXTENSION_BARK_RECONSTRUCT, Self.vseExciterToRaw(v)
       )
     }.store(in: &cancellables)
 
@@ -2063,19 +2064,16 @@ final class ViPERState: ObservableObject {
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
       self.send(self.isActiveSpk ? Param.SPK_AGC_ENABLE : Param.HP_AGC_ENABLE, on ? 1 : 0)
     }.store(in: &cancellables)
-    $playbackGainStrength.dropFirst().sink { [weak self] idx in
+    $playbackGainStrength.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      let v = Self.agcRatioValues[safe: idx] ?? 50
       self.send(self.isActiveSpk ? Param.SPK_AGC_RATIO : Param.HP_AGC_RATIO, v)
     }.store(in: &cancellables)
-    $playbackGainMaxGain.dropFirst().sink { [weak self] idx in
+    $playbackGainMaxGain.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      let v = Self.agcMaxGainValues[safe: idx] ?? 100
       self.send(self.isActiveSpk ? Param.SPK_AGC_MAX_SCALER : Param.HP_AGC_MAX_SCALER, v)
     }.store(in: &cancellables)
-    $playbackGainOutputThreshold.dropFirst().sink { [weak self] idx in
+    $playbackGainOutputThreshold.dropFirst().sink { [weak self] v in
       guard let self, !self.suppressDispatch, self.fxType == self.activeDeviceType else { return }
-      let v = Self.limiterValues[safe: idx] ?? 100
       self.send(self.isActiveSpk ? Param.SPK_AGC_VOLUME : Param.HP_AGC_VOLUME, v)
     }.store(in: &cancellables)
 
@@ -2312,16 +2310,8 @@ final class ViPERState: ObservableObject {
 
   func addDynEqBand() {
     guard dynEqBandCount < 8 else { return }
-    let lastFreq = dynEqFreqs.last ?? 0
-    guard lastFreq < 19990 else { return }
     setDynEqBandCount(dynEqBandCount + 1)
-    let newIdx = dynEqBandCount - 1
-    if dynEqFreqs[safe: newIdx] ?? 0 <= lastFreq {
-      let suggested = min(20000, lastFreq + max(100, (20000 - lastFreq) / 2))
-      dynEqFreqs[newIdx] = (suggested / 5) * 5
-      dispatchDynEqBand(newIdx)
-    }
-    dynEqSelectedBand = newIdx
+    dynEqSelectedBand = dynEqBandCount - 1
   }
 
   func removeDynEqBand(at index: Int) {
