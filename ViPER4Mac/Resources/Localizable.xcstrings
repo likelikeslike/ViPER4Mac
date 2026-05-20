@@ -4,7 +4,29 @@
     "" : {
       "shouldTranslate" : false
     },
+    "%lld - %@ Hz" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld - %2$@ Hz"
+          }
+        }
+      }
+    },
     "%u Hz" : {
+
+    },
+    "2nd" : {
+
+    },
+    "3rd" : {
+
+    },
+    "4th" : {
+
+    },
+    "5th" : {
 
     },
     "10" : {
@@ -55,6 +77,12 @@
     "Auto Release" : {
 
     },
+    "Band" : {
+
+    },
+    "Band Enable" : {
+
+    },
     "Bands" : {
 
     },
@@ -70,6 +98,18 @@
     "Classical" : {
 
     },
+    "Common Earphone (v1)" : {
+
+    },
+    "Common Earphone (v2)" : {
+
+    },
+    "Common Headphone (v1)" : {
+
+    },
+    "Common Headphone (v2)" : {
+
+    },
     "Convolver" : {
 
     },
@@ -79,7 +119,13 @@
     "Cross Ch." : {
 
     },
+    "Crossover" : {
+
+    },
     "Custom" : {
+
+    },
+    "Cutoff" : {
 
     },
     "Dampening" : {
@@ -97,10 +143,19 @@
     "Delete selected preset" : {
 
     },
+    "Delete this band?" : {
+
+    },
     "Depth" : {
 
     },
     "Device" : {
+
+    },
+    "Device name" : {
+
+    },
+    "Devices" : {
 
     },
     "Differential Surround" : {
@@ -112,13 +167,25 @@
     "Dry" : {
 
     },
+    "Dynamic EQ" : {
+
+    },
     "Dynamic System" : {
 
     },
     "Exciter" : {
 
     },
+    "Extreme Headphone (v1)" : {
+
+    },
+    "Extreme Headphone (v2)" : {
+
+    },
     "Fade-in" : {
+
+    },
+    "Fast" : {
 
     },
     "FET Compressor" : {
@@ -128,6 +195,9 @@
 
     },
     "File" : {
+
+    },
+    "Filter" : {
 
     },
     "FIR Equalizer" : {
@@ -142,16 +212,37 @@
     "Gain" : {
 
     },
+    "Harmonic" : {
+
+    },
     "Headphone" : {
 
     },
     "Headphone Surround+" : {
 
     },
+    "High Shelf" : {
+
+    },
+    "High Width" : {
+
+    },
+    "High X-over" : {
+
+    },
+    "High-End Headphone (v1)" : {
+
+    },
+    "High-End Headphone (v2)" : {
+
+    },
     "Import" : {
 
     },
     "Inactive" : {
+
+    },
+    "Intensity" : {
 
     },
     "Kernel" : {
@@ -163,10 +254,31 @@
     "Knee Multi" : {
 
     },
+    "Last Connected" : {
+
+    },
     "Launch at Login" : {
 
     },
-    "Load..." : {
+    "Load" : {
+
+    },
+    "Low Shelf" : {
+
+    },
+    "Low Width" : {
+
+    },
+    "Low X-over" : {
+
+    },
+    "Low-End Headphone (v2)" : {
+
+    },
+    "LP Cutoff" : {
+
+    },
+    "LUFS Targeting" : {
 
     },
     "Max Attack" : {
@@ -184,10 +296,16 @@
     "Mid Image" : {
 
     },
+    "Mid Width" : {
+
+    },
     "Mild" : {
 
     },
     "Mode" : {
+
+    },
+    "Multiband Compressor" : {
 
     },
     "N/A" : {
@@ -208,6 +326,9 @@
     "Not Found" : {
 
     },
+    "Orig. Level" : {
+
+    },
     "Output Device" : {
 
     },
@@ -220,6 +341,9 @@
     "OZone+" : {
 
     },
+    "Peak" : {
+
+    },
     "Playback Gain Control" : {
 
     },
@@ -229,7 +353,16 @@
     "Preset name" : {
 
     },
+    "Presets" : {
+
+    },
+    "Psychoacoustic Bass" : {
+
+    },
     "Pure Bass+" : {
+
+    },
+    "Q" : {
 
     },
     "Quality" : {
@@ -247,7 +380,19 @@
     "Release" : {
 
     },
+    "Rename" : {
+
+    },
+    "Rename Device" : {
+
+    },
+    "Rename Preset" : {
+
+    },
     "Reverberation" : {
+
+    },
+    "Reverse" : {
 
     },
     "Rock" : {
@@ -280,6 +425,9 @@
     "Side Gain Lo" : {
 
     },
+    "Slow" : {
+
+    },
     "Small Speakers" : {
 
     },
@@ -292,6 +440,12 @@
     "Spectrum Extension" : {
 
     },
+    "Speed" : {
+
+    },
+    "Stereo Imager" : {
+
+    },
     "Streaming" : {
 
     },
@@ -302,6 +456,9 @@
 
     },
     "Subwoofer" : {
+
+    },
+    "Target" : {
 
     },
     "Threshold" : {
@@ -317,6 +474,12 @@
 
     },
     "Tube Simulator (6N1J)" : {
+
+    },
+    "UID" : {
+
+    },
+    "Update" : {
 
     },
     "v%@" : {
@@ -341,6 +504,9 @@
 
     },
     "Wet" : {
+
+    },
+    "Wet/Dry" : {
 
     },
     "Widening" : {
