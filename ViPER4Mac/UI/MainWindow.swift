@@ -540,7 +540,7 @@ struct PopoverContentView: View {
   private var eqSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("FIR Equalizer"), icon: "slider.vertical.3", id: "eq", isOn: $state.equalizerEnabled
+        Text("FIR Equalizer"), icon: "chart.bar.xaxis", id: "eq", isOn: $state.equalizerEnabled
       )
       if expandedSections.contains("eq") {
         EqCurveGraph(
@@ -641,7 +641,7 @@ struct PopoverContentView: View {
   private var surroundSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("Field Surround"), icon: "dot.radiowaves.left.and.right", id: "surround",
+        Text("Field Surround"), icon: "person.and.background.dotted", id: "surround",
         isOn: $state.fieldSurroundEnabled
       )
       if expandedSections.contains("surround") {
@@ -720,7 +720,7 @@ struct PopoverContentView: View {
   private var dynamicSystemSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("Dynamic System"), icon: "hifispeaker.fill", id: "dynsys",
+        Text("Dynamic System"), icon: "slider.horizontal.3", id: "dynsys",
         isOn: $state.dynamicSystemEnabled
       )
       if expandedSections.contains("dynsys") {
@@ -869,7 +869,7 @@ struct PopoverContentView: View {
   private var compressorSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("FET Compressor"), icon: "rectangle.compress.vertical", id: "comp",
+        Text("FET Compressor"), icon: "arrow.down.and.line.horizontal.and.arrow.up", id: "comp",
         isOn: $state.fetCompressorEnabled
       )
       if expandedSections.contains("comp") {
@@ -995,7 +995,7 @@ struct PopoverContentView: View {
   private var ddcSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("ViPER-DDC"), icon: "slider.horizontal.3", id: "ddc", isOn: $state.ddcEnabled
+        Text("ViPER-DDC"), icon: "waveform.path.ecg.rectangle", id: "ddc", isOn: $state.ddcEnabled
       )
       if expandedSections.contains("ddc") {
         VStack(spacing: 4) {
@@ -1124,7 +1124,7 @@ struct PopoverContentView: View {
   private var mbcSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("Multiband Compressor"), icon: "waveform.badge.plus", id: "mbc",
+        Text("Multiband Compressor"), icon: "rectangle.compress.vertical", id: "mbc",
         isOn: $state.mbcEnabled
       )
       if expandedSections.contains("mbc") {
@@ -1447,7 +1447,7 @@ struct PopoverContentView: View {
   private var stereoImagerSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("Stereo Imager"), icon: "arrow.left.and.right", id: "stereoimg",
+        Text("Stereo Imager"), icon: "dot.radiowaves.left.and.right", id: "stereoimg",
         isOn: $state.stereoImgEnabled
       )
       if expandedSections.contains("stereoimg") {
@@ -1487,7 +1487,7 @@ struct PopoverContentView: View {
   private var lufsTargetingSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("LUFS Targeting"), icon: "gauge.with.needle", id: "lufs",
+        Text("LUFS Targeting"), icon: "target", id: "lufs",
         isOn: $state.lufsEnabled
       )
       if expandedSections.contains("lufs") {
@@ -1517,7 +1517,7 @@ struct PopoverContentView: View {
   private var psychoacousticBassSection: some View {
     VStack(spacing: 4) {
       sectionHeader(
-        Text("Psychoacoustic Bass"), icon: "speaker.wave.3", id: "psychobass",
+        Text("Psychoacoustic Bass"), icon: "brain.head.profile", id: "psychobass",
         isOn: $state.psychoBassEnabled
       )
       if expandedSections.contains("psychobass") {
