@@ -20,7 +20,6 @@ final class AudioOutputDetector {
   }
 
   private(set) var currentOutputType: OutputType = .speaker
-  var onOutputTypeChanged: ((OutputType) -> Void)?
 
   var activeDevice: DeviceInfo = .defaultSpeaker
   var onDeviceChanged: ((DeviceInfo) -> Void)?
@@ -92,17 +91,19 @@ final class AudioOutputDetector {
     let deviceName = getDeviceName(realDeviceID)
     let newDevice = DeviceInfo(uid: deviceUID, name: deviceName, type: newType)
 
-    if newType != currentOutputType {
+    let typeChanged = newType != currentOutputType
+    let uidChanged = newDevice.uid != activeDevice.uid
+    guard typeChanged || uidChanged else { return }
+
+    if typeChanged {
       logger.info("Output type changed: \(currentOutputType.rawValue) -> \(newType.rawValue)")
       currentOutputType = newType
-      onOutputTypeChanged?(newType)
     }
-
-    if newDevice.uid != activeDevice.uid {
+    if uidChanged {
       logger.info("Device changed: \(activeDevice.name) -> \(newDevice.name)")
-      activeDevice = newDevice
-      onDeviceChanged?(newDevice)
     }
+    activeDevice = newDevice
+    onDeviceChanged?(newDevice)
   }
 
   private func resolveRealDeviceID() -> AudioDeviceID {

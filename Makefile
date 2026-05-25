@@ -40,3 +40,6 @@ uninstall:
 
 clean:
 	rm -rf build
+
+format:
+	swiftformat ViPER4Mac --swift-version 5

@@ -5,12 +5,6 @@ import Foundation
 
 private let logger = AppLogger(category: "AudioEngine")
 
-struct OutputDeviceInfo: Identifiable, Equatable {
-  let id: AudioDeviceID
-  let name: String
-  let uid: String
-}
-
 final class AudioEngine {
   static let shared = AudioEngine()
 
@@ -102,16 +96,6 @@ final class AudioEngine {
   var outputDeviceName: String {
     guard outputDeviceID != kAudioObjectUnknown else { return "None" }
     return getDeviceName(outputDeviceID)
-  }
-
-  func getAvailableOutputDevices() -> [OutputDeviceInfo] {
-    getAllDeviceIDs().compactMap { deviceID in
-      let uid = getDeviceUID(deviceID)
-      guard hasOutputStreams(deviceID),
-            isDeviceAlive(deviceID)
-      else { return nil }
-      return OutputDeviceInfo(id: deviceID, name: getDeviceName(deviceID), uid: uid)
-    }
   }
 
   // MARK: - Process Tap

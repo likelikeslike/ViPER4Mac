@@ -142,22 +142,6 @@ struct PopoverContentView: View {
       }
       .pickerStyle(.segmented)
       .tint(.viperPurple)
-
-      if !state.availableOutputDevices.isEmpty {
-        HStack(spacing: 6) {
-          Image(systemName: "hifispeaker.2")
-            .font(.caption)
-            .foregroundStyle(.secondary)
-            .frame(width: 16)
-          Picker("", selection: $state.selectedOutputDeviceID) {
-            ForEach(state.availableOutputDevices) { device in
-              Text(device.name).tag(device.id)
-            }
-          }
-          .labelsHidden()
-          .frame(maxWidth: .infinity)
-        }
-      }
     }
   }
 

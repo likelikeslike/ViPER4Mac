@@ -565,6 +565,7 @@ final class ViPERState: ObservableObject {
   private var headphoneState = ModeState()
   private var speakerState = ModeState()
   private var suppressDispatch = false
+  private var suppressFxTypeSink = false
 
   @Published var isEnabled = true
   @Published var launchAtLogin: Bool = SMAppService.mainApp.status == .enabled {
@@ -744,17 +745,6 @@ final class ViPERState: ObservableObject {
   private var lastProcessedFrames: UInt64 = 0
   private var statusTimer: Timer?
 
-  @Published var availableOutputDevices: [OutputDeviceInfo] = []
-  @Published var selectedOutputDeviceID: AudioDeviceID = 0 {
-    didSet {
-      guard selectedOutputDeviceID != oldValue,
-            selectedOutputDeviceID != 0,
-            selectedOutputDeviceID != AudioEngine.shared.outputDeviceID
-      else { return }
-      AudioEngine.shared.switchOutputDevice(to: selectedOutputDeviceID)
-    }
-  }
-
   @Published var playbackGainEnabled = false
   @Published var playbackGainStrength: Int = 50
   @Published var playbackGainMaxGain: Int = 100
@@ -802,8 +792,6 @@ final class ViPERState: ObservableObject {
     outputDeviceName = engine.outputDeviceName
     currentSampleRate = bridge.getSamplingRate()
     dspVersion = "\(bridge.getVersionName()) (\(bridge.getVersionCode()))"
-    availableOutputDevices = engine.getAvailableOutputDevices()
-    selectedOutputDeviceID = engine.outputDeviceID
     let processedFrames = bridge.getProcessedFrames()
     isProcessing = processedFrames > 0 && processedFrames != lastProcessedFrames
     lastProcessedFrames = processedFrames
@@ -1319,37 +1307,84 @@ final class ViPERState: ObservableObject {
     send(Param.SPK_SPEAKER_CORRECTION_ENABLE, speakerCorrectionEnabled ? 1 : 0)
   }
 
-  func handleDeviceTypeChange(_ newType: AudioOutputDetector.OutputType) {
-    let fxType: FXType = newType == .headphone ? .headphone : .speaker
-    guard fxType != activeDeviceType else { return }
-    logger.info("Device type changed: \(fxType.rawValue) active=\(activeDeviceType.rawValue)")
+  func handleDeviceChanged(_ device: AudioOutputDetector.DeviceInfo) {
+    let newType: FXType = device.type == .headphone ? .headphone : .speaker
+    let oldUID = currentDeviceUID
+    let oldType = activeDeviceType
+    let typeChanged = newType != oldType
+    let uidChanged = device.uid != oldUID && !device.uid.isEmpty
 
-    saveToMode(isSpk: isSpk)
-    activeDeviceType = fxType
-    self.fxType = fxType
-    let source = isActiveSpk ? speakerState : headphoneState
-    loadModeToActive(source)
+    guard typeChanged || uidChanged else { return }
+
+    logger.info(
+      "Device transition: \(oldType.rawValue)/\(oldUID) -> \(newType.rawValue)/\(device.uid)"
+    )
+
+    saveToMode(isSpk: oldType == .speaker)
+    if !oldUID.isEmpty {
+      writeDeviceProfile(uid: oldUID, isHeadphone: oldType == .headphone)
+    }
+
+    currentDeviceUID = device.uid
+    currentDeviceName = device.name
+    if typeChanged {
+      activeDeviceType = newType
+      suppressFxTypeSink = true
+      fxType = newType
+      suppressFxTypeSink = false
+    }
+
+    let modeState =
+      readDeviceProfile(uid: device.uid, isHeadphone: device.type == .headphone)
+        ?? (newType == .speaker ? speakerState : headphoneState)
+    if newType == .speaker {
+      speakerState = modeState
+    } else {
+      headphoneState = modeState
+    }
+    loadModeToActive(modeState)
+    reloadActiveFiles()
     dispatchFullModeState()
+
+    saveSettings()
   }
 
-  func handleDeviceChanged(_ device: AudioOutputDetector.DeviceInfo) {
-    let fxType: FXType = device.type == .headphone ? .headphone : .speaker
-
-    if device.uid != currentDeviceUID && !device.uid.isEmpty {
-      saveCurrentDeviceSettings()
-      currentDeviceUID = device.uid
-      currentDeviceName = device.name
-
-      if fxType != activeDeviceType {
-        saveToMode(isSpk: isSpk)
-        activeDeviceType = fxType
-        self.fxType = fxType
-      }
-
-      loadDeviceSettings(device.uid, isHeadphone: device.type == .headphone)
-    } else if fxType != activeDeviceType {
-      handleDeviceTypeChange(device.type)
+  private func writeDeviceProfile(uid: String, isHeadphone: Bool) {
+    guard !uid.isEmpty else { return }
+    let url = ProfileFileManager.shared.fileURL(
+      name: "\(safeFileName(uid)).json", type: .deviceProfile
+    )
+    let source = isHeadphone ? headphoneState : speakerState
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .prettyPrinted
+    guard let data = try? encoder.encode(source) else { return }
+    var wrapper: [String: Any] = [
+      "deviceUID": uid,
+      "deviceName": currentDeviceUID == uid ? currentDeviceName : uid,
+      "isHeadphone": isHeadphone,
+      "lastConnected": Int(Date().timeIntervalSince1970 * 1000),
+    ]
+    if let settings = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+      wrapper["settings"] = settings
     }
+    if let jsonData = try? JSONSerialization.data(withJSONObject: wrapper, options: .prettyPrinted) {
+      try? jsonData.write(to: url)
+    }
+  }
+
+  private func readDeviceProfile(uid: String, isHeadphone _: Bool) -> ModeState? {
+    guard !uid.isEmpty else { return nil }
+    let url = ProfileFileManager.shared.fileURL(
+      name: "\(safeFileName(uid)).json", type: .deviceProfile
+    )
+    guard FileManager.default.fileExists(atPath: url.path),
+          let data = try? Data(contentsOf: url),
+          let wrapper = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+          let settings = wrapper["settings"] as? [String: Any],
+          let settingsData = try? JSONSerialization.data(withJSONObject: settings),
+          let modeState = try? JSONDecoder().decode(ModeState.self, from: settingsData)
+    else { return nil }
+    return modeState
   }
 
   func saveCurrentDeviceSettings() {
@@ -1536,7 +1571,7 @@ final class ViPERState: ObservableObject {
     }.store(in: &cancellables)
 
     $fxType.dropFirst().sink { [weak self] newType in
-      guard let self else { return }
+      guard let self, !self.suppressFxTypeSink else { return }
       logger.info("FX tab switched to \(newType == .speaker ? "speaker" : "headphone")")
       let previousWasSpk = newType == .speaker ? false : true
       self.saveToMode(isSpk: previousWasSpk)

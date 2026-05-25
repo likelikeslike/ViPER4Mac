@@ -50,9 +50,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
   private func setupOutputDetector() {
     let detector = AudioOutputDetector.shared
-    detector.onOutputTypeChanged = { newType in
-      ViPERState.shared.handleDeviceTypeChange(newType)
-    }
     detector.onDeviceChanged = { deviceInfo in
       ViPERState.shared.handleDeviceChanged(deviceInfo)
     }
