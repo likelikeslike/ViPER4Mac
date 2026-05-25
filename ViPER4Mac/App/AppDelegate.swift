@@ -67,7 +67,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   private func setupEngineDeviceCallback() {
     AudioEngine.shared.onOutputDeviceChanged = {
       AudioOutputDetector.shared.checkAndNotify()
-      ViPERState.shared.refreshDriverStatus()
+      ViPERState.shared.refreshEngineStatus()
     }
   }
 

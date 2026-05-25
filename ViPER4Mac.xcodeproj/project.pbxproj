@@ -112,7 +112,6 @@
 		7F4FBBB82F66D447002A6C68 /* Biquad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBB132F66D447002A6C68 /* Biquad.cpp */; };
 		7F4FBC3B2F66E33B002A6C68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBC382F66E33B002A6C68 /* Assets.xcassets */; };
 		7F4FBC3C2F66E33B002A6C68 /* ViPER4MacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBC362F66E33B002A6C68 /* ViPER4MacApp.swift */; };
-		7F4FBC4F2F66EB84002A6C68 /* ViPERDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBC4E2F66EB84002A6C68 /* ViPERDriver.cpp */; };
 		7F9471482FBCBF7600477DDB /* MultibandCompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F9471432FBCBF7600477DDB /* MultibandCompressor.cpp */; };
 		7F9471492FBCBF7600477DDB /* StereoImager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F9471472FBCBF7600477DDB /* StereoImager.cpp */; };
 		7F94714A2FBCBF7600477DDB /* LUFSTargeting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F9471412FBCBF7600477DDB /* LUFSTargeting.cpp */; };
@@ -123,42 +122,11 @@
 		7F94714F2FBCBF7600477DDB /* MultibandCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F9471422FBCBF7600477DDB /* MultibandCompressor.h */; };
 		7F9471502FBCBF7600477DDB /* StereoImager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F9471462FBCBF7600477DDB /* StereoImager.h */; };
 		7F9471512FBCBF7600477DDB /* DynamicEQ.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F94713E2FBCBF7600477DDB /* DynamicEQ.h */; };
-		7FD060122F66F22D00DA4E0E /* Device.g.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE582F66EFD1002A6C68 /* Device.g.cpp */; };
-		7FD060132F66F22D00DA4E0E /* Storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE642F66EFD1002A6C68 /* Storage.cpp */; };
-		7FD060142F66F22D00DA4E0E /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE522F66EFD1002A6C68 /* Client.cpp */; };
-		7FD060152F66F22D00DA4E0E /* VolumeControl.g.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE722F66EFD1002A6C68 /* VolumeControl.g.cpp */; };
-		7FD060162F66F22D00DA4E0E /* Driver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE5A2F66EFD1002A6C68 /* Driver.cpp */; };
-		7FD060172F66F22D00DA4E0E /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE5E2F66EFD1002A6C68 /* Object.cpp */; };
-		7FD060182F66F22D00DA4E0E /* Strings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE692F66EFD1002A6C68 /* Strings.cpp */; };
-		7FD060192F66F22D00DA4E0E /* Uid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE6E2F66EFD1002A6C68 /* Uid.cpp */; };
-		7FD0601A2F66F22D00DA4E0E /* Bridge.g.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE512F66EFD1002A6C68 /* Bridge.g.cpp */; };
-		7FD0601B2F66F22D00DA4E0E /* Object.g.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE602F66EFD1002A6C68 /* Object.g.cpp */; };
-		7FD0601C2F66F22D00DA4E0E /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE562F66EFD1002A6C68 /* Device.cpp */; };
-		7FD0601D2F66F22D00DA4E0E /* Convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE552F66EFD1002A6C68 /* Convert.cpp */; };
-		7FD0601E2F66F22D00DA4E0E /* MuteControl.g.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE5D2F66EFD1002A6C68 /* MuteControl.g.cpp */; };
-		7FD0601F2F66F22D00DA4E0E /* MuteControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE5B2F66EFD1002A6C68 /* MuteControl.cpp */; };
-		7FD060202F66F22D00DA4E0E /* VolumeCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE742F66EFD1002A6C68 /* VolumeCurve.cpp */; };
-		7FD060212F66F22D00DA4E0E /* Stream.g.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE672F66EFD1002A6C68 /* Stream.g.cpp */; };
-		7FD060222F66F22D00DA4E0E /* Plugin.g.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE632F66EFD1002A6C68 /* Plugin.g.cpp */; };
-		7FD060232F66F22D00DA4E0E /* Strings.g.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE6A2F66EFD1002A6C68 /* Strings.g.cpp */; };
-		7FD060242F66F22D00DA4E0E /* VolumeControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE702F66EFD1002A6C68 /* VolumeControl.cpp */; };
-		7FD060252F66F22D00DA4E0E /* Plugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE612F66EFD1002A6C68 /* Plugin.cpp */; };
-		7FD060262F66F22D00DA4E0E /* Dispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE592F66EFD1002A6C68 /* Dispatcher.cpp */; };
-		7FD060272F66F22D00DA4E0E /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE652F66EFD1002A6C68 /* Stream.cpp */; };
-		7FD060282F66F2AB00DA4E0E /* TPCircularBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0600D2F66F11400DA4E0E /* TPCircularBuffer.c */; };
 		7FD060302F66F82000DA4E0E /* libViPERDSP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4FB9332F66D193002A6C68 /* libViPERDSP.a */; };
-		7FD060332F66FC9F00DA4E0E /* Tracer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F4FBE6B2F66EFD1002A6C68 /* Tracer.cpp */; };
 		7FD060372F66FE8E00DA4E0E /* ViPERBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060362F66FE8E00DA4E0E /* ViPERBridge.mm */; };
 		7FD0603D2F670BC600DA4E0E /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0603C2F670BC600DA4E0E /* AudioEngine.swift */; };
 		7FD060412F684E1F00DA4E0E /* FileLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060402F684E1F00DA4E0E /* FileLogger.swift */; };
 		7FD060432F6851EF00DA4E0E /* AudioOutputDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060422F6851EF00DA4E0E /* AudioOutputDetector.swift */; };
-		7FD060442F68550F00DA4E0E /* Bridge.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE502F66EFD1002A6C68 /* Bridge.json */; };
-		7FD060452F68550F00DA4E0E /* Device.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE572F66EFD1002A6C68 /* Device.json */; };
-		7FD060462F68550F00DA4E0E /* MuteControl.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE5C2F66EFD1002A6C68 /* MuteControl.json */; };
-		7FD060472F68550F00DA4E0E /* Object.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE5F2F66EFD1002A6C68 /* Object.json */; };
-		7FD060482F68550F00DA4E0E /* Plugin.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE622F66EFD1002A6C68 /* Plugin.json */; };
-		7FD060492F68550F00DA4E0E /* Stream.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE662F66EFD1002A6C68 /* Stream.json */; };
-		7FD0604A2F68550F00DA4E0E /* VolumeControl.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F4FBE712F66EFD1002A6C68 /* VolumeControl.json */; };
 		7FD0604E2F68566100DA4E0E /* ProfileFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0604D2F68566100DA4E0E /* ProfileFileManager.swift */; };
 		7FD060502F68577700DA4E0E /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0604F2F68577700DA4E0E /* SafeSubscript.swift */; };
 		7FD060522F68579B00DA4E0E /* ViPERState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD060512F68579B00DA4E0E /* ViPERState.swift */; };
@@ -286,67 +254,6 @@
 		7F4FBB4A2F66D447002A6C68 /* ViPER.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ViPER.cpp; sourceTree = "<group>"; };
 		7F4FBC362F66E33B002A6C68 /* ViPER4MacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViPER4MacApp.swift; sourceTree = "<group>"; };
 		7F4FBC382F66E33B002A6C68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7F4FBC472F66EA6F002A6C68 /* ViPER4Mac.driver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViPER4Mac.driver; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F4FBC4E2F66EB84002A6C68 /* ViPERDriver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ViPERDriver.cpp; sourceTree = "<group>"; };
-		7F4FBC502F66EBB0002A6C68 /* ViPERSharedRing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViPERSharedRing.h; sourceTree = "<group>"; };
-		7F4FBE372F66EFD1002A6C68 /* Client.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Client.hpp; sourceTree = "<group>"; };
-		7F4FBE382F66EFD1002A6C68 /* Compat.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Compat.hpp; sourceTree = "<group>"; };
-		7F4FBE392F66EFD1002A6C68 /* Context.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Context.hpp; sourceTree = "<group>"; };
-		7F4FBE3A2F66EFD1002A6C68 /* ControlRequestHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ControlRequestHandler.hpp; sourceTree = "<group>"; };
-		7F4FBE3B2F66EFD1002A6C68 /* Device.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Device.hpp; sourceTree = "<group>"; };
-		7F4FBE3C2F66EFD1002A6C68 /* Direction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Direction.hpp; sourceTree = "<group>"; };
-		7F4FBE3D2F66EFD1002A6C68 /* Dispatcher.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Dispatcher.hpp; sourceTree = "<group>"; };
-		7F4FBE3E2F66EFD1002A6C68 /* DoubleBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DoubleBuffer.hpp; sourceTree = "<group>"; };
-		7F4FBE3F2F66EFD1002A6C68 /* Driver.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Driver.hpp; sourceTree = "<group>"; };
-		7F4FBE402F66EFD1002A6C68 /* DriverRequestHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DriverRequestHandler.hpp; sourceTree = "<group>"; };
-		7F4FBE412F66EFD1002A6C68 /* IORequestHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IORequestHandler.hpp; sourceTree = "<group>"; };
-		7F4FBE422F66EFD1002A6C68 /* MuteControl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MuteControl.hpp; sourceTree = "<group>"; };
-		7F4FBE432F66EFD1002A6C68 /* Object.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Object.hpp; sourceTree = "<group>"; };
-		7F4FBE442F66EFD1002A6C68 /* Plugin.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Plugin.hpp; sourceTree = "<group>"; };
-		7F4FBE452F66EFD1002A6C68 /* Storage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Storage.hpp; sourceTree = "<group>"; };
-		7F4FBE462F66EFD1002A6C68 /* Stream.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Stream.hpp; sourceTree = "<group>"; };
-		7F4FBE472F66EFD1002A6C68 /* Tracer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tracer.hpp; sourceTree = "<group>"; };
-		7F4FBE482F66EFD1002A6C68 /* VolumeControl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VolumeControl.hpp; sourceTree = "<group>"; };
-		7F4FBE4F2F66EFD1002A6C68 /* Bridge.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Bridge.hpp; sourceTree = "<group>"; };
-		7F4FBE502F66EFD1002A6C68 /* Bridge.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bridge.json; sourceTree = "<group>"; };
-		7F4FBE512F66EFD1002A6C68 /* Bridge.g.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bridge.g.cpp; sourceTree = "<group>"; };
-		7F4FBE522F66EFD1002A6C68 /* Client.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Client.cpp; sourceTree = "<group>"; };
-		7F4FBE532F66EFD1002A6C68 /* Compare.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Compare.hpp; sourceTree = "<group>"; };
-		7F4FBE542F66EFD1002A6C68 /* Convert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Convert.hpp; sourceTree = "<group>"; };
-		7F4FBE552F66EFD1002A6C68 /* Convert.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Convert.cpp; sourceTree = "<group>"; };
-		7F4FBE562F66EFD1002A6C68 /* Device.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Device.cpp; sourceTree = "<group>"; };
-		7F4FBE572F66EFD1002A6C68 /* Device.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Device.json; sourceTree = "<group>"; };
-		7F4FBE582F66EFD1002A6C68 /* Device.g.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Device.g.cpp; sourceTree = "<group>"; };
-		7F4FBE592F66EFD1002A6C68 /* Dispatcher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Dispatcher.cpp; sourceTree = "<group>"; };
-		7F4FBE5A2F66EFD1002A6C68 /* Driver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Driver.cpp; sourceTree = "<group>"; };
-		7F4FBE5B2F66EFD1002A6C68 /* MuteControl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MuteControl.cpp; sourceTree = "<group>"; };
-		7F4FBE5C2F66EFD1002A6C68 /* MuteControl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MuteControl.json; sourceTree = "<group>"; };
-		7F4FBE5D2F66EFD1002A6C68 /* MuteControl.g.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MuteControl.g.cpp; sourceTree = "<group>"; };
-		7F4FBE5E2F66EFD1002A6C68 /* Object.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
-		7F4FBE5F2F66EFD1002A6C68 /* Object.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Object.json; sourceTree = "<group>"; };
-		7F4FBE602F66EFD1002A6C68 /* Object.g.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Object.g.cpp; sourceTree = "<group>"; };
-		7F4FBE612F66EFD1002A6C68 /* Plugin.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin.cpp; sourceTree = "<group>"; };
-		7F4FBE622F66EFD1002A6C68 /* Plugin.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Plugin.json; sourceTree = "<group>"; };
-		7F4FBE632F66EFD1002A6C68 /* Plugin.g.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Plugin.g.cpp; sourceTree = "<group>"; };
-		7F4FBE642F66EFD1002A6C68 /* Storage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Storage.cpp; sourceTree = "<group>"; };
-		7F4FBE652F66EFD1002A6C68 /* Stream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Stream.cpp; sourceTree = "<group>"; };
-		7F4FBE662F66EFD1002A6C68 /* Stream.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Stream.json; sourceTree = "<group>"; };
-		7F4FBE672F66EFD1002A6C68 /* Stream.g.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Stream.g.cpp; sourceTree = "<group>"; };
-		7F4FBE682F66EFD1002A6C68 /* Strings.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Strings.hpp; sourceTree = "<group>"; };
-		7F4FBE692F66EFD1002A6C68 /* Strings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Strings.cpp; sourceTree = "<group>"; };
-		7F4FBE6A2F66EFD1002A6C68 /* Strings.g.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Strings.g.cpp; sourceTree = "<group>"; };
-		7F4FBE6B2F66EFD1002A6C68 /* Tracer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tracer.cpp; sourceTree = "<group>"; };
-		7F4FBE6C2F66EFD1002A6C68 /* Traits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Traits.hpp; sourceTree = "<group>"; };
-		7F4FBE6D2F66EFD1002A6C68 /* Uid.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Uid.hpp; sourceTree = "<group>"; };
-		7F4FBE6E2F66EFD1002A6C68 /* Uid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Uid.cpp; sourceTree = "<group>"; };
-		7F4FBE6F2F66EFD1002A6C68 /* Variant.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Variant.hpp; sourceTree = "<group>"; };
-		7F4FBE702F66EFD1002A6C68 /* VolumeControl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeControl.cpp; sourceTree = "<group>"; };
-		7F4FBE712F66EFD1002A6C68 /* VolumeControl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VolumeControl.json; sourceTree = "<group>"; };
-		7F4FBE722F66EFD1002A6C68 /* VolumeControl.g.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeControl.g.cpp; sourceTree = "<group>"; };
-		7F4FBE732F66EFD1002A6C68 /* VolumeCurve.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VolumeCurve.hpp; sourceTree = "<group>"; };
-		7F4FBE742F66EFD1002A6C68 /* VolumeCurve.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VolumeCurve.cpp; sourceTree = "<group>"; };
-		7F4FBE752F66EFD1002A6C68 /* VolumeDecibelPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VolumeDecibelPoint.hpp; sourceTree = "<group>"; };
-		7F4FBE762F66EFD1002A6C68 /* VolumeRawPoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VolumeRawPoint.hpp; sourceTree = "<group>"; };
 		7F94713E2FBCBF7600477DDB /* DynamicEQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicEQ.h; sourceTree = "<group>"; };
 		7F94713F2FBCBF7600477DDB /* DynamicEQ.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DynamicEQ.cpp; sourceTree = "<group>"; };
 		7F9471402FBCBF7600477DDB /* LUFSTargeting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LUFSTargeting.h; sourceTree = "<group>"; };
@@ -357,9 +264,6 @@
 		7F9471452FBCBF7600477DDB /* PsychoacousticBass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PsychoacousticBass.cpp; sourceTree = "<group>"; };
 		7F9471462FBCBF7600477DDB /* StereoImager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StereoImager.h; sourceTree = "<group>"; };
 		7F9471472FBCBF7600477DDB /* StereoImager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StereoImager.cpp; sourceTree = "<group>"; };
-		7FD0600C2F66F11400DA4E0E /* TPCircularBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPCircularBuffer.h; sourceTree = "<group>"; };
-		7FD0600D2F66F11400DA4E0E /* TPCircularBuffer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = TPCircularBuffer.c; sourceTree = "<group>"; };
-		7FD060292F66F49800DA4E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FD0602B2F66F6C700DA4E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FD060342F66FE0D00DA4E0E /* ViPER4Mac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViPER4Mac-Bridging-Header.h"; sourceTree = "<group>"; };
 		7FD060352F66FE1F00DA4E0E /* ViPERBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViPERBridge.h; sourceTree = "<group>"; };
@@ -401,8 +305,6 @@
 				7F4FBC3A2F66E33B002A6C68 /* ViPER4Mac */,
 				7F4FBB512F66D447002A6C68 /* ViPERDSP */,
 				7F4FB9202F65C8D4002A6C68 /* Products */,
-				7F4FBC4B2F66EAC9002A6C68 /* ViPERDriver */,
-				7F4FBE912F66EFD1002A6C68 /* Vendor */,
 			);
 			sourceTree = "<group>";
 		};
@@ -411,7 +313,6 @@
 			children = (
 				7F4FB91F2F65C8D4002A6C68 /* ViPER4Mac.app */,
 				7F4FB9332F66D193002A6C68 /* libViPERDSP.a */,
-				7F4FBC472F66EA6F002A6C68 /* ViPER4Mac.driver */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -647,123 +548,6 @@
 			path = Bridge;
 			sourceTree = "<group>";
 		};
-		7F4FBC4B2F66EAC9002A6C68 /* ViPERDriver */ = {
-			isa = PBXGroup;
-			children = (
-				7F4FBC4E2F66EB84002A6C68 /* ViPERDriver.cpp */,
-				7F4FBC502F66EBB0002A6C68 /* ViPERSharedRing.h */,
-				7FD060292F66F49800DA4E0E /* Info.plist */,
-			);
-			path = ViPERDriver;
-			sourceTree = "<group>";
-		};
-		7F4FBE492F66EFD1002A6C68 /* aspl */ = {
-			isa = PBXGroup;
-			children = (
-				7F4FBE372F66EFD1002A6C68 /* Client.hpp */,
-				7F4FBE382F66EFD1002A6C68 /* Compat.hpp */,
-				7F4FBE392F66EFD1002A6C68 /* Context.hpp */,
-				7F4FBE3A2F66EFD1002A6C68 /* ControlRequestHandler.hpp */,
-				7F4FBE3B2F66EFD1002A6C68 /* Device.hpp */,
-				7F4FBE3C2F66EFD1002A6C68 /* Direction.hpp */,
-				7F4FBE3D2F66EFD1002A6C68 /* Dispatcher.hpp */,
-				7F4FBE3E2F66EFD1002A6C68 /* DoubleBuffer.hpp */,
-				7F4FBE3F2F66EFD1002A6C68 /* Driver.hpp */,
-				7F4FBE402F66EFD1002A6C68 /* DriverRequestHandler.hpp */,
-				7F4FBE412F66EFD1002A6C68 /* IORequestHandler.hpp */,
-				7F4FBE422F66EFD1002A6C68 /* MuteControl.hpp */,
-				7F4FBE432F66EFD1002A6C68 /* Object.hpp */,
-				7F4FBE442F66EFD1002A6C68 /* Plugin.hpp */,
-				7F4FBE452F66EFD1002A6C68 /* Storage.hpp */,
-				7F4FBE462F66EFD1002A6C68 /* Stream.hpp */,
-				7F4FBE472F66EFD1002A6C68 /* Tracer.hpp */,
-				7F4FBE482F66EFD1002A6C68 /* VolumeControl.hpp */,
-			);
-			path = aspl;
-			sourceTree = "<group>";
-		};
-		7F4FBE4A2F66EFD1002A6C68 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				7F4FBE492F66EFD1002A6C68 /* aspl */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		7F4FBE772F66EFD1002A6C68 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				7F4FBE4F2F66EFD1002A6C68 /* Bridge.hpp */,
-				7F4FBE502F66EFD1002A6C68 /* Bridge.json */,
-				7F4FBE512F66EFD1002A6C68 /* Bridge.g.cpp */,
-				7F4FBE522F66EFD1002A6C68 /* Client.cpp */,
-				7F4FBE532F66EFD1002A6C68 /* Compare.hpp */,
-				7F4FBE542F66EFD1002A6C68 /* Convert.hpp */,
-				7F4FBE552F66EFD1002A6C68 /* Convert.cpp */,
-				7F4FBE562F66EFD1002A6C68 /* Device.cpp */,
-				7F4FBE572F66EFD1002A6C68 /* Device.json */,
-				7F4FBE582F66EFD1002A6C68 /* Device.g.cpp */,
-				7F4FBE592F66EFD1002A6C68 /* Dispatcher.cpp */,
-				7F4FBE5A2F66EFD1002A6C68 /* Driver.cpp */,
-				7F4FBE5B2F66EFD1002A6C68 /* MuteControl.cpp */,
-				7F4FBE5C2F66EFD1002A6C68 /* MuteControl.json */,
-				7F4FBE5D2F66EFD1002A6C68 /* MuteControl.g.cpp */,
-				7F4FBE5E2F66EFD1002A6C68 /* Object.cpp */,
-				7F4FBE5F2F66EFD1002A6C68 /* Object.json */,
-				7F4FBE602F66EFD1002A6C68 /* Object.g.cpp */,
-				7F4FBE612F66EFD1002A6C68 /* Plugin.cpp */,
-				7F4FBE622F66EFD1002A6C68 /* Plugin.json */,
-				7F4FBE632F66EFD1002A6C68 /* Plugin.g.cpp */,
-				7F4FBE642F66EFD1002A6C68 /* Storage.cpp */,
-				7F4FBE652F66EFD1002A6C68 /* Stream.cpp */,
-				7F4FBE662F66EFD1002A6C68 /* Stream.json */,
-				7F4FBE672F66EFD1002A6C68 /* Stream.g.cpp */,
-				7F4FBE682F66EFD1002A6C68 /* Strings.hpp */,
-				7F4FBE692F66EFD1002A6C68 /* Strings.cpp */,
-				7F4FBE6A2F66EFD1002A6C68 /* Strings.g.cpp */,
-				7F4FBE6B2F66EFD1002A6C68 /* Tracer.cpp */,
-				7F4FBE6C2F66EFD1002A6C68 /* Traits.hpp */,
-				7F4FBE6D2F66EFD1002A6C68 /* Uid.hpp */,
-				7F4FBE6E2F66EFD1002A6C68 /* Uid.cpp */,
-				7F4FBE6F2F66EFD1002A6C68 /* Variant.hpp */,
-				7F4FBE702F66EFD1002A6C68 /* VolumeControl.cpp */,
-				7F4FBE712F66EFD1002A6C68 /* VolumeControl.json */,
-				7F4FBE722F66EFD1002A6C68 /* VolumeControl.g.cpp */,
-				7F4FBE732F66EFD1002A6C68 /* VolumeCurve.hpp */,
-				7F4FBE742F66EFD1002A6C68 /* VolumeCurve.cpp */,
-				7F4FBE752F66EFD1002A6C68 /* VolumeDecibelPoint.hpp */,
-				7F4FBE762F66EFD1002A6C68 /* VolumeRawPoint.hpp */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		7F4FBE8F2F66EFD1002A6C68 /* libASPL */ = {
-			isa = PBXGroup;
-			children = (
-				7F4FBE4A2F66EFD1002A6C68 /* include */,
-				7F4FBE772F66EFD1002A6C68 /* src */,
-			);
-			path = libASPL;
-			sourceTree = "<group>";
-		};
-		7F4FBE912F66EFD1002A6C68 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				7FD060112F66F11400DA4E0E /* TPCircularBuffer */,
-				7F4FBE8F2F66EFD1002A6C68 /* libASPL */,
-			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
-		7FD060112F66F11400DA4E0E /* TPCircularBuffer */ = {
-			isa = PBXGroup;
-			children = (
-				7FD0600C2F66F11400DA4E0E /* TPCircularBuffer.h */,
-				7FD0600D2F66F11400DA4E0E /* TPCircularBuffer.c */,
-			);
-			path = TPCircularBuffer;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -877,24 +661,6 @@
 			productReference = 7F4FB9332F66D193002A6C68 /* libViPERDSP.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		7F4FBC462F66EA6F002A6C68 /* ViPERDriver */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7F4FBC482F66EA6F002A6C68 /* Build configuration list for PBXNativeTarget "ViPERDriver" */;
-			buildPhases = (
-				7F4FBC432F66EA6F002A6C68 /* Sources */,
-				7F4FBC452F66EA6F002A6C68 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ViPERDriver;
-			packageProductDependencies = (
-			);
-			productName = ViPERDriver;
-			productReference = 7F4FBC472F66EA6F002A6C68 /* ViPER4Mac.driver */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -910,9 +676,6 @@
 						LastSwiftMigration = 2630;
 					};
 					7F4FB9322F66D193002A6C68 = {
-						CreatedOnToolsVersion = 26.3;
-					};
-					7F4FBC462F66EA6F002A6C68 = {
 						CreatedOnToolsVersion = 26.3;
 					};
 				};
@@ -933,7 +696,6 @@
 			targets = (
 				7F4FB91E2F65C8D4002A6C68 /* ViPER4Mac */,
 				7F4FB9322F66D193002A6C68 /* ViPERDSP */,
-				7F4FBC462F66EA6F002A6C68 /* ViPERDriver */,
 			);
 		};
 /* End PBXProject section */
@@ -945,20 +707,6 @@
 			files = (
 				7FD060852F6C3E3500DA4E0E /* Localizable.xcstrings in Resources */,
 				7F4FBC3B2F66E33B002A6C68 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F4FBC452F66EA6F002A6C68 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7FD060442F68550F00DA4E0E /* Bridge.json in Resources */,
-				7FD060452F68550F00DA4E0E /* Device.json in Resources */,
-				7FD060462F68550F00DA4E0E /* MuteControl.json in Resources */,
-				7FD060472F68550F00DA4E0E /* Object.json in Resources */,
-				7FD060482F68550F00DA4E0E /* Plugin.json in Resources */,
-				7FD060492F68550F00DA4E0E /* Stream.json in Resources */,
-				7FD0604A2F68550F00DA4E0E /* VolumeControl.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,38 +787,6 @@
 				7F4FBBB62F66D447002A6C68 /* PolesFilter.cpp in Sources */,
 				7F4FBBB72F66D447002A6C68 /* DepthSurround.cpp in Sources */,
 				7F4FBBB82F66D447002A6C68 /* Biquad.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F4FBC432F66EA6F002A6C68 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7FD060122F66F22D00DA4E0E /* Device.g.cpp in Sources */,
-				7FD060132F66F22D00DA4E0E /* Storage.cpp in Sources */,
-				7FD060142F66F22D00DA4E0E /* Client.cpp in Sources */,
-				7FD060152F66F22D00DA4E0E /* VolumeControl.g.cpp in Sources */,
-				7FD060162F66F22D00DA4E0E /* Driver.cpp in Sources */,
-				7FD060332F66FC9F00DA4E0E /* Tracer.cpp in Sources */,
-				7FD060172F66F22D00DA4E0E /* Object.cpp in Sources */,
-				7FD060282F66F2AB00DA4E0E /* TPCircularBuffer.c in Sources */,
-				7FD060182F66F22D00DA4E0E /* Strings.cpp in Sources */,
-				7FD060192F66F22D00DA4E0E /* Uid.cpp in Sources */,
-				7FD0601A2F66F22D00DA4E0E /* Bridge.g.cpp in Sources */,
-				7FD0601B2F66F22D00DA4E0E /* Object.g.cpp in Sources */,
-				7FD0601C2F66F22D00DA4E0E /* Device.cpp in Sources */,
-				7FD0601D2F66F22D00DA4E0E /* Convert.cpp in Sources */,
-				7FD0601E2F66F22D00DA4E0E /* MuteControl.g.cpp in Sources */,
-				7FD0601F2F66F22D00DA4E0E /* MuteControl.cpp in Sources */,
-				7FD060202F66F22D00DA4E0E /* VolumeCurve.cpp in Sources */,
-				7FD060212F66F22D00DA4E0E /* Stream.g.cpp in Sources */,
-				7FD060222F66F22D00DA4E0E /* Plugin.g.cpp in Sources */,
-				7FD060232F66F22D00DA4E0E /* Strings.g.cpp in Sources */,
-				7FD060242F66F22D00DA4E0E /* VolumeControl.cpp in Sources */,
-				7FD060252F66F22D00DA4E0E /* Plugin.cpp in Sources */,
-				7FD060262F66F22D00DA4E0E /* Dispatcher.cpp in Sources */,
-				7FD060272F66F22D00DA4E0E /* Stream.cpp in Sources */,
-				7F4FBC4F2F66EB84002A6C68 /* ViPERDriver.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1328,80 +1044,6 @@
 			};
 			name = Release;
 		};
-		7F4FBC492F66EA6F002A6C68 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Vendor/libASPL/include",
-					"$(SRCROOT)/Vendor/TPCircularBuffer",
-					"$(SRCROOT)/ViPERDriver",
-				);
-				INFOPLIST_FILE = ViPERDriver/Info.plist;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSPrincipalClass = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Audio/Plug-Ins/HAL";
-				MACOSX_DEPLOYMENT_TARGET = 15.7;
-				MARKETING_VERSION = 1.0.0;
-				OTHER_LDFLAGS = (
-					"-framework",
-					CoreAudio,
-					"-framework",
-					CoreFoundation,
-					"-framework",
-					AudioToolbox,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.driver;
-				PRODUCT_NAME = ViPER4Mac;
-				SKIP_INSTALL = NO;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				USER_HEADER_SEARCH_PATHS = "";
-				WRAPPER_EXTENSION = driver;
-			};
-			name = Debug;
-		};
-		7F4FBC4A2F66EA6F002A6C68 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/Vendor/libASPL/include",
-					"$(SRCROOT)/Vendor/TPCircularBuffer",
-					"$(SRCROOT)/ViPERDriver",
-				);
-				INFOPLIST_FILE = ViPERDriver/Info.plist;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSPrincipalClass = "";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Audio/Plug-Ins/HAL";
-				MACOSX_DEPLOYMENT_TARGET = 15.7;
-				MARKETING_VERSION = 1.0.0;
-				OTHER_LDFLAGS = (
-					"-framework",
-					CoreAudio,
-					"-framework",
-					CoreFoundation,
-					"-framework",
-					AudioToolbox,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.driver;
-				PRODUCT_NAME = ViPER4Mac;
-				SKIP_INSTALL = NO;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				USER_HEADER_SEARCH_PATHS = "";
-				WRAPPER_EXTENSION = driver;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1428,15 +1070,6 @@
 			buildConfigurations = (
 				7F4FB9352F66D193002A6C68 /* Debug */,
 				7F4FB9362F66D193002A6C68 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7F4FBC482F66EA6F002A6C68 /* Build configuration list for PBXNativeTarget "ViPERDriver" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7F4FBC492F66EA6F002A6C68 /* Debug */,
-				7F4FBC4A2F66EA6F002A6C68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -17,7 +17,7 @@ struct PopoverContentView: View {
   @State private var expandedSections: Set<String> = []
   @State private var presetName: String = ""
   @State private var showSavePreset = false
-  @State private var showDriverStatus = false
+  @State private var showEngineStatus = false
   @State private var dsPresetName: String = ""
   @State private var showSaveDsPreset = false
   @State private var showDevices = false
@@ -118,17 +118,17 @@ struct PopoverContentView: View {
           .fontWeight(.bold)
           .foregroundStyle(Color.viperAccent)
         Button {
-          showDriverStatus.toggle()
+          showEngineStatus.toggle()
         } label: {
           Image(systemName: "info.circle")
             .font(.caption)
             .foregroundStyle(
-              state.driverInstalled && state.isProcessing ? Color.viperAccent : .secondary
+              state.isProcessing ? Color.viperAccent : .secondary
             )
         }
         .buttonStyle(.borderless)
-        .popover(isPresented: $showDriverStatus, arrowEdge: .bottom) {
-          driverStatusPopover
+        .popover(isPresented: $showEngineStatus, arrowEdge: .bottom) {
+          engineStatusPopover
         }
         Spacer()
         Toggle("", isOn: $state.isEnabled)
@@ -455,7 +455,7 @@ struct PopoverContentView: View {
         } label: {
           Label("Delete", systemImage: "trash")
             .font(.caption)
-            .foregroundStyle(isActive || isBuiltIn ? .gray : .red)
+            .foregroundStyle(isActive || isBuiltIn ? Color.gray.opacity(0.4) : Color.red)
         }
         .buttonStyle(.borderless)
         .disabled(isActive || isBuiltIn)
@@ -1356,7 +1356,9 @@ struct PopoverContentView: View {
                 }
                 .buttonStyle(.plain)
               }
-              if state.dynEqBandCount < 8 {
+              if state.dynEqBandCount < 8,
+                 (state.dynEqFreqs.last ?? 0) < 19990
+              {
                 Button(action: { state.addDynEqBand() }) {
                   Image(systemName: "plus")
                     .font(.caption)
@@ -1583,9 +1585,9 @@ struct PopoverContentView: View {
     .padding(.top, 4)
   }
 
-  // MARK: - Driver Status
+  // MARK: - Engine Status
 
-  private var driverStatusPopover: some View {
+  private var engineStatusPopover: some View {
     VStack(alignment: .leading, spacing: 8) {
       Text("ViPER4Mac")
         .font(.subheadline)
@@ -1600,12 +1602,8 @@ struct PopoverContentView: View {
         )
       )
       statusRow(
-        Text("Driver"),
-        value: Text(
-          state.driverInstalled
-            ? "v\(state.driverVersion)" : "Not Found"
-        ),
-        color: state.driverInstalled ? .green : .red
+        Text("DSP Version"),
+        value: Text(state.dspVersion)
       )
       statusRow(
         Text("Streaming"),

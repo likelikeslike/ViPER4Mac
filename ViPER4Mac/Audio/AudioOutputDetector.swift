@@ -106,30 +106,11 @@ final class AudioOutputDetector {
   }
 
   private func resolveRealDeviceID() -> AudioDeviceID {
-    let deviceID = getDefaultOutputDevice()
-    guard deviceID != kAudioObjectUnknown else { return kAudioObjectUnknown }
-
-    let uid = getDeviceUID(deviceID)
-    if uid == "ViPER4Mac_VirtualDevice" {
-      let engineOutput = AudioEngine.shared.outputDeviceID
-      if engineOutput != kAudioObjectUnknown {
-        return engineOutput
-      }
-      let devices = getAllDeviceIDs()
-      for device in devices {
-        if getDeviceUID(device) == "ViPER4Mac_VirtualDevice" { continue }
-        if !hasOutputStreams(device) { continue }
-        return device
-      }
-      return kAudioObjectUnknown
+    let engineOutput = AudioEngine.shared.outputDeviceID
+    if engineOutput != kAudioObjectUnknown {
+      return engineOutput
     }
-    return deviceID
-  }
-
-  private func detectOutputType() -> OutputType {
-    let realDevice = resolveRealDeviceID()
-    guard realDevice != kAudioObjectUnknown else { return .speaker }
-    return classifyDevice(realDevice)
+    return getDefaultOutputDevice()
   }
 
   private func classifyDevice(_ deviceID: AudioDeviceID) -> OutputType {
@@ -228,40 +209,6 @@ final class AudioOutputDetector {
       return "Unknown"
     }
     return name as String
-  }
-
-  private func getAllDeviceIDs() -> [AudioDeviceID] {
-    var addr = AudioObjectPropertyAddress(
-      mSelector: kAudioHardwarePropertyDevices,
-      mScope: kAudioObjectPropertyScopeGlobal,
-      mElement: kAudioObjectPropertyElementMain
-    )
-    var dataSize: UInt32 = 0
-    guard AudioObjectGetPropertyDataSize(
-      AudioObjectID(kAudioObjectSystemObject), &addr, 0, nil, &dataSize
-    ) == noErr
-    else { return [] }
-
-    let count = Int(dataSize) / MemoryLayout<AudioDeviceID>.size
-    var deviceIDs = [AudioDeviceID](repeating: 0, count: count)
-    guard AudioObjectGetPropertyData(
-      AudioObjectID(kAudioObjectSystemObject), &addr, 0, nil, &dataSize, &deviceIDs
-    ) == noErr
-    else { return [] }
-    return deviceIDs
-  }
-
-  private func hasOutputStreams(_ deviceID: AudioDeviceID) -> Bool {
-    var addr = AudioObjectPropertyAddress(
-      mSelector: kAudioDevicePropertyStreams,
-      mScope: kAudioObjectPropertyScopeOutput,
-      mElement: kAudioObjectPropertyElementMain
-    )
-    var dataSize: UInt32 = 0
-    guard AudioObjectGetPropertyDataSize(deviceID, &addr, 0, nil, &dataSize) == noErr else {
-      return false
-    }
-    return dataSize > 0
   }
 }
 

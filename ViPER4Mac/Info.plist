@@ -26,5 +26,7 @@
     <string>NSApplication</string>
     <key>LSUIElement</key>
     <true/>
+    <key>NSAudioCaptureUsageDescription</key>
+    <string>ViPER4Mac captures system audio to apply real-time audio effects.</string>
 </dict>
 </plist>

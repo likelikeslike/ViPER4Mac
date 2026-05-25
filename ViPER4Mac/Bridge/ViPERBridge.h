@@ -11,7 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setParameterWithData:(int)param data:(NSData *)data;
 - (void)setSamplingRate:(uint32_t)rate;
 - (uint32_t)getSamplingRate;
-- (uint32_t)getConvolverKernelID;
+- (uint64_t)getProcessedFrames;
+- (NSString *)getVersionName;
+- (uint32_t)getVersionCode;
 
 @end
 
