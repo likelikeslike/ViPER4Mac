@@ -7,9 +7,9 @@ APP_NAME   := ViPER4Mac.app
 APP_SRC    := $(BUILD_DIR)/$(APP_NAME)
 APP_DST    := /Applications/$(APP_NAME)
 
-VERSION            := 1.0.0
-DSP_VERSION_CODE   := 20260508
-DSP_VERSION_NAME   := 1.0.0
+VERSION            := 1.1.0
+DSP_VERSION_CODE   := 20260526
+DSP_VERSION_NAME   := 1.1.0
 
 .PHONY: all build install uninstall clean
 
