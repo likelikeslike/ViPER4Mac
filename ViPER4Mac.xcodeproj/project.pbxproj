@@ -937,6 +937,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GENERATE_INFOPLIST_FILE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/ViPERDSP",
@@ -949,6 +950,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LLVM_LTO = YES_THIN;
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.app;
@@ -979,6 +981,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GENERATE_INFOPLIST_FILE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/ViPERDSP",
@@ -991,6 +994,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LLVM_LTO = YES_THIN;
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.app;
@@ -1018,6 +1022,7 @@
 					"$(SRCROOT)/ViPERDSP/include",
 					"$(SRCROOT)/ViPERDSP",
 				);
+				LLVM_LTO = YES_THIN;
 				OTHER_CFLAGS = "-DPFFFT_SIMD_DISABLE=0";
 				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.dsp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1037,6 +1042,7 @@
 					"$(SRCROOT)/ViPERDSP/include",
 					"$(SRCROOT)/ViPERDSP",
 				);
+				LLVM_LTO = YES_THIN;
 				OTHER_CFLAGS = "-DPFFFT_SIMD_DISABLE=0";
 				PRODUCT_BUNDLE_IDENTIFIER = com.viper4mac.dsp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
