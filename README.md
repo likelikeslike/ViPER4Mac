@@ -3,57 +3,72 @@
 System-wide audio effects processor for macOS, ported from ViPER4Android.
 
 ViPER4Mac brings the legendary ViPER audio processing engine to macOS. It captures all
-system audio, applies ViPER effects in real-time, and routes the result to the output device.
+system audio using Apple's Core Audio Tap API, applies ViPER effects in real-time, and
+routes the processed audio to the output device. No virtual audio driver or kernel
+extension required.
 
 ## Features
 
 - FIR Equalizer with 10, 15, 25, or 31 bands
+- Dynamic EQ with up to 8 bands (Peak, Low Shelf, High Shelf filters)
 - ViPER Bass enhancement (Natural, Pure Bass, Subwoofer modes)
+- ViPER Bass Mono
+- Psychoacoustic Bass with harmonic generation
 - ViPER Clarity (Natural, OZone, XHiFi modes)
 - Tube Simulator and AnalogX warmth processing
-- Spectrum Extension
+- Spectrum Extension with bark frequency and exciter control
 - Field Surround with stereo widening, mid image, and depth control
-- Differential Surround
+- Differential Surround with LP crossover
+- Stereo Imager with 3-band width control
 - Headphone Surround+ (VHE) for virtual surround on headphones
 - Reverberation with full room modeling
-- FET Compressor
+- FET Compressor with auto knee/gain/attack/release
+- Multiband Compressor (5 bands)
 - Playback Gain Control (AGC)
+- LUFS Targeting with speed control
 - Auditory System Protection (CURe crossfeed)
 - Speaker Optimization (speaker mode)
 - ViPER-DDC device correction (.vdc profiles)
 - Convolver with WAV/IRS impulse responses
-- Dynamic System headphone compensation
+- Dynamic System headphone compensation with user presets
 
 ## Requirements
 
-- macOS Sequoia or later with Apple Silicon
-- Tested on macOS Sequoia 15.7.4
+- macOS 15 (Sequoia) or later with Apple Silicon
+
+## Compatibility
+
+ViPER4Mac uses Apple's Process Tap API and conflicts with audio utilities that
+install their own Core Audio drivers (e.g. Rogue Amoeba SoundSource, Boom 3D,
+Loopback). Running ViPER4Mac alongside such tools causes audible crackling
+because both products write audio to the same output device simultaneously.
+Use one or the other, not both.
 
 ## Installation
 
-### Package Installer
+### Pre-built release
 
-Download the `ViPER4Mac.pkg` installer from the [Releases](https://github.com/likelikeslike/ViPER4Mac/releases) page and run it. Follow the prompts to complete installation.
+Download the latest release from the [Releases page](https://github.com/likelikeslike/ViPER4Mac/releases). Copy the `ViPER4Mac.app` bundle to your Applications folder and launch it.
 
 ### From source
 
-- Xcode with command line tools required
+Xcode with command line tools required.
 
 ```bash
 git clone --recursive https://github.com/likelikeslike/ViPER4Mac.git && cd ViPER4Mac
 make install
 ```
 
-## Usage
+On first launch, macOS will ask to allow system audio recording. Click Allow.
 
-ViPER4Mac works by installing a virtual audio driver that captures system audio, applies effects in real-time, and routes it to your the device.
+## Usage
 
 Click the "V" icon in the menu bar to open the control panel. Toggle effects on or off
 globally, or expand individual sections to fine-tune parameters. The app automatically
 detects whether you're using headphones or speakers and switches profiles accordingly.
 You can also override this manually if you have multiple output devices.
 
-Each mode (headphone/speaker) maintains its own independent settings.
+Each device maintains its own independent settings.
 
 ### Presets and Profiles
 
@@ -74,15 +89,11 @@ make uninstall
 osascript -e 'tell application "ViPER4Mac" to quit'
 sleep 1
 sudo rm -rf /Applications/ViPER4Mac.app
-sudo rm -rf /Library/Audio/Plug-Ins/HAL/ViPER4Mac.driver
 rm -rf ~/Library/Application\ Support/ViPER4Mac
-rm ~/Library/Logs/ViPER4Mac/viper.log
-sudo killall coreaudiod
+rm -rf ~/Library/Logs/ViPER4Mac
 ```
 
 ## Credits
 
 - **ViPER4Android** by Zhuhang and ViPER520
-- **ViPERDSP** reverse engineering by Martmists, Iscel, and likelikeslike ([ViPERDSP](https://github.com/likelikeslike/ViPERDSP))
-- **libASPL** by [gavv](https://github.com/gavv/libASPL)
-- **TPCircularBuffer** by [Michael Tyson](https://github.com/michaeltyson/TPCircularBuffer)
+- **ViPERDSP** reverse engineering by Martmists, Iscle, and likelikeslike ([ViPERDSP](https://github.com/likelikeslike/ViPERDSP))
