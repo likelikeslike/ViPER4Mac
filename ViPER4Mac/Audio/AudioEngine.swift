@@ -234,7 +234,10 @@ final class AudioEngine {
       )
       let outABL = UnsafeMutableAudioBufferListPointer(outOutputData)
 
-      guard let inBuf = inABL.first,
+      // The device's capture stream comes before the process tap.
+      // `.first` could read the silent mic instead of the tap, causing
+      // silence when the tap is muted. The tap is always the last stream.
+      guard let inBuf = inABL.last,
             let outBuf = outABL.first,
             let inData = inBuf.mData,
             let outData = outBuf.mData
